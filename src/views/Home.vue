@@ -1,30 +1,32 @@
 <template>
   <Header></Header>
-  <!-- <MainPhoto></MainPhoto>
+  <MainPhoto></MainPhoto>
   <MainMessage></MainMessage>
   <LatestDesigns></LatestDesigns>
   <Collection></Collection>
-  <AboutArtist></AboutArtist>
-  <Footer></Footer> -->
+  <!-- <AboutArtist></AboutArtist>
+  <Footer></Footer>  -->
 </template>
 
 <script>
-// import MainPhoto from "./LandingPage/TopPhoto.vue";
-// import MainMessage from "./LandingPage/MainMessage.vue";
-// import LatestDesigns from "./LandingPage/LatestDesigns.vue";
-// import Collection from "./LandingPage/Collection.vue";
-// import AboutArtist from "./LandingPage/AboutArtist.vue";
 import Header from "../components/Header.vue";
+import MainPhoto from "../components/LandingPage/MainPhoto.vue";
+import MainMessage from "../components/LandingPage/MainMessage.vue";
+import LatestDesigns from "../components/LandingPage/LatestDesigns.vue";
+import Collection from "../components/LandingPage/Collection.vue";
+// import AboutArtist from "../components/LandingPage/AboutArtist.vue";
+
 // import Footer from "./Footer.vue";
 
 export default {
   components: {
-    // MainPhoto,
-    // MainMessage,
-    // LatestDesigns,
-    // Collection,
-    // AboutArtist,
     Header,
+    MainPhoto,
+    MainMessage,
+    LatestDesigns,
+    Collection,
+    // AboutArtist,
+
     // Footer,
   },
 };
