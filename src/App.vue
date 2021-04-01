@@ -31,4 +31,17 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+button {
+  /* font-family: "Nova Mono", monospace; */
+  transition: all 0.5s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+h1 {
+  font-family: "Nova Mono", monospace;
+}
 </style>
