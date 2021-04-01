@@ -9,6 +9,9 @@ module.exports = {
           dark: "#365a69",
         },
       },
+      inset: {
+        "1/20": "5%",
+      },
     },
   },
   variants: {
