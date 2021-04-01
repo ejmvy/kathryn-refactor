@@ -1,0 +1,8 @@
+/* ./src/assets/styles/tailwine.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.li-class {
+    @apply list-none uppercase mx-5 text-sm py-2 z-10 md:text-xs text-white  cursor-pointer;
+}
