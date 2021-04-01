@@ -6,3 +6,35 @@
 .li-class {
     @apply list-none uppercase mx-5 text-sm py-2 z-10 md:text-xs text-white  cursor-pointer;
 }
+
+.btn-green {
+    @apply px-8 py-2 uppercase bg-transparent text-sm text-green-dark border-2 border-green-dark rounded-full text-sm mt-10 cursor-pointer;
+}
+
+.btn-green:hover {
+    @apply bg-green-dark text-white scale-50;
+}
+
+.section {
+    @apply w-full h-full flex flex-col items-center pb-5;
+}
+
+.title1 {
+    @apply uppercase text-green-dark font-bold;
+}
+
+.lineTop, .lineBottom {
+    @apply flex flex-col items-center w-40;
+}
+
+.line1 {
+    @apply h-0.5 bg-green-dark rounded-full;
+}
+
+.line2 {
+    @apply h-0.5 bg-green-dark rounded-full;
+}
+
+.dot {
+    @apply h-3 w-3 bg-green-dark rounded-full;
+}
