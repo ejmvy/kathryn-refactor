@@ -1,0 +1,127 @@
+<template>
+  <!-- <div class="noteAppear">
+    <transition name="appear" :duration="{ enter: 800, leave: 800 }">
+      <Notification
+        v-if="showNotification"
+        :type="notificationType"
+      ></Notification>
+    </transition>
+  </div> -->
+  <Header></Header>
+  <section class="section py-8 md:pt-16 mb-24 bg-gray-100">
+    <TitleDesign :title="titleText"></TitleDesign>
+    <div class="w-11/12 sm:mt-6 flex justify-between">
+      <div class="flex">
+        <p>Collections</p>
+        <div class="px-5">/</div>
+        <select
+          class="bg-transparent pr-10 cursor-pointer"
+          v-model="categorySelected"
+          @change="changeCategory"
+        >
+          <option
+            v-for="category in categoryOptions"
+            :key="category"
+            :value="category"
+          >
+            {{ category }}
+          </option>
+        </select>
+      </div>
+      <p>{{ productData.length }} items</p>
+    </div>
+    <div
+      class="w-11/12 flex justify-center pt-10 md:pt-0 md:justify-between flex-wrap"
+    >
+      <div v-for="item in productData" :key="item">
+        <ItemCard :displayItem="item"></ItemCard>
+      </div>
+    </div>
+  </section>
+  <Footer></Footer>
+</template>
+
+<script>
+import Header from "../components/LandingPage/Header.vue";
+import Footer from "../components/LandingPage/Footer.vue";
+import TitleDesign from "../components/Designs/TitleDesign.vue";
+import ItemCard from "../components/Designs/ItemCard.vue";
+// import Notification from "../components/Designs/Notification.vue";
+export default {
+  data() {
+    return {
+      titleText: "Our Collection",
+      productData: [],
+      showNotification: "",
+      notificationType: "",
+      categoryName: "",
+      categoryOptions: ["All", "Bowls", "Mugs", "Dishes", "Plates", "Misc"],
+      categorySelected: "All",
+      serverData: [],
+    };
+  },
+  created() {
+    const categoryParam = this.$route.params.category;
+    console.log("category: " + categoryParam);
+    if (categoryParam)
+      this.categoryName =
+        categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
+
+    fetch("http://localhost:3000/api/products/")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        this.serverData = data;
+        if (categoryParam) {
+          this.categorySelected =
+            this.categoryName.slice(0, 1).toUpperCase() +
+            this.categoryName.slice(1);
+          return this.findItems(this.categoryName);
+        }
+        this.productData = data;
+      });
+  },
+
+  methods: {
+    findItems(searchCategory) {
+      var dataArr = [];
+      this.serverData.forEach((item) => {
+        if (item.category.name == searchCategory) {
+          dataArr.push(item);
+        }
+      });
+      this.productData = dataArr;
+    },
+    changeCategory() {
+      console.log(`this cat: ${this.categorySelected}`);
+      if (this.categorySelected === "All") {
+        return (this.productData = this.serverData);
+      }
+      this.findItems(this.categorySelected);
+    },
+  },
+  components: {
+    // Notification,
+    Header,
+    Footer,
+    TitleDesign,
+    ItemCard,
+  },
+};
+</script>
+
+<style scoped>
+.routerLink {
+  transition: all 0.2s ease;
+}
+.routerLink:hover {
+  border-bottom: 2px solid rgba(32, 72, 88, 0.7);
+  transform: scale(1.1);
+}
+
+select:focus {
+  outline: none;
+}
+</style>

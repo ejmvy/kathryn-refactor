@@ -76,37 +76,4 @@ export default {
 };
 </script>
 
-<style scoped>
-#collectionArea {
-  background: #f5f5f5;
-  padding-bottom: 30px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.collectionSection {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 50px;
-  /* border: 2px solid red; */
-}
-
-@media only screen and (min-width: 1200px) {
-  .collectionSection {
-    width: 80%;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .collectionArea {
-    padding-bottom: 5px;
-  }
-  .collectionSection {
-    padding-bottom: 0;
-  }
-}
-</style>
+<style scoped></style>

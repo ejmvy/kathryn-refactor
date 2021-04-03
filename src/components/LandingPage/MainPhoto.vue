@@ -12,7 +12,7 @@
           using Lorem Ipsum is that it has a more-or-less normal distribution of
           letters.
         </p>
-        <button class="btn-green mt-5">SHOP NOW</button>
+        <button class="btn-green btn-lrg mt-5">SHOP NOW</button>
       </div>
 
       <div class="mainImageArea absolute h-screen z-0">

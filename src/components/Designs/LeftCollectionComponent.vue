@@ -10,29 +10,29 @@
       <!-- <img class="reasonImage" src="../../assets/latestDesigns/dish1.jpeg" /> -->
     </div>
     <div
-      class="flex flex-col items-center text-center relative -top-10 md:top-0 w-3/4 md:-left-3 p-8 md:flex-1 md:w-40 z-10 bg-white shadow-2xl"
+      class="flex flex-col items-center text-center relative -top-10 md:top-0 w-3/4 md:-left-5 p-8 md:flex-1 md:w-40 z-10 bg-white shadow-2xl"
     >
       <div class="lineTop">
         <div class="line1 w-48 md:w-36"></div>
         <div class="line2 w-24 mt-3"></div>
         <div class="dot mb-8 mt-3"></div>
       </div>
-      <div class="text-sm">
-        <h2 class="font-bold pb-5 md:pb-10 uppercase">
+      <div>
+        <h2 class="text-sm font-bold pb-5 md:pb-10 uppercase">
           {{ displayCollection.title }}
         </h2>
-        <p>
+        <p class="text-xs">
           {{
             getProductText
               ? displayCollection.shortText
               : displayCollection.longText
           }}
         </p>
-        <!-- <router-link
+        <router-link
           :to="{ name: 'ShowCollection', params: { category: collection } }"
         >
-          <button class="btn">SHOP NOW</button>
-        </router-link> -->
+          <button class="btn-green btn-sm">SHOP NOW</button>
+        </router-link>
       </div>
     </div>
   </div>

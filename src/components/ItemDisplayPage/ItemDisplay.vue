@@ -1,0 +1,182 @@
+<template>
+  <Header></Header>
+  <section class="section pt-5 md:pt-10">
+    <div class="w-11/12 flex justify-between">
+      <div class="flex items-center text-gray-500">
+        <router-link
+          class="routerLink border-b-2 border-transparent text-gray-500 py-3 cursor-pointer"
+          to="/shop"
+          >Collection</router-link
+        >
+        <div class="px-10">/</div>
+        <p>{{ item.name }}</p>
+      </div>
+    </div>
+
+    <div
+      class="w-10/12 sm:w-8/12 md:w-10/12 lg:w-8/12 flex flex-col md:flex-row items-center justify-center mt-16"
+    >
+      <div class="flex flex-col md:flex-row w-full md:w-3/5">
+        <div class="flex md:justify-between w-full md:w-24 md:flex-col order-2">
+          <div
+            class="smImage w-full m-1"
+            v-for="smImg in item.imageUrlArray"
+            :key="smImg"
+          >
+            <img
+              class="w-full h-20 md:h-24 cursor-pointer shadow-md"
+              :src="smImg"
+              @click="changeImage(smImg)"
+            />
+          </div>
+        </div>
+        <div
+          class="lrgImage md:w-3/5 order-1 md:order-last shadow-md md:shadow-none"
+        >
+          <img
+            class="w-full h-80 md:h-full ml-0 md:ml-5 md:shadow-lg"
+            :src="imageView"
+          />
+        </div>
+      </div>
+
+      <div
+        class="flex flex-col w-11/12 md:w-2/5 pt-20 md:pt-0 md:ml-5 text-left"
+      >
+        <h3 class="uppercase title1 pb-3">{{ item.name }}</h3>
+        <p class="pb-3 text-gray-500">{{ item.price }}</p>
+        <p class="text-sm text-gray-500">{{ item.description }}</p>
+
+        <div class="flex justify-between w-full mt-12 md:mt-20 pb-5">
+          <label class="uppercase text-xs">Color</label>
+          <select v-model="colourPicked" class="displaySelect">
+            <option v-for="col in item.colourArr" :key="col" :value="col">
+              {{ col }}
+            </option>
+          </select>
+        </div>
+        <div class="flex justify-between w-full mt-5 pb-5">
+          <label class="uppercase text-xs">Quantity</label>
+          <select v-model="item.quantity" class="displaySelect">
+            <option v-for="num in quantityValues" :key="num" :value="num">
+              {{ num }}
+            </option>
+          </select>
+        </div>
+
+        <div class="w-full flex justify-center">
+          <button @click="addItemToCart(item)" class="btn-green btn-lrg">
+            Add To Basket
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ProductDescription :itemInfo="item"></ProductDescription>
+  </section>
+  <FrequentQuestions></FrequentQuestions>
+  <Footer></Footer>
+</template>
+
+<script>
+import Header from "../LandingPage/Header.vue";
+import Footer from "../LandingPage/Footer.vue";
+import ProductDescription from "./ProductDesription.vue";
+import FrequentQuestions from "./FrequentQuestions.vue";
+
+export default {
+  data() {
+    return {
+      item: {},
+      colourVal: null,
+      quantityValues: ["One", "Two", "Three", "Four", "Five"],
+      colourPicked: "",
+      quantityList: {
+        One: 1,
+        Two: 2,
+        Three: 3,
+        Four: 4,
+        Five: 5,
+      },
+      imageView: "",
+    };
+  },
+  methods: {
+    changeImage(imgUrl) {
+      this.imageView = imgUrl;
+    },
+    addItemToCart(item) {
+      console.log("ITEM ADDED: ", item);
+      fetch("http://localhost:3000/api/cart/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: item.name,
+          price: item.price,
+          description: item.description,
+          quantity: this.quantityList[item.quantity],
+          colourPicked: this.colourPicked,
+          imageUrl: item.imageUrl,
+          dimensions: item.dimensions,
+          numberInStock: item.numberInStock,
+        }),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log("ITEM SENT: ");
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+
+  created() {
+    fetch(`http://localhost:3000/api/products/${this.$route.params.id}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        // console.log('DISPLAY ITEM');
+        // console.log(data);
+        data.colourArr = data.colour.split(",");
+        data.colourArr = data.colourArr.map((col) => col.trim());
+        console.log(data);
+        this.imageView = data.imageUrlArray[0];
+        this.item = data;
+      });
+  },
+  components: {
+    Header,
+    Footer,
+    ProductDescription,
+    FrequentQuestions,
+  },
+};
+</script>
+
+<style scoped>
+.routerLink {
+  transition: all 0.2s ease-in-out;
+}
+.routerLink:hover {
+  border-bottom: 2px solid #ccc;
+}
+
+@media screen and (min-width: 768px) {
+  .lrgImage {
+    min-height: 400px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .smImage {
+    max-width: 105px;
+  }
+}
+</style>

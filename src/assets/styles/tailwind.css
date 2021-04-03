@@ -1,4 +1,5 @@
 /* ./src/assets/styles/tailwine.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,11 +9,27 @@
 }
 
 .btn-green {
-    @apply px-8 py-2 uppercase bg-transparent text-sm text-green-dark border-2 border-green-dark rounded-full text-sm mt-10 cursor-pointer;
+    @apply uppercase bg-transparent text-green-dark border-2 border-green-dark rounded-full mt-10 cursor-pointer;
 }
 
-.btn-green:hover {
+.btn-green:hover, .btn-green:focus {
     @apply bg-green-dark text-white scale-50;
+}
+
+.btn-white {
+    @apply uppercase px-6 py-1 bg-transparent text-white border-2 border-white rounded-full mt-10 cursor-pointer;
+}
+
+.btn-white:hover, .btn-white:focus {
+    @apply bg-white text-green-dark scale-50;
+}
+
+.btn-lrg {
+    @apply text-xs px-8 py-2;
+}
+
+.btn-sm {
+    @apply text-xs px-6 py-1;
 }
 
 .section {
@@ -37,4 +54,20 @@
 
 .dot {
     @apply h-3 w-3 bg-green-dark rounded-full;
+}
+
+.contactInput {
+    @apply w-full bg-transparent border-transparent text-white tracking-wider text-sm leading-5 border-b-2 border-gray-50;
+}
+
+.contactLabel {
+    @apply uppercase text-xxs text-gray-600 font-bold;
+}
+
+.displaySelect {
+    @apply cursor-pointer border-transparent text-sm pr-5 text-green-dark outline-none;
+}
+
+.colorBtn:focus {
+    @apply ring-2 ring-offset-1 ring-gray-300 outline-none rounded-full;
 }
