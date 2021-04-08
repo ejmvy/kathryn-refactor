@@ -82,6 +82,10 @@ export default {
         }
         this.productData = data;
       });
+    const products = this.$store.getters["prods/products"];
+    console.log("PRODS FROM STORE:");
+    console.log(products);
+    // const total = this.$store.getters["prods/productTotal"];
   },
 
   methods: {
@@ -102,6 +106,7 @@ export default {
       this.findItems(this.categorySelected);
     },
   },
+
   components: {
     // Notification,
     Header,

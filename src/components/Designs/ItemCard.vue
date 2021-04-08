@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white w-80 flex justify-center flex-col items-center shadow-xl my-10"
+    class="bg-white w-80 flex justify-center flex-col items-center shadow-xl my-10 mx-4"
   >
     <router-link :to="{ name: 'ItemDisplay', params: { id: displayItem._id } }">
       <div class="w-80 h-48">
@@ -30,6 +30,7 @@
           class="flex space-x-4 px-4"
         >
           <button
+            @click="colourChosen = color"
             class="h-6 w-6 border-gray-200 border rounded-full cursor-pointer colorBtn"
             :style="{
               backgroundColor: colourMatch[color]
@@ -44,7 +45,7 @@
       >
         <p class="text-xs uppercase font-bold">Quick Add</p>
         <img
-          @click="addItemToCart"
+          @click="addItemToCart(displayItem)"
           class="w-4 h-4 cursor-pointer"
           src="https://i.ibb.co/z7TdxXP/Add-New-256.png"
         />
@@ -75,33 +76,33 @@ export default {
         Brown: "#66462F",
       },
       colorCode: "",
+      colourChosen: "",
     };
   },
   methods: {
     findColorCode(colour) {
-      console.log(`color: ${this.colourMatch[colour]}`);
+      // console.log(`color: ${this.colourMatch[colour]}`);
       return this.colourMatch[colour];
-    },
-    addItemToCart(item) {
-      console.log("item to send:", item.name);
-      fetch("http://localhost:3000/api/cart/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: item.name,
-          price: item.price,
-          description: item.description,
-          quantity: 1,
-        }),
-      });
     },
     getColourArray(colorString) {
       const newArr = colorString.split(",").map((val) => val.trim());
-      console.log("arr: ");
-      console.log(newArr);
       return newArr;
+    },
+    addItemToCart(item) {
+      console.log(`color chosen: ${this.colourChosen}`);
+      console.log(item);
+      this.$store.dispatch("cart/addToCart", {
+        id: item._id,
+        colourSelected: this.colourChosen,
+      });
+
+      this.getCartItems();
+    },
+
+    getCartItems() {
+      const items = this.$store.getters["cart/products"];
+      console.log("CART ITEMS:");
+      console.log(items);
     },
   },
   computed: {},

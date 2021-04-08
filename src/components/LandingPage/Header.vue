@@ -63,15 +63,15 @@
     </div>
   </header>
 
-  <!-- <div :class="{ cartOpened: cartOpen }">
+  <div :class="{ cartOpened: cartOpen }">
     <div v-if="cartOpen" class="cartImport">
       <CartPopup @closePopup="openCart()"></CartPopup>
     </div>
-  </div> -->
+  </div>
 </template>
 
 <script>
-// import CartPopup from "../components/views/CartPopup.vue";
+import CartPopup from "../../views/CartPopup.vue";
 export default {
   data() {
     return {
@@ -91,7 +91,7 @@ export default {
       this.cartOpen = !this.cartOpen;
     },
     showUser() {
-      console.log(`user logged: `, this.$store.state.user);
+      // console.log(`user logged: `, this.$store.state.user);
     },
   },
   computed: {
@@ -99,13 +99,13 @@ export default {
       return this.windowWidth <= 800;
     },
     // checkLoggedIn() {
-    //   console.log("LOGGED IN:");
-    //   console.log(this.$store.state.user);
-    //   return this.$store.state.user.userData._id;
+    // console.log("LOGGED IN:");
+    // console.log(this.$store.state.user);
+    // return this.$store.state.user.userData._id;
     // },
   },
   components: {
-    // CartPopup,
+    CartPopup,
   },
 };
 </script>
