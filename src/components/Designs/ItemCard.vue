@@ -15,7 +15,7 @@
         />
       </div>
     </router-link>
-    <div class="p-3 text-left w-full">
+    <div class="p-3 pb-1 text-left w-full">
       <div class="pb-3">
         <h3 class="font-bold">{{ displayItem.name }}</h3>
         <h3 class="pt-1 text-gray-dark text-sm">
@@ -41,14 +41,18 @@
         </div>
       </div>
       <div
-        class="flex justify-between items-center border-t border-gray-light pt-3"
+        class="flex justify-between items-center border-t border-gray-light pt-1"
       >
         <p class="text-xs uppercase font-bold">Quick Add</p>
-        <img
-          @click="addItemToCart(displayItem)"
-          class="w-4 h-4 cursor-pointer"
-          src="https://i.ibb.co/z7TdxXP/Add-New-256.png"
-        />
+        <div
+          class="bg-transparant cursor-pointer p-2 hover:bg-gray-100 focus:ring-2 rounded-full"
+        >
+          <img
+            @click="addItemToCart(displayItem)"
+            class="w-4 h-4"
+            src="https://i.ibb.co/z7TdxXP/Add-New-256.png"
+          />
+        </div>
       </div>
     </div>
   </div>

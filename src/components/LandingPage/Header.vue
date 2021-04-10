@@ -1,6 +1,11 @@
 <template>
-  <header class="bg-green-light w-full shadow-xl">
-    <div class="flex py-3 px-5 md:px-10 justify-between items-center">
+  <header
+    :class="{ hideCart: cartOpen }"
+    class="bg-green-light w-full shadow-2xl"
+  >
+    <div
+      class="flex py-3 px-5 md:px-10 justify-between items-center shadow-2xl"
+    >
       <router-link class="logo text-3xl text-white" to="/">{{
         mobileWidth ? shortTitle : longTitle
       }}</router-link>
@@ -139,5 +144,9 @@ li:hover {
   right: 0;
   opacity: 1;
   z-index: 3;
+}
+
+.hideCart {
+  display: none;
 }
 </style>

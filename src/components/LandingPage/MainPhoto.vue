@@ -16,7 +16,10 @@
       </div>
 
       <div class="mainImageArea absolute h-screen z-0">
-        <img class="w-screen h-full" src="https://i.ibb.co/YffVZ9q/cups1.jpg" />
+        <img
+          class="w-screen h-full"
+          src="../../assets/latestDesigns/cups1.jpeg"
+        />
       </div>
     </div>
   </section>

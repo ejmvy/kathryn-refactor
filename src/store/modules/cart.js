@@ -12,6 +12,22 @@ export default {
     addProductToCart(state, payload) {
       const productData = payload;
 
+      const productInCartIdx = state.items.findIndex(
+        (cartItem) => cartItem._id === productData._id
+      );
+      const productInCart = state.items.find(
+        (cartItem) => cartItem._id === productData._id
+      );
+
+      console.log(`index:  + ${productInCartIdx}`);
+      console.log(productInCart);
+
+      // if (productInCart >= 0) {
+      //   if (productInCart.colourSelected === productData.colourSelected) {
+      //     state.items;
+      //   }
+      // }
+
       productData.qty = 1;
 
       state.items.push(productData);
@@ -19,16 +35,19 @@ export default {
       state.total += productData.price;
     },
     removeProductFromCart(state, payload) {
-      const prodId = payload.id;
+      const prodId = payload._id;
 
-      const productInCartIndex = state.items.findIndex((cartItem) => {
-        cartItem.productId === prodId;
-      });
+      console.log("item: ");
+      console.log(payload);
+      const productInCart = state.items.find(
+        (cartItem) => cartItem._id === prodId
+      );
+      console.log("index: ");
+      console.log(productInCart);
+      state.items.splice(productInCart, 1);
+      state.qty -= productInCart.qty;
 
-      const prodData = state.items[productInCartIndex];
-      state.items.splice(productInCartIndex, 1);
-      state.qty -= prodData.qty;
-      state.total -= prodData.price * prodData.qty;
+      state.total -= productInCart.price * productInCart.qty;
     },
   },
 
@@ -39,13 +58,14 @@ export default {
       try {
         const product = products.find((prod) => prod._id === prodId);
         product.colourSelected = payload.colourSelected;
+        console.log("color sent: " + product.colourSelected);
         context.commit("addProductToCart", product);
       } catch (e) {
         console.log("api error", e);
       }
     },
     removeFromCart(context, payload) {
-      context.commit("removeProductFromCart", payload);
+      context.commit("removeProductFromCart", payload.item);
     },
   },
   getters: {
