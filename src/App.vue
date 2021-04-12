@@ -41,6 +41,11 @@ button:hover {
   transform: scale(1.05);
 }
 
+button:focus,
+input:focus {
+  outline: none;
+}
+
 h1 {
   font-family: "Nova Mono", monospace;
 }

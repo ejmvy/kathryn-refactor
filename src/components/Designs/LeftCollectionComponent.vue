@@ -31,7 +31,7 @@
         <router-link
           :to="{ name: 'ShowCollection', params: { category: collection } }"
         >
-          <button class="btn-green btn-sm">SHOP NOW</button>
+          <button class="btn-green btn-sm mt-8">SHOP NOW</button>
         </router-link>
       </div>
     </div>

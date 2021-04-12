@@ -25,7 +25,10 @@
       <h5 class="text-white font-bold">Total: {{ getCartTotal }}</h5>
     </div>
 
-    <div class="mt-20 px-5 md:px-16">
+    <div class="mt-20 px-5 sm:px-16">
+      <h5 v-if="!getCartLength" class="text-white">
+        There are no items in your cart
+      </h5>
       <div
         class="flex justify-between items-center py-4 border-b border-gray-300"
         v-for="(item, idx) in cartData"
@@ -47,7 +50,9 @@
     </div>
     <div class="flex justify-center">
       <router-link to="/cart" class="absolute bottom-5">
-        <button class="btn-white">View Cart</button>
+        <button class="btn-white" :class="{ disable: !getCartLength }">
+          View Cart
+        </button>
       </router-link>
     </div>
   </div>
@@ -119,6 +124,7 @@ export default {
 .cartArea {
   top: 0 !important;
   position: absolute;
+  overflow: hidden;
 }
 
 @media screen and (min-width: 12000px) {

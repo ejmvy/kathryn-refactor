@@ -1,8 +1,5 @@
 <template>
-  <header
-    :class="{ hideCart: cartOpen }"
-    class="bg-green-light w-full shadow-2xl"
-  >
+  <header :class="{ hideCart: cartOpen }" class="bg-green-light w-full">
     <div
       class="flex py-3 px-5 md:px-10 justify-between items-center shadow-2xl"
     >
@@ -23,10 +20,7 @@
           <a href="#">Gallery</a>
         </li>
         <li class="li-class">
-          <router-link v-if="!checkLoggedIn" to="/login">
-            <img class="w-5 h-5" src="https://i.ibb.co/pn8FWKn/userIcon.png" />
-          </router-link>
-          <router-link v-if="checkLoggedIn" to="/userprofile">
+          <router-link :to="checkLoggedIn ? '/userprofile' : '/login'">
             <img class="w-5 h-5" src="https://i.ibb.co/pn8FWKn/userIcon.png" />
           </router-link>
         </li>
@@ -44,17 +38,14 @@
         <li class="list-none mx-4">
           <img class="w-4 h-4" src="https://i.ibb.co/DGCt4tJ/hamburger.png" />
         </li>
-        <li class="list-none mx-4">
-          <img
-            class="w-5 h-5 middleLink"
-            src="https://i.ibb.co/pn8FWKn/userIcon.png"
-          />
-        </li>
-        <!-- <li v-if='$store.state.user.userData._id'>
-          <router-link to="userprofile">
-            <img class='userLogo middleLink' src='../assets/icons/userIcon.png' />
+        <li class="flex md:hidden items-center">
+          <router-link :to="checkLoggedIn ? '/userprofile' : '/login'">
+            <img
+              class="w-5 h-5 middleLink"
+              src="https://i.ibb.co/pn8FWKn/userIcon.png"
+            />
           </router-link>
-        </li> -->
+        </li>
         <li class="list-none mx-4">
           <a href="#">
             <img
@@ -103,11 +94,10 @@ export default {
     mobileWidth() {
       return this.windowWidth <= 800;
     },
-    // checkLoggedIn() {
-    // console.log("LOGGED IN:");
-    // console.log(this.$store.state.user);
-    // return this.$store.state.user.userData._id;
-    // },
+    checkLoggedIn() {
+      console.log(`LOGGED IN: ${this.$store.getters.isAuthenticated}`);
+      return this.$store.getters.isAuthenticated;
+    },
   },
   components: {
     CartPopup,

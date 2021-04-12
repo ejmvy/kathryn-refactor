@@ -11,26 +11,20 @@ export default {
   mutations: {
     addProductToCart(state, payload) {
       const productData = payload;
+      const prodId = payload._id;
 
       const productInCartIdx = state.items.findIndex(
-        (cartItem) => cartItem._id === productData._id
+        (cartItem) =>
+          cartItem._id === prodId &&
+          cartItem.colourSelected === productData.colourSelected
       );
-      const productInCart = state.items.find(
-        (cartItem) => cartItem._id === productData._id
-      );
 
-      console.log(`index:  + ${productInCartIdx}`);
-      console.log(productInCart);
+      if (productInCartIdx >= 0) {
+        state.items[productInCartIdx].qty++;
+      } else {
+        state.items.push(productData);
+      }
 
-      // if (productInCart >= 0) {
-      //   if (productInCart.colourSelected === productData.colourSelected) {
-      //     state.items;
-      //   }
-      // }
-
-      productData.qty = 1;
-
-      state.items.push(productData);
       state.qty++;
       state.total += productData.price;
     },
@@ -39,14 +33,21 @@ export default {
 
       console.log("item: ");
       console.log(payload);
-      const productInCart = state.items.find(
-        (cartItem) => cartItem._id === prodId
-      );
-      console.log("index: ");
-      console.log(productInCart);
-      state.items.splice(productInCart, 1);
-      state.qty -= productInCart.qty;
 
+      const productInCartIdx = state.items.findIndex(
+        (cartItem) =>
+          cartItem._id === prodId &&
+          cartItem.colourSelected === payload.colourSelected
+      );
+      const productInCart = state.items.find(
+        (cartItem) =>
+          cartItem._id === prodId &&
+          cartItem.colourSelected === payload.colourSelected
+      );
+
+      console.log("index1: " + productInCartIdx);
+      state.items.splice(productInCartIdx, 1);
+      state.qty -= productInCart.qty;
       state.total -= productInCart.price * productInCart.qty;
     },
   },
@@ -56,10 +57,12 @@ export default {
       const prodId = payload.id;
       const products = context.rootGetters["prods/products"];
       try {
-        const product = products.find((prod) => prod._id === prodId);
-        product.colourSelected = payload.colourSelected;
-        console.log("color sent: " + product.colourSelected);
-        context.commit("addProductToCart", product);
+        const product = products.find((prod) => prod._id == prodId);
+        const newProduct = { ...product };
+        newProduct.colourSelected = payload.colourSelected;
+        newProduct.qty = payload.qty ? payload.qty : 1;
+        console.log("color sent: " + newProduct.colourSelected);
+        context.commit("addProductToCart", newProduct);
       } catch (e) {
         console.log("api error", e);
       }

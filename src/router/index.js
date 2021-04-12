@@ -6,8 +6,8 @@ import Contact from "@/views/Contact.vue";
 // import Admin from "@/components/views/Admin.vue";
 // import CartView from "@/components/views/CartView.vue";
 // import ShowCollection from "@/components/views/ShowCollection.vue";
-// import Login from "@/components/views/Login.vue";
-// import UserProfile from "@/components/views/UserProfile.vue";
+import Login from "@/views/Login.vue";
+import UserProfile from "@/views/UserProfile.vue";
 // import Payment from "@/components/CartSection/Payment.vue";
 
 const routes = [
@@ -51,16 +51,16 @@ const routes = [
   //   name: "ShowCollection",
   //   component: ShowCollection,
   // },
-  // {
-  //   path: "/login",
-  //   name: "Login",
-  //   component: Login,
-  // },
-  // {
-  //   path: "/userprofile",
-  //   name: "UserProfile",
-  //   component: UserProfile,
-  // },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path: "/userprofile",
+    name: "UserProfile",
+    component: UserProfile,
+  },
   // {
   //   path: "/payment",
   //   name: "Payment",

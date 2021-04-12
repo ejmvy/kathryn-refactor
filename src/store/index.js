@@ -8,7 +8,30 @@ export default createStore({
     prods: productModule,
     cart: cartModule,
   },
-  state: {},
-  mutations: {},
-  actions: {},
+  state: {
+    isLoggedIn: false,
+    user: {},
+  },
+  mutations: {
+    login(state, payload) {
+      console.log("user logging in...");
+      console.log(payload);
+      state.user = payload;
+      state.isLoggedIn = true;
+    },
+    logout(state) {
+      state.isLoggedIn = false;
+      state.user = {};
+    },
+  },
+  actions: {
+    login: (context, payload) => context.commit("login", payload),
+    logout: (context) => context.commit("logout"),
+  },
+
+  getters: {
+    isAuthenticated(state) {
+      return state.isLoggedIn;
+    },
+  },
 });

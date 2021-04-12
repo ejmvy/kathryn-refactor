@@ -4,12 +4,23 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
 .li-class {
-    @apply list-none uppercase mx-5 text-sm py-2 z-10 md:text-xs text-white  cursor-pointer;
+    @apply list-none uppercase mx-5 text-sm py-2 z-10 md:text-xs text-white;
+}
+
+button {
+    @apply cursor-pointer uppercase tracking-widest border-2; 
+}
+
+button:focus {
+    @apply outline-none;
 }
 
 .btn-green {
-    @apply uppercase bg-transparent text-green-dark border-2 border-green-dark rounded-full mt-10 cursor-pointer;
+    @apply  bg-transparent text-green-dark  border-green-dark rounded-full;
 }
 
 .btn-green:hover, .btn-green:focus {
@@ -17,7 +28,11 @@
 }
 
 .btn-white {
-    @apply uppercase px-6 py-1 bg-transparent text-white border-2 border-white rounded-full mt-10 cursor-pointer;
+    @apply  px-6 py-1 bg-transparent text-white border-white rounded-full mt-10;
+}
+
+.btn-full-white {
+    @apply px-6 py-1 bg-white text-green-dark font-bold border-white rounded-full mt-10 ;
 }
 
 .btn-white:hover, .btn-white:focus {
@@ -65,9 +80,18 @@
 }
 
 .displaySelect {
-    @apply cursor-pointer border-transparent text-sm pr-5 text-green-dark outline-none;
+    @apply cursor-pointer border-transparent text-sm pr-5 text-green-dark outline-none bg-transparent;
 }
 
 .colorBtn:focus {
     @apply ring-2 ring-offset-1 ring-gray-300 outline-none rounded-full;
 }
+
+.loginInput {
+    @apply border-transparent w-full bg-transparent mt-5 py-4  px-5 text-sm tracking-wider border-b-2 border-gray-400 ;
+}
+
+
+.disable {
+    @apply border-2 border-gray-400 text-gray-400 cursor-not-allowed pointer-events-none bg-transparent;
+  }

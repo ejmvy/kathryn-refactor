@@ -49,7 +49,7 @@
 
         <div class="flex justify-between w-full mt-12 md:mt-20 pb-5">
           <label class="uppercase text-xs">Color</label>
-          <select v-model="colourPicked" class="displaySelect">
+          <select v-model="colourSelected" class="displaySelect">
             <option v-for="col in item.colourArr" :key="col" :value="col">
               {{ col }}
             </option>
@@ -57,7 +57,7 @@
         </div>
         <div class="flex justify-between w-full mt-5 pb-5">
           <label class="uppercase text-xs">Quantity</label>
-          <select v-model="item.quantity" class="displaySelect">
+          <select v-model="quantityChosen" class="displaySelect">
             <option v-for="num in quantityValues" :key="num" :value="num">
               {{ num }}
             </option>
@@ -65,7 +65,7 @@
         </div>
 
         <div class="w-full flex justify-center">
-          <button @click="addItemToCart(item)" class="btn-green btn-lrg">
+          <button @click="addItemToCart(item)" class="btn-green btn-lrg mt-10">
             Add To Basket
           </button>
         </div>
@@ -90,7 +90,8 @@ export default {
       item: {},
       colourVal: null,
       quantityValues: ["One", "Two", "Three", "Four", "Five"],
-      colourPicked: "",
+      colourSelected: "",
+      quantityChosen: "",
       quantityList: {
         One: 1,
         Two: 2,
@@ -107,32 +108,12 @@ export default {
     },
     addItemToCart(item) {
       console.log("ITEM ADDED: ", item);
-      fetch("http://localhost:3000/api/cart/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: item.name,
-          price: item.price,
-          description: item.description,
-          quantity: this.quantityList[item.quantity],
-          colourPicked: this.colourPicked,
-          imageUrl: item.imageUrl,
-          dimensions: item.dimensions,
-          numberInStock: item.numberInStock,
-        }),
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          console.log("ITEM SENT: ");
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+
+      this.$store.dispatch("cart/addToCart", {
+        id: item._id,
+        colourSelected: this.colourSelected,
+        qty: this.quantityList[this.quantityChosen],
+      });
     },
   },
 
@@ -142,8 +123,6 @@ export default {
         return res.json();
       })
       .then((data) => {
-        // console.log('DISPLAY ITEM');
-        // console.log(data);
         data.colourArr = data.colour.split(",");
         data.colourArr = data.colourArr.map((col) => col.trim());
         console.log(data);
