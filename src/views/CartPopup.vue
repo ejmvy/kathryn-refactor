@@ -1,6 +1,6 @@
 <template>
   <div
-    class="cartArea absolute top-0 z-10 w-screen h-screen right-0 lg:w-1/4 flex flex-col bg-green-dark mt-0 pb-5"
+    class="cartArea absolute top-0 z-20 w-screen h-screen right-0 lg:w-1/4 flex flex-col bg-green-dark mt-0 pb-5"
   >
     <!-- <div class="arrow"></div> -->
     <!-- //v-if='mobileWidth' -->

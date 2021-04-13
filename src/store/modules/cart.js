@@ -50,6 +50,31 @@ export default {
       state.qty -= productInCart.qty;
       state.total -= productInCart.price * productInCart.qty;
     },
+
+    increaseQty(state, payload) {
+      const prodId = payload._id;
+      const productInCartIdx = state.items.findIndex(
+        (cartItem) =>
+          cartItem._id === prodId &&
+          cartItem.colourSelected === payload.colourSelected
+      );
+
+      state.items[productInCartIdx].qty++;
+      state.qty++;
+      state.total += state.items[productInCartIdx].price;
+    },
+    decreaseQty(state, payload) {
+      const prodId = payload._id;
+      const productInCartIdx = state.items.findIndex(
+        (cartItem) =>
+          cartItem._id === prodId &&
+          cartItem.colourSelected === payload.colourSelected
+      );
+
+      state.items[productInCartIdx].qty--;
+      state.qty--;
+      state.total -= state.items[productInCartIdx].price;
+    },
   },
 
   actions: {
@@ -69,6 +94,12 @@ export default {
     },
     removeFromCart(context, payload) {
       context.commit("removeProductFromCart", payload.item);
+    },
+    increaseQty(context, payload) {
+      context.commit("increaseQty", payload);
+    },
+    decreaseQty(context, payload) {
+      context.commit("decreaseQty", payload);
     },
   },
   getters: {

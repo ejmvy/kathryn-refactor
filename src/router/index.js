@@ -4,7 +4,7 @@ import Shop from "@/views/Shop.vue";
 import ItemDisplay from "../components/ItemDisplayPage/ItemDisplay.vue";
 import Contact from "@/views/Contact.vue";
 // import Admin from "@/components/views/Admin.vue";
-// import CartView from "@/components/views/CartView.vue";
+import CartView from "@/views/CartView.vue";
 // import ShowCollection from "@/components/views/ShowCollection.vue";
 import Login from "@/views/Login.vue";
 import UserProfile from "@/views/UserProfile.vue";
@@ -41,11 +41,11 @@ const routes = [
   //   name: "Admin",
   //   component: Admin,
   // },
-  // {
-  //   path: "/cart",
-  //   name: "Cart",
-  //   component: CartView,
-  // },
+  {
+    path: "/cart",
+    name: "Cart",
+    component: CartView,
+  },
   // {
   //   path: "/shop/:category",
   //   name: "ShowCollection",
