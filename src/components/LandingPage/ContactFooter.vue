@@ -2,7 +2,7 @@
   <div class="flex flex-col w-full pt-20 items-center">
     <div class="flex w-1/2 justify-center pb-20">
       <div
-        class="circle flex justify-center text-white p-2 bg-green-light rounded-full mx-8 cursor-pointer"
+        class="circle flex justify-center text-white p-2 bg-green-light rounded-full mx-5 sm:mx-8 cursor-pointer"
         v-for="logo in logos"
         :key="logo"
       >
@@ -52,6 +52,7 @@ export default {
 <style scoped>
 .circle {
   transition: all 0.2s ease-in-out;
+  min-width: 45px;
 }
 .circle:hover {
   transform: scale(1.05);

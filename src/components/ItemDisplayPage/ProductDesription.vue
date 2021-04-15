@@ -3,7 +3,7 @@
     <TitleDesign :title="titleText"></TitleDesign>
 
     <div class="flex w-11/12 mt-10">
-      <div class="flex flex-1 flex-col text-left px-10">
+      <div class="flex flex-1 flex-col text-left px-2">
         <div class="pb-5">
           <label class="title1 text-sm pr-10">{{ itemInfo.name }}</label>
           <p class="text-gray-dark">{{ itemInfo.description }}</p>
@@ -17,7 +17,7 @@
           <p class="text-gray-dark">{{ itemInfo.colour }}</p>
         </div>
       </div>
-      <div class="flex flex-1 flex-col text-left">
+      <div class="flex flex-1 flex-col text-left px-2">
         <label class="title1 text-sm pr-10">Washing Instructions</label>
         <p class="text-gray-dark">{{ itemInfo.washing }}</p>
       </div>

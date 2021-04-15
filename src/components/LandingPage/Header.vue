@@ -1,5 +1,5 @@
 <template>
-  <header :class="{ hideCart: cartOpen }" class="bg-green-light w-full">
+  <header class="absolute bg-green-light w-full">
     <div
       class="flex py-3 px-5 md:px-10 justify-between items-center shadow-2xl"
     >
@@ -24,8 +24,8 @@
             <img class="w-5 h-5" src="https://i.ibb.co/pn8FWKn/userIcon.png" />
           </router-link>
         </li>
-        <li class="li-class">
-          <a href="#">
+        <li class="li-class no-underline">
+          <a href="#" class="no-underline">
             <img
               class="w-6 h-6"
               src="https://i.ibb.co/vzdx4Vj/cart.png"
@@ -34,6 +34,8 @@
           </a>
         </li>
       </nav>
+
+      <!-- MOBILE NAV -->
       <nav class="flex md:hidden items-center">
         <li class="list-none mx-4">
           <img class="w-4 h-4" src="https://i.ibb.co/DGCt4tJ/hamburger.png" />
@@ -59,11 +61,11 @@
     </div>
   </header>
 
-  <div :class="{ cartOpened: cartOpen }">
+  <transition name="slide">
     <div v-if="cartOpen" class="cartImport">
       <CartPopup @closePopup="openCart()"></CartPopup>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -121,22 +123,21 @@ li:hover {
   font-family: "Megrim", cursive;
 }
 
+header {
+  z-index: 1;
+}
+
 /* CART POPUP STYLES */
 .cartImport {
   position: relative;
-  right: -100px;
-  opacity: 0;
-  transition: right 0.3s, opacity 0.3s;
-  z-index: -1;
-}
-
-.cartOpened .cartImport {
   right: 0;
-  opacity: 1;
-  z-index: 3;
+  top: 0;
+  transition: all 0.5s ease-in-out;
 }
 
-.hideCart {
-  display: none;
+.slide-enter,
+.slide-enter-active,
+.slide-leave-active {
+  right: -100%;
 }
 </style>

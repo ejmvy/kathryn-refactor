@@ -87,7 +87,11 @@
               Already have an Account?
             </h5>
             <p>Click here to login</p>
-            <button class="btn-white btn-lrg" id="signIn" @click="signInButton">
+            <button
+              class="btn-white btn-lrg mt-10"
+              id="signIn"
+              @click="signInButton"
+            >
               Sign In
             </button>
           </div>
@@ -96,7 +100,11 @@
               New Friend?
             </h5>
             <p>Click here to register</p>
-            <button class="btn-white btn-lrg" id="signUp" @click="signUpButton">
+            <button
+              class="btn-white btn-lrg mt-10"
+              id="signUp"
+              @click="signUpButton"
+            >
               Sign Up
             </button>
           </div>
@@ -104,6 +112,7 @@
       </div>
     </div>
 
+    <!-- MOBILE LOGIN -->
     <div
       v-if="!welcomePopup"
       class="md:hidden h-screen w-full overflow-hidden bg-green-light"

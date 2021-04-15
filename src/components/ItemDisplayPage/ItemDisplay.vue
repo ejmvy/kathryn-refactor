@@ -1,6 +1,6 @@
 <template>
   <Header></Header>
-  <section class="section pt-5 md:pt-10">
+  <section class="section pt-16">
     <div class="w-11/12 flex justify-between">
       <div class="flex items-center text-gray-500">
         <router-link
@@ -8,13 +8,13 @@
           to="/shop"
           >Collection</router-link
         >
-        <div class="px-10">/</div>
+        <div class="px-8">/</div>
         <p>{{ item.name }}</p>
       </div>
     </div>
 
     <div
-      class="w-10/12 sm:w-8/12 md:w-10/12 lg:w-8/12 flex flex-col md:flex-row items-center justify-center mt-16"
+      class="w-10/12 sm:w-8/12 md:w-10/12 lg:w-8/12 flex flex-col md:flex-row items-center justify-center mt-10"
     >
       <div class="flex flex-col md:flex-row w-full md:w-3/5">
         <div class="flex md:justify-between w-full md:w-24 md:flex-col order-2">

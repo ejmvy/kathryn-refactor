@@ -28,7 +28,7 @@ button:focus {
 }
 
 .btn-white {
-    @apply  px-6 py-1 bg-transparent text-white border-white rounded-full mt-10;
+    @apply  px-6 py-1 bg-transparent text-white border-white rounded-full;
 }
 
 .btn-full-white {
@@ -88,7 +88,11 @@ button:focus {
 }
 
 .loginInput {
-    @apply border-transparent w-full bg-transparent mt-5 py-4  px-5 text-sm tracking-wider border-b-2 border-gray-400 ;
+    @apply border-transparent w-full bg-transparent mt-5 py-4  px-5 text-sm tracking-wider border-b-2 border-gray-400 text-green-dark;
+}
+
+.loginInput:focus {
+    @apply border-b-2 border-green-600 text-green-light;
 }
 
 

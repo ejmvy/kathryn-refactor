@@ -1,9 +1,7 @@
-<template>
+<template class="">
   <div
-    class="cartArea absolute top-0 z-20 w-screen h-screen right-0 lg:w-1/4 flex flex-col bg-green-dark mt-0 pb-5"
+    class="absolute top-0 w-screen h-screen overflow-hidden right-0 lg:w-1/4 flex flex-col bg-green-dark mt-0 pb-5 z-10"
   >
-    <!-- <div class="arrow"></div> -->
-    <!-- //v-if='mobileWidth' -->
     <div class="absolute right-3 top-3 cursor-pointer">
       <img
         @click="$emit('closePopup')"
@@ -25,7 +23,7 @@
       <h5 class="text-white font-bold">Total: {{ getCartTotal }}</h5>
     </div>
 
-    <div class="mt-20 px-5 sm:px-16">
+    <div class="h-2/3 overflow-y-auto mt-10 md:mt-20 px-5 sm:px-16">
       <h5 v-if="!getCartLength" class="text-white">
         There are no items in your cart
       </h5>
@@ -108,28 +106,9 @@ export default {
 </script>
 
 <style scoped>
-.arrow {
-  /* z-index: 10; */
-  position: absolute;
-  float: right;
-  right: 30px;
-  top: -15px;
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-
-  border-bottom: 15px solid rgba(32, 72, 88, 0.9);
-}
-.cartArea {
-  top: 0 !important;
-  position: absolute;
-  overflow: hidden;
-}
-
-@media screen and (min-width: 12000px) {
-  .cartArea {
-    height: 600px;
-  }
-}
+/* .cartItems {
+  border: 2px solid yellow;
+  height: 70%;
+  overflow: auto;
+} */
 </style>

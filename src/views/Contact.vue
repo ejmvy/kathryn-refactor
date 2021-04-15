@@ -1,6 +1,6 @@
 <template>
   <Header></Header>
-  <section class="section mt-20">
+  <section class="section pt-20">
     <TitleDesign :title="titleText"></TitleDesign>
     <div class="flex justify-between mt-14 w-11/12">
       <div
@@ -21,7 +21,7 @@
           <textarea class="contactInput h-24"></textarea>
         </div>
         <div>
-          <button class="btn-white">Submit</button>
+          <button class="btn-white btn-lrg mt-10">Submit</button>
         </div>
       </div>
       <div class="hidden md:block md:w-2/5">

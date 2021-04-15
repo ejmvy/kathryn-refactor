@@ -1,9 +1,9 @@
 <template>
   <section class="section py-14">
     <TitleDesign :title="titleText"></TitleDesign>
-    <div class="imageDisplay mt-10">
+    <div class="flex justify-between w-11/12 overflow-auto mt-10">
       <div v-for="img in imagesToDisplay" :key="img">
-        <img class="pic" :src="require(`../../assets/${img}`)" />
+        <img class="pic px-2" :src="require(`../../assets/${img}`)" />
       </div>
     </div>
   </section>
@@ -33,18 +33,8 @@ export default {
 </script>
 
 <style scoped>
-.imageDisplay {
-  display: flex;
-  justify-content: space-between;
-  width: 90%;
-  /* border: 1px solid red; */
-  overflow: auto;
-}
-
 .pic {
-  /* flex: 1; */
-  width: 200px;
+  min-width: 160px;
   height: 150px;
-  padding: 0 10px;
 }
 </style>

@@ -8,7 +8,7 @@
     </transition>
   </div> -->
   <Header></Header>
-  <section class="section py-8 md:pt-16 mb-24 bg-gray-100">
+  <section class="section pb-8 pt-16 mb-24 bg-gray-100">
     <TitleDesign :title="titleText"></TitleDesign>
     <div class="w-11/12 sm:mt-6 flex justify-between">
       <div class="flex">
