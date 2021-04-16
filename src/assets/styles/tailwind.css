@@ -72,7 +72,11 @@ button:focus {
 }
 
 .contactInput {
-    @apply w-full bg-transparent border-transparent text-white tracking-wider text-sm leading-5 border-b-2 border-gray-50;
+    @apply w-full bg-transparent outline-none border-transparent text-green-dark tracking-wider text-sm leading-5 border-b-2 border-gray-400;
+}
+
+.contactInput:focus {
+    @apply border-green-dark outline-none;
 }
 
 .contactLabel {
@@ -99,3 +103,7 @@ button:focus {
 .disable {
     @apply border-2 border-gray-400 text-gray-400 cursor-not-allowed pointer-events-none bg-transparent;
   }
+
+.circleProgress {
+    @apply w-10 h-10 bg-green-dark text-white rounded-full flex justify-center items-center;
+}

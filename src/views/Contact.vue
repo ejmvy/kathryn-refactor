@@ -1,11 +1,9 @@
 <template>
   <Header></Header>
-  <section class="section pt-20">
+  <section class="section pt-20 md:pt-24">
     <TitleDesign :title="titleText"></TitleDesign>
     <div class="flex justify-between mt-14 w-11/12">
-      <div
-        class="flex flex-1 flex-col text-white bg-green-light py-5 px-10 shadow-xl rounded-3xl"
-      >
+      <div class="flex flex-1 flex-col text-green-dark py-5 px-10 shadow-xl">
         <div class="flex flex-col mb-20">
           <div class="flex flex-col text-left">
             <label class="uppercase text-xs py-5">Name</label>
@@ -21,7 +19,7 @@
           <textarea class="contactInput h-24"></textarea>
         </div>
         <div>
-          <button class="btn-white btn-lrg mt-10">Submit</button>
+          <button class="btn-green btn-lrg mt-10">Submit</button>
         </div>
       </div>
       <div class="hidden md:block md:w-2/5">
@@ -85,12 +83,14 @@ export default {
 </script>
 
 <style scoped>
-input:focus,
-textarea:focus {
-  border-bottom: 2px solid white;
+input {
+  transition: all 0.5s ease-in-out;
   outline: none;
 }
 
+input:focus {
+  outline: none;
+}
 .circle {
   transition: all 0.2s ease-in-out;
 }

@@ -30,8 +30,7 @@ export default createStore({
   },
 
   getters: {
-    isAuthenticated(state) {
-      return state.isLoggedIn;
-    },
+    isAuthenticated: (state) => state.isLoggedIn,
+    addressDetails: (state) => state.user.addressDetails,
   },
 });

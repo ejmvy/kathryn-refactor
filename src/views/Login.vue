@@ -290,9 +290,16 @@ export default {
           data.userKey = key;
           this.$store.dispatch("login", data);
 
-          this.popupInfo.userName = ` Back ${data.name.split(" ")[0]}`;
-          this.popupInfo.message = "We hope you enjoy shopping with us again.";
-          this.welcomePopup = true;
+          const cartProcess = this.$store.getters("cart/paymentStep");
+
+          if (cartProcess > 0) {
+            return this.$router.push("/checkout");
+          } else {
+            this.popupInfo.userName = ` Back ${data.name.split(" ")[0]}`;
+            this.popupInfo.message =
+              "We hope you enjoy shopping with us again.";
+            this.welcomePopup = true;
+          }
         })
         .catch((err) => {
           console.log(`Err: ${err}`);

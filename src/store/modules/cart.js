@@ -5,6 +5,7 @@ export default {
       items: [],
       total: 0,
       qty: 0,
+      paymentStep: 0,
     };
   },
 
@@ -75,6 +76,10 @@ export default {
       state.qty--;
       state.total -= state.items[productInCartIdx].price;
     },
+
+    increasePaymentStep(state) {
+      state.paymentStep++;
+    },
   },
 
   actions: {
@@ -101,10 +106,14 @@ export default {
     decreaseQty(context, payload) {
       context.commit("decreaseQty", payload);
     },
+    increasePaymentStep(context) {
+      context.commit("increasePaymentStep");
+    },
   },
   getters: {
     products: (state) => state.items,
     totalSum: (state) => state.total,
     quantity: (state) => state.qty,
+    paymentStep: (state) => state.paymentStep,
   },
 };

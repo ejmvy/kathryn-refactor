@@ -92,6 +92,7 @@
         :class="{ topFormat: openBottom }"
       >
         <div
+          v-if="mobileWidth"
           class="circle absolute -top-10 right-0 m-3 p-4 rounded-full bg-green-dark cursor-pointer z-10"
           @click="openBottom = !openBottom"
         >
@@ -115,23 +116,9 @@
             <p class="p-3 text-sm">Shipping & Postage Included</p>
           </div>
           <div class="py-4">
-            <button
-              v-if="paymentStep === 1"
-              class="btn-white btn-lrg"
-              @click="paymentStep = 2"
-            >
+            <button class="btn-white btn-lrg" @click="checkLoginDetails">
               Checkout
             </button>
-            <!-- <router-link to="/payment">
-              <button
-                v-if="paymentStep === 2"
-                class="btn-white btn-lrg backwards"
-                :disabled="isDisabled"
-                :class="{ btnDisabled: !detailsConfirmed }"
-              >
-                Continue
-              </button>
-            </router-link> -->
           </div>
         </div>
       </div>
@@ -140,7 +127,6 @@
 </template>
 
 <script>
-// import AddressDetails from "../CartSection/AddressDetails.vue";
 export default {
   data() {
     return {
@@ -151,6 +137,7 @@ export default {
       paymentStep: 1,
       detailsConfirmed: false,
       openBottom: false,
+      showAddressForm: false,
     };
   },
   mounted() {
@@ -177,6 +164,19 @@ export default {
       console.log("Details Confirmed");
       this.detailsConfirmed = true;
     },
+    checkLoginDetails() {
+      this.$store.dispatch("cart/increasePaymentStep");
+      const userLoggedIn = this.$store.getters["isAuthenticated"];
+      console.log(`userLoggedIn: ${userLoggedIn}`);
+      if (!userLoggedIn) {
+        return this.$router.push("/login");
+      }
+      if (userLoggedIn) {
+        const addressDetails = this.$store.getters["addressDetails"];
+        if (!addressDetails) return this.$router.push("/checkout");
+        return this.router.push("/reviewWindow");
+      }
+    },
   },
   computed: {
     getTotal: function () {
@@ -192,6 +192,10 @@ export default {
     },
     isDisabled() {
       return this.detailsConfirmed ? false : true;
+    },
+
+    getPaymentStep() {
+      return this.$store.getters["cart/paymentStep"];
     },
   },
   created() {

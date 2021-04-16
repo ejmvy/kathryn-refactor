@@ -8,7 +8,7 @@
     </transition>
   </div> -->
   <Header></Header>
-  <section class="section pb-8 pt-16 mb-24 bg-gray-100">
+  <section class="section pb-8 pt-16 md:pt-24 mb-24 bg-gray-100">
     <TitleDesign :title="titleText"></TitleDesign>
     <div class="w-11/12 sm:mt-6 flex justify-between">
       <div class="flex">
@@ -31,7 +31,7 @@
       <p>{{ productData.length }} items</p>
     </div>
     <div
-      class="w-11/12 flex justify-center pt-10 md:pt-0 md:justify-between flex-wrap"
+      class="w-11/12 flex justify-center pt-10 md:pt-6 md:justify-between flex-wrap"
     >
       <div v-for="item in productData" :key="item">
         <ItemCard :displayItem="item"></ItemCard>
