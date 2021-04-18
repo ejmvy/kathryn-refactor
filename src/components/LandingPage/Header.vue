@@ -37,18 +37,18 @@
 
       <!-- MOBILE NAV -->
       <nav class="flex md:hidden items-center">
-        <li class="list-none mx-4">
+        <div class="mx-4">
           <img class="w-4 h-4" src="https://i.ibb.co/DGCt4tJ/hamburger.png" />
-        </li>
-        <li class="flex md:hidden items-center">
+        </div>
+        <div class="flex md:hidden items-center">
           <router-link :to="checkLoggedIn ? '/userprofile' : '/login'">
             <img
               class="w-5 h-5 middleLink"
               src="https://i.ibb.co/pn8FWKn/userIcon.png"
             />
           </router-link>
-        </li>
-        <li class="list-none mx-4">
+        </div>
+        <div class="mx-4">
           <a href="#">
             <img
               class="w-6 h-6"
@@ -56,7 +56,7 @@
               @click="openCart()"
             />
           </a>
-        </li>
+        </div>
       </nav>
     </div>
   </header>
@@ -117,10 +117,6 @@ li {
 li:hover {
   border-bottom: 1px solid white;
   color: #eaeaea;
-}
-
-.logo {
-  font-family: "Megrim", cursive;
 }
 
 header {

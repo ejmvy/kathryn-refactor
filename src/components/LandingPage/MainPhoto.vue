@@ -2,7 +2,7 @@
   <section class="pb-0">
     <div class="flex justify-between items-center w-screen h-screen">
       <div
-        class="absolute left-1/20 w-11/12 md:w-1/2 md:left-1/4 bottom-0 px-10 pt-5 pb-10 text-center z-10"
+        class="textArea absolute left-1/20 w-11/12 md:w-1/2 md:left-1/4 bottom-0 px-10 pt-5 pb-10 text-center"
       >
         <h1 class="title1 text-4xl">Kathryn O'Kelly</h1>
         <h3 class="my-4 font-bold text-lg">Irish Ceramic Artist</h3>
@@ -27,4 +27,8 @@
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.textArea {
+  z-index: 1;
+}
+</style>

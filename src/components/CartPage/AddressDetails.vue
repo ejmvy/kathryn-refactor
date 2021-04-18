@@ -1,47 +1,93 @@
 <template>
-  <div>
-    <form>
-      <h5>Your Details</h5>
-      <div style="display: flex">
-        <div class="inputArea">
-          <label>First Name:</label>
-          <input v-model="userObject.firstName" type="text" />
+  <div class="bg-white mt-3 p-3">
+    <h5 class="uppercase text-xs pb-4">Shipping Address</h5>
+    <form class="px-3">
+      <div>
+        <input
+          class="addressInput"
+          v-model="userObject.firstName"
+          type="text"
+          placeholder="*First Name"
+        />
+      </div>
+      <div>
+        <input
+          class="addressInput"
+          v-model="userObject.lastName"
+          type="text"
+          placeholder="*Last Name"
+        />
+      </div>
+
+      <div>
+        <input
+          class="addressInput"
+          v-model="userObject.email"
+          type="text"
+          placeholder="*Email"
+        />
+      </div>
+      <div>
+        <input
+          class="addressInput"
+          v-model="userObject.addressLine1"
+          type="text"
+          placeholder="*Address Line 1"
+        />
+      </div>
+      <div>
+        <input
+          class="addressInput"
+          v-model="userObject.addressLine2"
+          type="text"
+          placeholder="Address Line 2"
+        />
+      </div>
+      <div class="flex justify-between">
+        <div class="mr-5">
+          <input
+            class="addressInput"
+            v-model="userObject.city"
+            type="text"
+            placeholder="*City"
+          />
         </div>
-        <div class="inputArea">
-          <label>Last Name:</label>
-          <input v-model="userObject.lastName" type="text" />
+        <div class="ml-5">
+          <input
+            class="addressInput"
+            v-model="userObject.postcode"
+            type="text"
+            placeholder="*Post Code"
+          />
         </div>
       </div>
-      <div class="inputArea">
-        <label>Email:</label>
-        <input v-model="userObject.email" type="text" />
+      <div>
+        <input
+          class="addressInput"
+          v-model="userObject.country"
+          type="text"
+          placeholder="*Country"
+        />
       </div>
-      <div class="inputArea">
-        <label>Address Line 1:</label>
-        <input v-model="userObject.addressLine1" type="text" />
-      </div>
-      <div class="inputArea">
-        <label>Address Line 2:</label>
-        <input v-model="userObject.addressLine2" type="text" />
-      </div>
-      <div style="display: flex">
-        <div class="inputArea">
-          <label>City:</label>
-          <input v-model="userObject.city" type="text" />
-        </div>
-        <div class="inputArea">
-          <label>Postcode:</label>
-          <input v-model="userObject.postCode" type="text" />
-        </div>
-      </div>
-      <div class="inputArea">
-        <label>Country:</label>
-        <input v-model="userObject.country" type="text" />
+      <div>
+        <input
+          class="addressInput"
+          v-model="userObject.phoneNumber"
+          type="text"
+          placeholder="*Phone Number"
+        />
       </div>
     </form>
 
     <div class="buttonArea">
-      <button class="btn" @click="confirmDetails">Confirm Details</button>
+      <!-- :class="{ disable: !missingValues }" -->
+      <button
+        class="btn-green btn-lrg mt-10"
+        @click="saveDetails()"
+        :class="{ disable: isDisabled }"
+      >
+        Confirm Details
+      </button>
     </div>
   </div>
 </template>
@@ -60,61 +106,69 @@ export default {
         city: "",
         postcode: "",
         country: "",
+        phoneNumber: "",
       },
+      missingValues: true,
     };
   },
   methods: {
-    confirmDetails() {
-      var missingValues = [];
+    saveDetails() {
+      this.$store.dispatch("saveAddress", this.userObject);
+
+      const user = this.$store.getters["getUserDetails"];
+      console.log("USER: ", user);
+
+      fetch(`http://localhost:3000/api/users/address/${user._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this.userObject),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((updatedUser) => {
+          console.log("updated user: ");
+          console.log(updatedUser);
+          this.$store.dispatch("cart/increasePaymentStep");
+        })
+        .catch((e) => {
+          console.log(`error: ${e}`);
+        });
+    },
+  },
+
+  computed: {
+    checkAllDetails() {
+      var isMissing = false;
       for (var key in this.userObject) {
         if (!this.userObject[key]) {
-          missingValues.push(key);
-          // console.log(missingValues);
+          isMissing = false;
         } else {
-          // console.log('all');
+          isMissing = false;
         }
       }
-      this.$emit("addressConfirmed");
+      console.log(`MISSING: ${isMissing}`);
+      return isMissing;
     },
+    isDisabled() {
+      const values = Object.values(this.userObject);
+
+      return values.every((val) => val != "");
+    },
+  },
+  created() {
+    const addressDetails = this.$store.getters["getAddress"];
+    if (addressDetails) this.userObject = addressDetails;
   },
 };
 </script>
 
 <style scoped>
-/* // form inputs  */
-
-form h5 {
-  margin-bottom: 80px;
-  text-transform: uppercase;
-}
-.inputArea {
-  flex: 1 1 50%;
-  display: flex;
-  flex-direction: column;
-  padding: 0 10px;
-}
-
-input {
-  width: 100%;
-  flex: 1 2 auto;
-  /* box-shadow: inset 0 0 5px #ccc; */
-  padding: 15px 0 10px 5px;
-  border: none;
-  border-bottom: 1px solid #ccc;
-  transition: all 0.2s ease-in-out;
-  /* margin: 10px 0; */
-}
-
 input:focus {
   outline: none;
-  border-bottom: 1px solid #365a69;
-}
-
-label {
-  font-size: 12px;
-  text-transform: uppercase;
-  text-align: left;
-  padding-top: 15px;
+  border-bottom: 2px solid #365a69;
 }
 
 .missingInfo {

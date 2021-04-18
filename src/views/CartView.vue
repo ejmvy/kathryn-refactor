@@ -1,128 +1,163 @@
 <template>
-  <div
-    class="md:flex md:absolute w-screen h-screen overflow-hidden bg-green-light md:justify-center md:items-center"
-  >
+  <div class="w-screen h-screen">
     <div
-      class="w-full h-screen overflow-hidden md:w-4/5 md:h-4/5 bg-white shadow-2xl flex flex-col md:flex-row"
+      class="md:flex md:absolute w-screen h-screen overflow-hidden bg-green-light md:justify-center md:items-center"
     >
-      <div v-if="mobileWidth" class="relative right-0 flex justify-end p-2">
-        <router-link to="/">
-          <img
-            class="h-6 w-6 cursor-pointer"
-            src="https://i.ibb.co/gTWS0q1/close-grey.png"
-          />
-        </router-link>
-      </div>
-      <div class="purchases p-2 pt-0 md:p-5 md:pl-8 overflow-auto">
-        <table class="mt-5 w-full" v-if="paymentStep === 1">
-          <tr class="pb-10">
-            <td class="text-xs uppercase text-left">Product</td>
-            <td class="text-xs uppercase">Price</td>
-            <td class="text-xs uppercase">Quantity</td>
-            <td class="text-xs uppercase">Total</td>
-          </tr>
-          <div
-            class="h-4/5 w-full border-2 border-yellow-400 overflow-y-auto overflow-auto"
-          >
-            <tr class="cartItem" v-for="(product, idx) in cartItems" :key="idx">
-              <td>
-                <div class="flex flex-col text-left md:mb-5">
-                  <img
-                    class="w-full h-20 md:w-20 md:h-20"
-                    :src="product.imageUrlArray[0]"
-                  />
-                  <p class="my-1">{{ product.name }}</p>
-                  <div class="text-xs text-gray-500">
-                    {{ product.colourSelected }}
-                  </div>
-                  <div v-if="!mobileWidth" class="text-xs text-gray-500">
-                    {{ product._id }}
-                  </div>
-                </div>
-              </td>
-              <td class="relative pt-6 text-xs">{{ product.price }}</td>
-
-              <td class="relative pt-6">
-                <div class="flex justify-center items-center">
-                  <div class="cursor-pointer" @click="minusPrice(product)">
-                    <div
-                      class="cursor-pointer text-sx text-green-dark mx-3 md:mx-8 w-3 h-0.5 bg-green-light"
-                    ></div>
-                  </div>
-                  <div>{{ product.qty }}</div>
-                  <div
-                    @click="plusPrice(product)"
-                    class="cursor-pointer text-sx text-green-dark mx-3 md:mx-8 font-bold"
-                  >
-                    +
-                  </div>
-                </div>
-                <div :class="{ removeAppear: product.qty === 0 }">
-                  <div
-                    @click="removeItem(product)"
-                    class="removeBtn mt-10 text-xs cursor-pointer underline opacity-0"
-                  >
-                    Remove
-                  </div>
-                </div>
-              </td>
-              <td class="relative pt-6">
-                {{ (product.price * product.qty).toFixed(2) }}
-              </td>
-            </tr>
-          </div>
-          <div
-            v-if="cartItems.length > 2"
-            class="flex justify-end relative bottom-8"
-          >
-            <img
-              class="w-5 h-5"
-              src="https://i.ibb.co/K9bhgv7/down-green.png"
-            />
-          </div>
-        </table>
-        <!-- <AddressDetails
-          v-if="paymentStep === 2"
-          @addressConfirmed="addressDetailsConfirmed"
-        ></AddressDetails> -->
-      </div>
-
       <div
-        class="buySection relative top-10 md:top-0 bg-green-dark"
-        :class="{ topFormat: openBottom }"
+        class="w-full h-screen overflow-hidden md:w-4/5 md:h-4/5 bg-white shadow-2xl flex flex-col md:flex-row"
+        :class="{ blackBg: customisePanel }"
       >
         <div
-          v-if="mobileWidth"
-          class="circle absolute -top-10 right-0 m-3 p-4 rounded-full bg-green-dark cursor-pointer z-10"
-          @click="openBottom = !openBottom"
+          class="relative flex justify-between items-center p-2 bg-green-light"
         >
-          <img
-            class="arrow w-5 h-5"
-            :class="{ rotateArrow: openBottom }"
-            src="https://i.ibb.co/s5zL0XX/Arrowhead-Up-150.png"
-          />
-        </div>
-        <div v-if="!mobileWidth" class="relative right-0 flex justify-end p-2">
-          <router-link to="/">
-            <img
-              class="w-6 h-6 cursor-pointer"
-              src="https://i.ibb.co/gTWS0q1/close-grey.png"
-            />
-          </router-link>
-        </div>
-        <div class="relative top-1/4 text-white bg-green-dark">
-          <div class="text-white">
-            <h3 class="font-bold pb-3">Total: {{ getTotal }}</h3>
-            <p class="p-3 text-sm">Shipping & Postage Included</p>
+          <router-link class="logo text-3xl text-white" to="/">KC</router-link>
+          <div class="flex">
+            <img class="w-6 h-6" src="https://i.ibb.co/vzdx4Vj/cart.png" />
+            <div
+              class="w-5 h-5 text-xs flex items-center justify-center bg-white rounded-full text-green font-bold relative -top-2"
+            >
+              {{ getCartLength }}
+            </div>
           </div>
-          <div class="py-4">
-            <button class="btn-white btn-lrg" @click="checkLoginDetails">
-              Checkout
-            </button>
+        </div>
+
+        <div class="mainContent bg-gray-100 h-4/5 overflow-auto">
+          <div class="bg-white h-11/12 mt-5">
+            <div
+              v-for="(product, idx) in cartItems"
+              :key="idx"
+              class="w-full h-36 flex flex-col justify-center border-b border-gray-300 px-3 py-4"
+            >
+              <div class="flex h-36 items-center justify-between">
+                <div class="w-24 h-28">
+                  <img class="h-28 w-24" :src="product.imageUrlArray[0]" />
+                </div>
+                <div class="flex flex-col items-center justify-between">
+                  <div class="flex items-center justify-between w-full pb-4">
+                    <div class="text-gray-500">{{ product.name }}</div>
+                    <div class="text-xs font-bold">{{ product.price }}</div>
+                  </div>
+                  <div class="text-gray-400 text-xs">{{ product._id }}</div>
+                  <div class="flex items-center pt-3">
+                    <div class="text-xs">{{ product.colourSelected }}</div>
+                    <div class="h-4 w-0.5 bg-gray-200 mx-5"></div>
+                    <div class="text-xs">Qty {{ product.qty }}</div>
+                  </div>
+                </div>
+                <div
+                  @click="manageItem(product)"
+                  class="self-start cursor-pointer"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+
+        <div
+          class="absolute bottom-0 w-full py-5 bg-green-dark p-3 flex justify-between items-center text-white"
+        >
+          <div class="flex flex-col text-left">
+            <div class="text-xs text-white uppercase">Total:</div>
+            <div class="font-bold">€ {{ getTotal }}</div>
+          </div>
+          <button
+            class="btn-white btn-lrg"
+            :class="{ disable: !getCartLength }"
+            @click="checkLoginDetails"
+          >
+            Checkout
+          </button>
         </div>
       </div>
     </div>
+    <transition name="slideUp" class="transition">
+      <div
+        v-if="customisePanel"
+        class="customisePanel absolute w-full flex flex-col items-center bg-white"
+      >
+        <div class="py-3">
+          <div class="font-bold">{{ customiseItem.name }}</div>
+          <div class="text-gray-500 py-4">
+            {{ customiseItem.description }}
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="text-green-light text-xs">Customise Item</div>
+            <div class="flex items-center pt-3">
+              <div class="cursor-pointer" @click="minusPrice(customiseItem)">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+
+              <div class="font-bold mx-5">{{ customiseItem.qty }}</div>
+              <div class="cursor-pointer" @click="plusPrice(customiseItem)">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="text-gray-600 text-xs py-3">
+            Price: {{ (customiseItem.price * customiseItem.qty).toFixed(2) }}
+          </div>
+
+          <div
+            class="text-xs text-red-500 font-bold cursor-pointer opacity-0"
+            :class="{ fullOpacity: customiseItem.qty == '0' }"
+            @click="removeItem(customiseItem)"
+          >
+            Remove ?
+          </div>
+        </div>
+
+        <div class="border border-gray-200 w-full"></div>
+        <div class="flex justify-end w-full text-sm font-bold py-1 px-3">
+          <button
+            @click="closeCustomisePanel()"
+            class="text-gray-400 bg-transparent border-transparent p-1 focus:bg-gray-400 focus:text-white hover:bg-gray-500 hover:text-white"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -138,6 +173,8 @@ export default {
       detailsConfirmed: false,
       openBottom: false,
       showAddressForm: false,
+      customisePanel: false,
+      customiseItem: {},
     };
   },
   mounted() {
@@ -159,6 +196,8 @@ export default {
       this.$store.dispatch("cart/removeFromCart", {
         item: product,
       });
+      this.customiseItem = {};
+      this.customisePanel = false;
     },
     addressDetailsConfirmed() {
       console.log("Details Confirmed");
@@ -172,10 +211,21 @@ export default {
         return this.$router.push("/login");
       }
       if (userLoggedIn) {
-        const addressDetails = this.$store.getters["addressDetails"];
+        const addressDetails = this.$store.getters["getAddress"];
         if (!addressDetails) return this.$router.push("/checkout");
-        return this.router.push("/reviewWindow");
+        else {
+          this.$store.dispatch("cart/setPaymentStep", 2);
+          this.$router.push("/checkout");
+        }
       }
+    },
+    manageItem(product) {
+      this.customiseItem = product;
+      this.customisePanel = true;
+    },
+    closeCustomisePanel() {
+      this.customiseItem = {};
+      this.customisePanel = false;
     },
   },
   computed: {
@@ -197,6 +247,9 @@ export default {
     getPaymentStep() {
       return this.$store.getters["cart/paymentStep"];
     },
+    getCartLength() {
+      return this.$store.getters["cart/quantity"];
+    },
   },
   created() {
     this.cartItems = this.$store.getters["cart/products"];
@@ -209,53 +262,32 @@ export default {
 </script>
 
 <style scoped>
-.purchases {
-  flex: 2;
-  min-height: 550px;
-  border: 2px solid green;
+.blackBg {
+  background: black;
+  opacity: 0.4;
+}
+.mainContent {
+  z-index: 0;
+  transition: all 0.8s ease-in-out;
+  min-height: 50%;
+}
+.customisePanel {
+  bottom: 0;
+  transition: all 0.5s ease-in-out;
+  z-index: 5;
 }
 
-.buySection {
-  flex: 1;
-  transition: all 1s ease-in-out;
+.transition {
+  z-index: 10;
 }
 
-.cartItem,
-.arrow {
-  transition: all 1s ease-in-out;
+.slideUp-enter,
+.slideUp-enter-active,
+.slideUp-leave-active {
+  bottom: -100%;
 }
 
-.removeBtn {
-  transition: opacity 0.3s;
-}
-.removeAppear .removeBtn {
+.fullOpacity {
   opacity: 1;
-}
-
-td {
-  /* text-align: center; */
-  flex: 1;
-}
-
-tr {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-
-  font-size: 15px;
-}
-
-.circle {
-  -webkit-box-shadow: 2px 2px 5px 0px rgb(173, 172, 172);
-  -moz-box-shadow: 2px 2px 5px 0px rgb(173, 172, 172);
-  box-shadow: 2px 2px 5px 0px rgb(173, 172, 172);
-}
-
-.topFormat {
-  top: -100px;
-}
-
-.rotateArrow {
-  transform: rotate(-180deg);
 }
 </style>

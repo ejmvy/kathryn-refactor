@@ -23,14 +23,22 @@ export default createStore({
       state.isLoggedIn = false;
       state.user = {};
     },
+    saveAddress(state, payload) {
+      console.log("address to save:");
+      console.log(payload);
+      state.user.userAddress = payload;
+    },
   },
   actions: {
     login: (context, payload) => context.commit("login", payload),
     logout: (context) => context.commit("logout"),
+    saveAddress: (context, payload) => context.commit("saveAddress", payload),
   },
 
   getters: {
     isAuthenticated: (state) => state.isLoggedIn,
-    addressDetails: (state) => state.user.addressDetails,
+    getUserDetails: (state) => state.user,
+    // addressDetails: (state) => state.user.addressDetails,
+    getAddress: (state) => state.user.userAddress,
   },
 });

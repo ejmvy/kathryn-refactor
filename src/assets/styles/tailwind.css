@@ -95,8 +95,20 @@ button:focus {
     @apply border-transparent w-full bg-transparent mt-5 py-4  px-5 text-sm tracking-wider border-b-2 border-gray-400 text-green-dark;
 }
 
-.loginInput:focus {
-    @apply border-b-2 border-green-600 text-green-light;
+.mobileInput {
+    @apply text-white;
+}
+
+.mobileInput:focus {
+    @apply border-b-2 border-white text-white;
+}
+
+.webInput {
+    @apply text-green-light;
+}
+
+.webInput:focus {
+    @apply border-b-2 border-green-500;
 }
 
 
@@ -104,6 +116,24 @@ button:focus {
     @apply border-2 border-gray-400 text-gray-400 cursor-not-allowed pointer-events-none bg-transparent;
   }
 
+
+
 .circleProgress {
-    @apply w-10 h-10 bg-green-dark text-white rounded-full flex justify-center items-center;
+    @apply w-6 h-6 rounded-full flex justify-center items-center text-xs;
+}
+
+.progressCompleted {
+ @apply bg-green-dark text-white;
+}
+
+.progressTodo {
+    @apply border-2 border-green-dark text-green-dark;
+}
+
+.addressInput {
+    @apply w-full border-b border-gray-400 text-sm px-2 p-1 mt-5;
+}
+
+.label {
+    @apply text-xxs text-gray-400 tracking-widest uppercase;
 }

@@ -28,14 +28,18 @@
           <h5 class="uppercase text-gray-400 font-bold tracking-widest">
             Create Account
           </h5>
-          <input class="loginInput" placeholder="Name" v-model="newUser.name" />
           <input
-            class="loginInput"
+            class="loginInput webInput"
+            placeholder="Name"
+            v-model="newUser.name"
+          />
+          <input
+            class="loginInput webInput"
             placeholder="Email"
             v-model="newUser.email"
           />
           <input
-            class="loginInput"
+            class="loginInput webInput"
             placeholder="Password"
             v-model="newUser.password"
           />
@@ -62,12 +66,12 @@
             Sign in
           </h5>
           <input
-            class="loginInput"
+            class="loginInput webInput"
             placeholder="Email"
             v-model="loginUser.email"
           />
           <input
-            class="loginInput"
+            class="loginInput webInput"
             placeholder="Password"
             v-model="loginUser.password"
           />
@@ -132,14 +136,18 @@
           class="flex items-center justify-center flex-col h-full w-4/5 text-center px-0"
         >
           <h5 class="text-white uppercase">Create Account</h5>
-          <input class="loginInput" placeholder="Name" v-model="newUser.name" />
           <input
-            class="loginInput text-white"
+            class="loginInput mobileInput"
+            placeholder="Name"
+            v-model="newUser.name"
+          />
+          <input
+            class="loginInput mobileInput"
             placeholder="Email"
             v-model="newUser.email"
           />
           <input
-            class="loginInput"
+            class="loginInput mobileInput"
             placeholder="Password"
             v-model="newUser.password"
           />
@@ -170,16 +178,16 @@
       >
         <img class="w-20 h-20" src="https://i.ibb.co/wBkvvKz/owl.png" />
         <form
-          class="flex items-center justify-center flex-col h-full w-4/5 text-center px-0"
+          class="flex items-center justify-center flex-col h-full w-4/5 text-center px-0 text-white"
         >
           <h5 class="text-white uppercase">Sign in</h5>
           <input
-            class="loginInput"
+            class="loginInput mobileInput"
             placeholder="Email"
             v-model="loginUser.email"
           />
           <input
-            class="loginInput"
+            class="loginInput mobileInput"
             placeholder="Password"
             v-model="loginUser.password"
           />
@@ -290,7 +298,9 @@ export default {
           data.userKey = key;
           this.$store.dispatch("login", data);
 
-          const cartProcess = this.$store.getters("cart/paymentStep");
+          const cartProcess = this.$store.getters["cart/paymentStep"];
+
+          console.log("process: " + cartProcess);
 
           if (cartProcess > 0) {
             return this.$router.push("/checkout");

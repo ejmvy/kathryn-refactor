@@ -49,4 +49,8 @@ input:focus {
 h1 {
   font-family: "Nova Mono", monospace;
 }
+
+.logo {
+  font-family: "Megrim", cursive;
+}
 </style>

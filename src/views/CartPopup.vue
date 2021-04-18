@@ -23,7 +23,9 @@
       <h5 class="text-white font-bold">Total: {{ getCartTotal }}</h5>
     </div>
 
-    <div class="h-2/3 overflow-y-auto mt-10 md:mt-20 px-5 sm:px-16">
+    <div
+      class="h-2/3 overflow-y-auto overflow-y-scroll mt-10 md:mt-20 px-5 sm:px-16"
+    >
       <h5 v-if="!getCartLength" class="text-white">
         There are no items in your cart
       </h5>
@@ -46,7 +48,7 @@
         />
       </div>
     </div>
-    <div class="flex justify-center">
+    <div class="flex justify-center cartBtn">
       <router-link to="/cart" class="absolute bottom-5">
         <button class="btn-white" :class="{ disable: !getCartLength }">
           View Cart
@@ -105,10 +107,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* .cartItems {
-  border: 2px solid yellow;
-  height: 70%;
-  overflow: auto;
-} */
-</style>
+<style scoped></style>

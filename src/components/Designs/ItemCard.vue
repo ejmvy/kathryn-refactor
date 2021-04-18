@@ -85,7 +85,6 @@ export default {
   },
   methods: {
     findColorCode(colour) {
-      // console.log(`color: ${this.colourMatch[colour]}`);
       return this.colourMatch[colour];
     },
     getColourArray(colorString) {
@@ -93,8 +92,6 @@ export default {
       return newArr;
     },
     addItemToCart(item) {
-      console.log(`color chosen: ${this.colourChosen}`);
-      console.log(item);
       this.$store.dispatch("cart/addToCart", {
         id: item._id,
         colourSelected: this.colourChosen,
@@ -104,9 +101,7 @@ export default {
     },
 
     getCartItems() {
-      const items = this.$store.getters["cart/products"];
-      console.log("CART ITEMS:");
-      console.log(items);
+      return this.$store.getters["cart/products"];
     },
   },
   computed: {},

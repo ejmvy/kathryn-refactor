@@ -80,6 +80,9 @@ export default {
     increasePaymentStep(state) {
       state.paymentStep++;
     },
+    setPaymentStep(state, payload) {
+      state.paymentStep = payload;
+    },
   },
 
   actions: {
@@ -108,6 +111,9 @@ export default {
     },
     increasePaymentStep(context) {
       context.commit("increasePaymentStep");
+    },
+    setPaymentStep(context, payload) {
+      context.commit("setPaymentStep", payload);
     },
   },
   getters: {
