@@ -97,6 +97,11 @@ export default {
         colourSelected: this.colourChosen,
       });
 
+      this.emitter.emit("showNotification", {
+        state: true,
+        title: "Item Added to Cart",
+      });
+
       this.getCartItems();
     },
 

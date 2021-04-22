@@ -8,7 +8,7 @@ import CartView from "@/views/CartView.vue";
 import CartProcess from "../components/CartPage/CartProcess.vue";
 // import ShowCollection from "@/components/views/ShowCollection.vue";
 import Login from "@/views/Login.vue";
-import UserProfile from "@/views/UserProfile.vue";
+import UserProfile from "../components/UserProfilePage/UserProfile.vue";
 // import Payment from "@/components/CartSection/Payment.vue";
 
 const routes = [

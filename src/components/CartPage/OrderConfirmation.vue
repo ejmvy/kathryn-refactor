@@ -7,22 +7,22 @@
       </p>
       <div class="text-left mt-10">
         <div class="flex flex-col">
-          <div class="label">Order Total</div>
-          <p class="text-xs">€ 115.40</p>
+          <div class="label-grey">Order Total</div>
+          <p class="text-xs">€ {{ orderDetails.paymentTotal }}</p>
         </div>
 
         <div class="flex flex-col mt-5">
-          <div class="label">Order Reference</div>
-          <p class="text-xs">124XH4239UB</p>
+          <div class="label-grey">Order Reference</div>
+          <p class="text-xs">{{ orderDetails.orderRef }}</p>
         </div>
 
         <div class="flex flex-col mt-5">
-          <div class="label">Delivery</div>
+          <div class="label-grey">Delivery</div>
           <p class="text-xs">Delivered on or before Monday 26th April 2021</p>
         </div>
 
         <div class="flex flex-col mt-5">
-          <div class="label">Order Status</div>
+          <div class="label-grey">Order Status</div>
           <p class="text-xs">Received</p>
         </div>
       </div>
@@ -31,15 +31,15 @@
     <div class="bg-gray-200 w-full p-1"></div>
 
     <div class="bg-white h-11/12 mt-5">
-      <h5 class="uppercase text-xs font-bold text-left pl-3 pb-3">My Items</h5>
+      <h5 class="labelxs text-left pl-3 pb-3">My Items</h5>
       <div
-        v-for="(product, idx) in cartItems"
+        v-for="(product, idx) in orderDetails.products"
         :key="idx"
         class="w-full h-36 flex flex-col justify-center border-b border-gray-300 px-3 py-4"
       >
         <div class="flex h-36 items-center justify-between">
           <div class="w-24 h-28">
-            <img class="h-28 w-24" :src="product.imageUrlArray[0]" />
+            <!-- <img class="h-28 w-24" :src="product.imageUrlArray[0]" /> -->
           </div>
           <div class="itemDesc flex flex-col items-center justify-between px-8">
             <div class="flex items-center justify-between w-full pb-4">
@@ -58,24 +58,35 @@
     </div>
 
     <router-link to="/shop">
-      <button class="btn-green btn-lrg mt-10">Continue Shopping</button>
+      <button class="btn-green btn-lrg mt-10" @click="clearCart()">
+        Continue Shopping
+      </button>
     </router-link>
   </div>
 </template>
 
 <script>
 export default {
+  props: ["orderDetails"],
   data() {
     return {
       cartItems: [],
       user: [],
+      completedOrder: {},
     };
   },
+
+  methods: {
+    clearCart() {
+      this.$store.dispatch("cart/clearCart");
+    },
+  },
+
   created() {
-    this.cartItems = this.$store.getters["cart/products"];
     this.user = this.$store.getters["getUserDetails"];
 
-    console.log("USER DETAILS: ", this.user);
+    console.log("order details");
+    console.log(this.orderDetails);
   },
 };
 </script>

@@ -1,8 +1,6 @@
 <template>
   <header class="absolute bg-green-light w-full">
-    <div
-      class="flex py-3 px-5 md:px-10 justify-between items-center shadow-2xl"
-    >
+    <div class="flex py-3 px-5 md:px-10 justify-between items-center shadow-xl">
       <router-link class="logo text-3xl text-white" to="/">{{
         mobileWidth ? shortTitle : longTitle
       }}</router-link>
@@ -25,13 +23,26 @@
           </router-link>
         </li>
         <li class="li-class no-underline">
-          <a href="#" class="no-underline">
+          <div class="flex">
             <img
               class="w-6 h-6"
               src="https://i.ibb.co/vzdx4Vj/cart.png"
               @click="openCart()"
             />
-          </a>
+            <div
+              v-if="getCartLength"
+              class="w-5 h-5 text-xs flex items-center justify-center bg-white rounded-full text-green font-bold relative -top-2"
+            >
+              {{ getCartLength }}
+            </div>
+          </div>
+          <!-- <a href="#" class="no-underline">
+            <img
+              class="w-6 h-6"
+              src="https://i.ibb.co/vzdx4Vj/cart.png"
+              @click="openCart()"
+            />
+          </a> -->
         </li>
       </nav>
 
@@ -48,14 +59,27 @@
             />
           </router-link>
         </div>
-        <div class="mx-4">
-          <a href="#">
+        <div class="ml-4">
+          <div class="flex">
             <img
               class="w-6 h-6"
               src="https://i.ibb.co/vzdx4Vj/cart.png"
               @click="openCart()"
             />
-          </a>
+            <div
+              v-if="getCartLength"
+              class="w-5 h-5 text-xs flex items-center justify-center bg-white rounded-full text-green font-bold relative -top-2"
+            >
+              {{ getCartLength }}
+            </div>
+          </div>
+          <!-- <a href="#">
+            <img
+              class="w-6 h-6"
+              src="https://i.ibb.co/vzdx4Vj/cart.png"
+              @click="openCart()"
+            />
+          </a> -->
         </div>
       </nav>
     </div>
@@ -99,6 +123,9 @@ export default {
     checkLoggedIn() {
       console.log(`LOGGED IN: ${this.$store.getters.isAuthenticated}`);
       return this.$store.getters.isAuthenticated;
+    },
+    getCartLength() {
+      return this.$store.getters["cart/quantity"];
     },
   },
   components: {

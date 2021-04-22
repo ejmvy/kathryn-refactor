@@ -7,19 +7,21 @@
         <div class="flex flex-col mb-20">
           <div class="flex flex-col text-left">
             <label class="uppercase text-xs py-5">Name</label>
-            <input class="contactInput h-8" type="text" />
+            <input class="contactInput h-8" v-model="form.name" type="text" />
           </div>
           <div class="flex flex-col text-left">
             <label class="uppercase text-xs py-5">Email</label>
-            <input class="contactInput h-8" type="text" />
+            <input class="contactInput h-8" v-model="form.email" type="text" />
           </div>
         </div>
         <div class="flex flex-col text-left">
           <label class="uppercase text-xs pb-5">Message</label>
-          <textarea class="contactInput h-24"></textarea>
+          <textarea class="contactInput h-24" v-model="form.message"></textarea>
         </div>
         <div>
-          <button class="btn-green btn-lrg mt-10">Submit</button>
+          <button class="btn-green btn-lrg mt-10" @click="submitForm()">
+            Submit
+          </button>
         </div>
       </div>
       <div class="hidden md:block md:w-2/5">
@@ -72,7 +74,29 @@ export default {
         "https://i.ibb.co/FDkCfv4/fb-f.png",
         "https://i.ibb.co/xmwsQMm/etsy2.png",
       ],
+      form: {
+        name: "",
+        email: "",
+        message: "",
+      },
     };
+  },
+  methods: {
+    submitForm() {
+      if (this.form.name && this.form.email && this.form.message) {
+        this.emitter.emit("showNotification", {
+          state: true,
+          title: "Message Sent",
+          message: "Thanks for reaching out",
+        });
+      } else {
+        this.emitter.emit("showNotification", {
+          state: false,
+          title: "Ooops!",
+          message: "Some information is missing.",
+        });
+      }
+    },
   },
   components: {
     TitleDesign,

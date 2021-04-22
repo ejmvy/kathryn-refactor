@@ -11,6 +11,11 @@ export default createStore({
   state: {
     isLoggedIn: false,
     user: {},
+    notification: {
+      state: "",
+      title: "",
+      message: "",
+    },
   },
   mutations: {
     login(state, payload) {
@@ -40,5 +45,7 @@ export default createStore({
     getUserDetails: (state) => state.user,
     // addressDetails: (state) => state.user.addressDetails,
     getAddress: (state) => state.user.userAddress,
+    getUserOrders: (state) => state.user.orders,
+    getUserKey: (state) => state.user.userKey,
   },
 });

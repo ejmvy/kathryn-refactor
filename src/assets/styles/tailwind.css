@@ -27,6 +27,10 @@ button:focus {
     @apply bg-green-dark text-white scale-50;
 }
 
+.btn-green:focus {
+    @apply outline-none ring-2 ring-green-dark ring-opacity-50;
+}
+
 .btn-white {
     @apply  px-6 py-1 bg-transparent text-white border-white rounded-full;
 }
@@ -134,6 +138,10 @@ button:focus {
     @apply w-full border-b border-gray-400 text-sm px-2 p-1 mt-5;
 }
 
-.label {
+.label-grey {
     @apply text-xxs text-gray-400 tracking-widest uppercase;
+}
+
+.labelxs {
+    @apply text-xs font-bold uppercase;
 }

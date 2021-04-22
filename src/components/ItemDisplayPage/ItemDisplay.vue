@@ -1,6 +1,6 @@
 <template>
   <Header></Header>
-  <section class="section pt-16">
+  <section class="section pt-16 md:pt-20">
     <div class="w-11/12 flex justify-between">
       <div class="flex items-center text-gray-500">
         <router-link
@@ -14,9 +14,9 @@
     </div>
 
     <div
-      class="w-10/12 sm:w-8/12 md:w-10/12 lg:w-8/12 flex flex-col md:flex-row items-center justify-center mt-10"
+      class="w-10/12 sm:w-8/12 md:w-10/12 lg:w-8/12 flex flex-col md:flex-row items-center justify-center mt-5 md:mt-10"
     >
-      <div class="flex flex-col md:flex-row w-full md:w-3/5">
+      <div class="hidden md:flex flex-col md:flex-row w-full md:w-3/5">
         <div class="flex md:justify-between w-full md:w-24 md:flex-col order-2">
           <div
             class="smImage w-full m-1"
@@ -40,14 +40,18 @@
         </div>
       </div>
 
+      <div class="flex md:hidden w-full h-80">
+        <ImageSlider :images="item.imageUrlArray"></ImageSlider>
+      </div>
+
       <div
-        class="flex flex-col w-11/12 md:w-2/5 pt-20 md:pt-0 md:ml-5 text-left"
+        class="flex flex-col w-11/12 md:w-2/5 pt-8 md:pt-0 md:ml-5 text-left"
       >
         <h3 class="uppercase title1 pb-3">{{ item.name }}</h3>
         <p class="pb-3 text-gray-500">{{ item.price }}</p>
         <p class="text-sm text-gray-500">{{ item.description }}</p>
 
-        <div class="flex justify-between w-full mt-12 md:mt-20 pb-5">
+        <div class="flex justify-between w-full mt-10 md:mt-20 pb-5">
           <label class="uppercase text-xs">Color</label>
           <select v-model="colourSelected" class="displaySelect">
             <option v-for="col in item.colourArr" :key="col" :value="col">
@@ -83,6 +87,7 @@ import Header from "../LandingPage/Header.vue";
 import Footer from "../LandingPage/Footer.vue";
 import ProductDescription from "./ProductDesription.vue";
 import FrequentQuestions from "./FrequentQuestions.vue";
+import ImageSlider from "../Designs/ImageSlider.vue";
 
 export default {
   data() {
@@ -114,6 +119,11 @@ export default {
         colourSelected: this.colourSelected,
         qty: this.quantityList[this.quantityChosen],
       });
+
+      this.emitter.emit("showNotification", {
+        state: true,
+        title: "Item Added to Cart",
+      });
     },
   },
 
@@ -133,6 +143,7 @@ export default {
   components: {
     Header,
     Footer,
+    ImageSlider,
     ProductDescription,
     FrequentQuestions,
   },

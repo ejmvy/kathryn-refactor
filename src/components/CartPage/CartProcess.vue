@@ -54,8 +54,14 @@
       <div class="w-full bg-gray-200">
         <div class="w-full">
           <AddressDetails v-if="getPaymentStep == 1"> </AddressDetails>
-          <ConfirmOrder v-if="getPaymentStep == 2"></ConfirmOrder>
-          <OrderConfirmation v-if="getPaymentStep == 3"></OrderConfirmation>
+          <ConfirmOrder
+            v-if="getPaymentStep == 2"
+            @orderComplete="saveOrder"
+          ></ConfirmOrder>
+          <OrderConfirmation
+            v-if="getPaymentStep == 3"
+            :orderDetails="newOrder"
+          ></OrderConfirmation>
         </div>
       </div>
     </div>
@@ -70,8 +76,16 @@ import OrderConfirmation from "./OrderConfirmation.vue";
 export default {
   data() {
     return {
-      // paymentStep: 1,
+      newOrder: {},
     };
+  },
+
+  methods: {
+    saveOrder(order) {
+      console.log("NEW ORDER");
+      console.log(order);
+      this.newOrder = order;
+    },
   },
 
   computed: {

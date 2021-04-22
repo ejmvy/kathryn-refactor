@@ -6,6 +6,7 @@ export default {
       total: 0,
       qty: 0,
       paymentStep: 0,
+      recentOrder: {},
     };
   },
 
@@ -83,6 +84,12 @@ export default {
     setPaymentStep(state, payload) {
       state.paymentStep = payload;
     },
+    clearCart(state) {
+      state.items = [];
+      state.total = 0;
+      state.qty = 0;
+      state.paymentStep = 0;
+    },
   },
 
   actions: {
@@ -94,7 +101,6 @@ export default {
         const newProduct = { ...product };
         newProduct.colourSelected = payload.colourSelected;
         newProduct.qty = payload.qty ? payload.qty : 1;
-        console.log("color sent: " + newProduct.colourSelected);
         context.commit("addProductToCart", newProduct);
       } catch (e) {
         console.log("api error", e);
@@ -114,6 +120,15 @@ export default {
     },
     setPaymentStep(context, payload) {
       context.commit("setPaymentStep", payload);
+    },
+    // setRecentOrder(context, payload) {
+    //   context.commit("setRecentOrder")
+    // },
+    clearCart(context) {
+      context.commit("clearCart");
+    },
+    clearCartTotal(context) {
+      context.commit("clearCart");
     },
   },
   getters: {

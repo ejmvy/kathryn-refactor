@@ -3,7 +3,7 @@
     <h5 class="uppercase text-xs py-4">Confirm Order</h5>
 
     <div class="w-full flex flex-col p-3">
-      <h5 class="uppercase text-xs font-bold self-start">My Bag</h5>
+      <h5 class="labelxs self-start">My Bag</h5>
       <div class="flex w-full overflow-auto py-4">
         <div class="" v-for="item in cartItems" :key="item">
           <img class="pic px-1 w-20 h-16" :src="item.imageUrlArray[0]" />
@@ -18,14 +18,14 @@
     <div class="bg-gray-200 w-full p-1"></div>
 
     <div class="w-full flex flex-col p-3">
-      <h5 class="uppercase text-xs font-bold self-start">Email Address</h5>
+      <h5 class="labelxs self-start">Email Address</h5>
       <div class="text-xs self-start pt-5">{{ userDetails.email }}</div>
     </div>
 
     <div class="bg-gray-200 w-full p-1"></div>
     <div class="w-full flex flex-col p-3">
       <div class="flex justify-between">
-        <h5 class="uppercase text-xs font-bold">Shipping Address</h5>
+        <h5 class="labelxs">Shipping Address</h5>
         <img
           @click="changeAddress()"
           class="w-4 h-4"
@@ -57,7 +57,7 @@
     <div class="bg-gray-200 w-full p-1"></div>
 
     <div class="w-full flex flex-col p-3">
-      <h5 class="uppercase text-xs font-bold self-start">Delivery Info</h5>
+      <h5 class="labelxs self-start">Delivery Info</h5>
       <div class="flex justify-between items-center">
         <div class="flex flex-col">
           <div class="text-xs self-start pt-5">
@@ -74,7 +74,7 @@
 
     <div class="w-full flex justify-between items-center p-3">
       <div class="flex flex-col text-left">
-        <h5 class="uppercase text-xs font-bold">Complete Order</h5>
+        <h5 class="labelxs">Complete Order</h5>
         <p class="text-xs text-gray-500 pt-3">Pay with Stripe</p>
       </div>
       <div class="font-bold">€ {{ getTotalAmount }}</div>
@@ -102,9 +102,11 @@ export default {
         userId: this.userDetails._id,
         cartTotal: this.getItemsAmount,
         paymentTotal: this.getTotalAmount,
-        orderStatus: "Received",
         products: this.cartItems,
       };
+
+      console.log("payment pobj:");
+      console.log(confirmOrder);
 
       fetch("http://localhost:3000/api/orders", {
         method: "POST",
@@ -114,14 +116,18 @@ export default {
         body: JSON.stringify(confirmOrder),
       })
         .then((res) => {
-          console.log("RESPONSE");
-          console.log(res);
-          return res;
+          return res.json();
         })
         .then((newOrder) => {
           console.log("payment taken");
           console.log(newOrder);
+
+          this.$store.dispatch("cart/clearCart");
           this.$store.dispatch("cart/setPaymentStep", 3);
+          this.$emit("orderComplete", newOrder);
+
+          this.updateUserDetails();
+
           window.scroll({
             top: 0,
             left: 0,
@@ -139,6 +145,26 @@ export default {
     generateOrderNumber() {
       return;
     },
+    updateUserDetails() {
+      const key = this.$store.getters["getUserKey"];
+      fetch("http://localhost:3000/api/users/me", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": key,
+        },
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          data.userKey = key;
+          this.$store.dispatch("login", data);
+        })
+        .catch((e) => {
+          console.log(`err ${e}`);
+        });
+    },
   },
 
   computed: {
@@ -146,7 +172,6 @@ export default {
       return this.$store.getters["cart/quantity"];
     },
     getItemsAmount() {
-      //   this.$store.getters["cart/totalSum"].toFixed(2);
       return this.$store.getters["cart/totalSum"].toFixed(2);
     },
     getTotalAmount() {
@@ -159,9 +184,6 @@ export default {
   created() {
     this.cartItems = this.$store.getters["cart/products"];
     this.userDetails = this.$store.getters["getUserDetails"];
-    console.log("cart and user:");
-    console.log(this.userDetails);
-    console.log(this.cartItems);
   },
 };
 </script>
@@ -169,6 +191,5 @@ export default {
 <style scoped>
 .pic {
   min-width: 40px;
-  /* height: 150px; */
 }
 </style>

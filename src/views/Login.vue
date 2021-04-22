@@ -1,20 +1,8 @@
 <template>
-  <!-- <transition name="appear" :duration="{ enter: 800, leave: 800 }">
-    <Notification
-      v-if="showNotification"
-      :type="notificationType"
-      :message="notificationMessage"
-    ></Notification>
-  </transition> -->
   <div
     class="absolute w-full h-full flex justify-center items-center overflow-hidden bg-green-light"
   >
-    <div
-      v-if="!welcomePopup"
-      class="container hidden md:inline"
-      id="container"
-      ref="containerRef"
-    >
+    <div class="container hidden md:inline" id="container" ref="containerRef">
       <div class="form-container sign-up-container bg-green-dark text-white">
         <router-link to="/">
           <img
@@ -117,10 +105,7 @@
     </div>
 
     <!-- MOBILE LOGIN -->
-    <div
-      v-if="!welcomePopup"
-      class="md:hidden h-screen w-full overflow-hidden bg-green-light"
-    >
+    <div class="md:hidden h-screen w-full overflow-hidden bg-green-light">
       <router-link to="/">
         <img
           class="w-5 h-5 absolute cursor-pointer left-0 m-2"
@@ -211,18 +196,10 @@
         </div>
       </div>
     </div>
-
-    <transition name="appearUP">
-      <div class="welcomePopupArea" v-if="welcomePopup">
-        <EnterPopup :popupObject="popupInfo"></EnterPopup>
-      </div>
-    </transition>
   </div>
 </template>
 
 <script>
-// import Notification from "../Designs/Notification.vue";
-import EnterPopup from "../components/Designs/EnterPopup.vue";
 export default {
   data() {
     return {
@@ -236,15 +213,6 @@ export default {
       loginUser: {
         email: "",
         password: "",
-      },
-
-      welcomePopup: false,
-      showNotification: false,
-      notificationType: "",
-      notificationMessage: "",
-      popupInfo: {
-        userName: "",
-        message: "",
       },
     };
   },
@@ -298,21 +266,35 @@ export default {
           data.userKey = key;
           this.$store.dispatch("login", data);
 
+          console.log("user login:");
+          console.log(data);
+
           const cartProcess = this.$store.getters["cart/paymentStep"];
 
           console.log("process: " + cartProcess);
 
+          let userName = data.name.split(" ")[0];
+          this.emitter.emit("showNotification", {
+            state: true,
+            title: `Welcome Back ${userName} !`,
+          });
+
           if (cartProcess > 0) {
+            if (data.userAddress) {
+              this.$store.dispatch("cart/setPaymentStep", 2);
+            }
             return this.$router.push("/checkout");
           } else {
-            this.popupInfo.userName = ` Back ${data.name.split(" ")[0]}`;
-            this.popupInfo.message =
-              "We hope you enjoy shopping with us again.";
-            this.welcomePopup = true;
+            this.$router.push("/shop");
           }
         })
         .catch((err) => {
           console.log(`Err: ${err}`);
+          this.emitter.emit("showNotification", {
+            state: false,
+            title: "Ooops!",
+            message: "Somethings gone wrong.",
+          });
         });
     },
     registerUser(e) {
@@ -332,25 +314,36 @@ export default {
           })
           .then((newUser) => {
             this.$store.dispatch("login", newUser);
-            this.popupInfo.userName = newUser.name.split(" ")[0];
-            this.popupInfo.message =
-              "Congratulations your account has been successfully set up";
-            this.welcomePopup = true;
-            this.$emit("showNotification", "success");
+
+            const cartProcess = this.$store.getters["cart/paymentStep"];
+
+            console.log("process: " + cartProcess);
+
+            let userName = newUser.name.split(" ")[0];
+            this.emitter.emit("showNotification", {
+              state: true,
+              title: `Welcome ${userName} !`,
+            });
+
+            if (cartProcess > 0) {
+              return this.$router.push("/checkout");
+            } else {
+              this.$router.push("/shop");
+            }
           })
           .catch((err) => {
             console.log("Error:", err);
+            this.emitter.emit("showNotification", {
+              state: false,
+              title: "Ooops!",
+              message: "Somethings gone wrong.",
+            });
           });
       } else {
-        console.log("DATA MISSING");
-        this.notificationType = false;
-        this.notificationMessage = "Some Information is missing";
-        this.showNotification = true;
-        this.welcomePopup = false;
-
-        setTimeout(() => {
-          this.showNotification = false;
-        }, 2000);
+        this.emitter.emit("showNotification", {
+          state: false,
+          title: `Ooops! Some Information is missing`,
+        });
       }
     },
   },
@@ -367,10 +360,6 @@ export default {
       }
       return true;
     },
-  },
-  components: {
-    // Notification,
-    EnterPopup,
   },
 };
 </script>

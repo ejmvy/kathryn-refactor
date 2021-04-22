@@ -1,9 +1,15 @@
 import { createApp } from "vue";
 import App from "./App.vue";
+import mitt from "mitt";
 import router from "./router";
 import axios from "axios";
 import VueAxios from "vue-axios";
 import store from "./store";
 import "./assets/styles/tailwind.css";
+const emitter = mitt();
 
-createApp(App).use(store).use(router).use(VueAxios, axios).mount("#app");
+const app = createApp(App);
+
+app.config.globalProperties.emitter = emitter;
+
+app.use(store).use(router).use(VueAxios, axios).mount("#app");
