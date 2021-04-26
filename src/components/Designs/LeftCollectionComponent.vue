@@ -15,10 +15,10 @@
       <div class="lineTop">
         <div class="line1 w-48 md:w-36"></div>
         <div class="line2 w-24 mt-3"></div>
-        <div class="dot mb-8 mt-3"></div>
+        <div class="dot mb-5 mt-3"></div>
       </div>
       <div>
-        <h2 class="text-sm font-bold pb-5 md:pb-10 uppercase">
+        <h2 class="text-sm font-bold pb-4 md:pb-10 uppercase">
           {{ displayCollection.title }}
         </h2>
         <p class="text-xs">
