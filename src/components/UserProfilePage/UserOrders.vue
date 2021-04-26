@@ -10,7 +10,7 @@
   </div>
   <div class="bg-gray-200 w-full p-1"></div>
 
-  <div class="mt-10" v-if="!userOrders">
+  <div class="mt-10" v-if="!userOrders.length">
     <p class="text-xs text-gray-500">There are no orders to show</p>
     <button class="btn-green btn-sm mt-10">Start Shopping now!</button>
   </div>
@@ -22,9 +22,9 @@
         <div>Processing..</div>
       </div>
       <div class="w-full h-0.5 bg-gray-200 my-2"></div>
-      <div class="w-full mt-3 h-24 flex justify-center overflow-auto">
+      <div class="w-full mt-3 h-24 sm:h-32 flex justify-center overflow-auto">
         <div
-          class="h-24 w-24 mx-2"
+          class="h-24 w-24 sm:h-32 sm:w-32 mx-2"
           v-for="product in order.products"
           :key="product"
         >
@@ -43,7 +43,7 @@
         <div class="flex mt-1 items-center">
           <div class="labelxs mr-5">Order Date:</div>
           <p class="text-sm">
-            {{ order.orderDate.substring(0, 19).replace("T", " ") }}
+            {{ convertDate(order.orderDate) }}
           </p>
         </div>
       </div>
@@ -70,6 +70,10 @@ export default {
   methods: {
     closeMenu() {
       this.$emit("closeMenu", "userOrders");
+    },
+    convertDate(orderDate) {
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      return new Date(orderDate).toLocaleDateString(undefined, options);
     },
   },
 
