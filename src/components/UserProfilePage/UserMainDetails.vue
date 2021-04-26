@@ -11,7 +11,8 @@
   <div class="bg-gray-200 w-full p-1"></div>
   <div class="bg-white mt-3 p-3">
     <form class="px-3">
-      <div>
+      <div class="flex flex-col">
+        <div class="label-grey self-start">First Name:</div>
         <input
           class="addressInput"
           v-model="userObject.firstName"
@@ -19,7 +20,8 @@
           placeholder="*First Name"
         />
       </div>
-      <div>
+      <div class="flex flex-col mt-8">
+        <div class="label-grey self-start">Last Name:</div>
         <input
           class="addressInput"
           v-model="userObject.lastName"
@@ -28,7 +30,8 @@
         />
       </div>
 
-      <div>
+      <div class="flex flex-col mt-8">
+        <div class="label-grey self-start">Email:</div>
         <input
           class="addressInput"
           v-model="userObject.email"
@@ -36,7 +39,8 @@
           placeholder="*Email"
         />
       </div>
-      <div>
+      <div class="flex flex-col mt-8">
+        <div class="label-grey self-start">Phone Number:</div>
         <input
           class="addressInput"
           v-model="userObject.phoneNumber"
@@ -45,6 +49,9 @@
         />
       </div>
     </form>
+    <button class="btn-green btn-lrg mt-10" @click="saveDetails">
+      Save Changes
+    </button>
   </div>
 </template>
 
@@ -64,30 +71,29 @@ export default {
   },
   methods: {
     saveDetails() {
-      this.closeMenu();
-      //   this.$store.dispatch("saveAddress", this.userObject);
+      //   this.closeMenu();
 
-      //   const user = this.$store.getters["getUserDetails"];
-      //   console.log("USER: ", user);
+      const user = this.$store.getters["getUserDetails"];
+      console.log("USER: ", user);
 
-      //   fetch(`http://localhost:3000/api/users/address/${user._id}`, {
-      //     method: "PUT",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(this.userObject),
-      //   })
-      //     .then((res) => {
-      //       return res.json();
-      //     })
-      //     .then((updatedUser) => {
-      //       console.log("updated user: ");
-      //       console.log(updatedUser);
-
-      //     })
-      //     .catch((e) => {
-      //       console.log(`error: ${e}`);
-      //     });
+      fetch(`http://localhost:3000/api/users/${user._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this.userObject),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((updatedUser) => {
+          console.log("updated user: ");
+          console.log(updatedUser);
+          this.$store.dispatch("updateUserDetails");
+        })
+        .catch((e) => {
+          console.log(`error: ${e}`);
+        });
     },
     closeMenu() {
       this.$emit("closeMenu", "userDetails");
@@ -107,15 +113,27 @@ export default {
       console.log(`MISSING: ${isMissing}`);
       return isMissing;
     },
+
+    getFirstName() {
+      return this.userObject.name.split(" ")[0];
+    },
     isDisabled() {
       const values = Object.values(this.userObject);
 
       return values.every((val) => val != "");
     },
   },
-  created() {
-    const addressDetails = this.$store.getters["getAddress"];
-    if (addressDetails) this.userObject = addressDetails;
+  mounted() {
+    const userDetails = this.$store.getters["getUserDetails"];
+
+    var newObj = {
+      firstName: userDetails.name.split(" ")[0],
+      lastName: userDetails.name.split(" ")[1],
+      email: userDetails.email,
+      phoneNumber: userDetails.phoneNumber,
+    };
+
+    if (userDetails) this.userObject = newObj;
   },
 };
 </script>
