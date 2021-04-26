@@ -5,7 +5,12 @@
         <Notification :notificationObj="noteObjet"></Notification>
       </div>
     </transition>
-    <router-view></router-view>
+
+    <router-view v-slot="{ Component }">
+      <transition name="slide-fade" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
@@ -101,5 +106,20 @@ h1 {
 .appear-enter-active,
 .appear-leave-active {
   top: -100px;
+}
+
+.slide-fade-enter {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.5s ease;
+}
+
+.slide-fade-leave-to {
+  transform: translateX(-10px);
+  opacity: 0;
 }
 </style>

@@ -1,11 +1,13 @@
 <template>
-  <Header></Header>
-  <MainPhoto></MainPhoto>
-  <MainMessage></MainMessage>
-  <LatestDesigns></LatestDesigns>
-  <Collection></Collection>
-  <AboutArtist></AboutArtist>
-  <Footer></Footer>
+  <div>
+    <Header></Header>
+    <MainPhoto></MainPhoto>
+    <MainMessage></MainMessage>
+    <LatestDesigns></LatestDesigns>
+    <Collection></Collection>
+    <AboutArtist></AboutArtist>
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>

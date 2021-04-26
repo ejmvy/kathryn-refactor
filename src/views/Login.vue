@@ -246,6 +246,7 @@ export default {
         })
         .then((key) => {
           this.getUserDetails(key);
+          this.$store.dispatch("setKey", key);
         })
         .catch((err) => {
           console.log("Error:", err);
@@ -263,15 +264,7 @@ export default {
           return res.json();
         })
         .then((data) => {
-          console.log("key to login:");
-          console.log(key);
-          this.$store.dispatch("setUserkey", key);
           this.$store.dispatch("login", data);
-
-          //     this.$store.dispatch("cart/addToCart", {
-          //   id: item._id,
-          //   colourSelected: this.colourChosen,
-          // });
 
           console.log("user login:");
           console.log(data);

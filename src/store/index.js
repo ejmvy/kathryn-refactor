@@ -37,13 +37,12 @@ export default createStore({
     },
     setUserKey(state, payload) {
       state.userKey = payload;
-      console.log("NEW KEY: " + state.userKey);
     },
   },
   actions: {
     login: (context, payload) => context.commit("login", payload),
     logout: (context) => context.commit("logout"),
-    setUserKey: (context, payload) => context.commit("setUserKey", payload),
+    // setUserKey: (context, payload) => {},
     saveAddress: (context, payload) => context.commit("saveAddress", payload),
     updateUserDetails: ({ dispatch, getters }) => {
       const key = getters["getUserKey"];
@@ -64,6 +63,9 @@ export default createStore({
         .catch((e) => {
           console.log(`err ${e}`);
         });
+    },
+    setKey: (context, payload) => {
+      context.commit("setUserKey", payload);
     },
   },
 

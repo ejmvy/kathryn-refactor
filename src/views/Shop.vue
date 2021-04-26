@@ -1,44 +1,38 @@
 <template>
-  <!-- <div class="noteAppear">
-    <transition name="appear" :duration="{ enter: 800, leave: 800 }">
-      <Notification
-        v-if="showNotification"
-        :type="notificationType"
-      ></Notification>
-    </transition>
-  </div> -->
-  <Header></Header>
-  <section class="section pb-8 pt-16 md:pt-24 mb-24 bg-gray-100">
-    <TitleDesign :title="titleText"></TitleDesign>
-    <div class="w-11/12 sm:mt-6 flex justify-between">
-      <div class="flex">
-        <p>Collections</p>
-        <div class="px-5">/</div>
-        <select
-          class="bg-transparent pr-10 cursor-pointer"
-          v-model="categorySelected"
-          @change="changeCategory"
-        >
-          <option
-            v-for="category in categoryOptions"
-            :key="category"
-            :value="category"
+  <div>
+    <Header></Header>
+    <section class="section pb-8 pt-16 md:pt-24 mb-24 bg-gray-100">
+      <TitleDesign :title="titleText"></TitleDesign>
+      <div class="w-11/12 sm:mt-6 flex justify-between">
+        <div class="flex">
+          <p>Collections</p>
+          <div class="px-5">/</div>
+          <select
+            class="bg-transparent pr-10 cursor-pointer"
+            v-model="categorySelected"
+            @change="changeCategory"
           >
-            {{ category }}
-          </option>
-        </select>
+            <option
+              v-for="category in categoryOptions"
+              :key="category"
+              :value="category"
+            >
+              {{ category }}
+            </option>
+          </select>
+        </div>
+        <p>{{ productData.length }} items</p>
       </div>
-      <p>{{ productData.length }} items</p>
-    </div>
-    <div
-      class="w-11/12 flex justify-center pt-10 md:pt-6 md:justify-between flex-wrap"
-    >
-      <div v-for="item in productData" :key="item">
-        <ItemCard :displayItem="item"></ItemCard>
+      <div
+        class="w-11/12 flex justify-center pt-10 md:pt-6 md:justify-between flex-wrap"
+      >
+        <div v-for="item in productData" :key="item">
+          <ItemCard :displayItem="item"></ItemCard>
+        </div>
       </div>
-    </div>
-  </section>
-  <Footer></Footer>
+    </section>
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>
@@ -46,14 +40,12 @@ import Header from "../components/LandingPage/Header.vue";
 import Footer from "../components/LandingPage/Footer.vue";
 import TitleDesign from "../components/Designs/TitleDesign.vue";
 import ItemCard from "../components/Designs/ItemCard.vue";
-// import Notification from "../components/Designs/Notification.vue";
+
 export default {
   data() {
     return {
       titleText: "Our Collection",
       productData: [],
-      showNotification: "",
-      notificationType: "",
       categoryName: "",
       categoryOptions: ["All", "Bowls", "Mugs", "Dishes", "Plates", "Misc"],
       categorySelected: "All",
@@ -108,7 +100,6 @@ export default {
   },
 
   components: {
-    // Notification,
     Header,
     Footer,
     TitleDesign,
