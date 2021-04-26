@@ -112,7 +112,7 @@ button:focus {
 }
 
 .webInput:focus {
-    @apply border-b-2 border-green-500;
+    @apply border-b-2 border-green-dark;
 }
 
 
@@ -135,7 +135,7 @@ button:focus {
 }
 
 .addressInput {
-    @apply w-full border-b border-gray-400 text-sm px-2 p-1 mt-5;
+    @apply w-full border-b border-gray-400 text-sm px-2 p-1 mt-3;
 }
 
 .label-grey {
