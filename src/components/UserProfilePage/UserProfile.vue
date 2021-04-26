@@ -2,12 +2,12 @@
   <div class="mainSection h-screen">
     <div class="w-screen h-full">
       <div
-        class="bg-green-light w-full flex items-center justify-between p-2 shadow-xl"
+        class="bg-green-light w-full flex items-center justify-between p-2 md:p-5 shadow-xl"
       >
         <router-link to="/">
           <img class="w-5 h-5" src="https://i.ibb.co/jgk6zTW/house.png" />
         </router-link>
-        <h5 class="text-white uppercase text-xs">My Account</h5>
+        <h5 class="text-white uppercase text-xs md:text-xl">My Account</h5>
         <svg
           @click="logoutUser"
           xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ export default {
       this.hideMenu = false;
     },
   },
-  created() {
+  mounted() {
     this.userDetails = this.$store.getters["getUserDetails"];
   },
   components: {
