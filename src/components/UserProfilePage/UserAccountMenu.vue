@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center mt-5">
+  <div class="flex flex-col bg-white items-center pt-5">
     <div
       class="w-20 h-20 bg-green-dark border-4 border-gray-300 rounded-full text-4xl flex justify-center text-white items-center"
     >
@@ -10,7 +10,11 @@
   </div>
   <div class="bg-gray-200 w-full p-1"></div>
 
-  <div v-for="path in accountPaths" :key="path">
+  <div
+    class="md:w-3/4 md:m-auto md:flex md:justify-center bg-white"
+    v-for="path in accountPaths"
+    :key="path"
+  >
     <div
       @click="showRoute(path.route)"
       class="w-full flex items-center py-5 pl-6 border-b border-gray-400"
@@ -44,9 +48,10 @@
 
 <script>
 export default {
-  props: ["userName"],
+  //   props: ["userName"],
   data() {
     return {
+      userName: "",
       accountPaths: [
         {
           pathName: "My orders",
@@ -95,6 +100,10 @@ export default {
       }
       return "";
     },
+  },
+  mounted() {
+    const userDetails = this.$store.getters["getUserDetails"];
+    this.userName = userDetails.name;
   },
 };
 </script>
