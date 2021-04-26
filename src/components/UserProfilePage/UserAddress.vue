@@ -11,7 +11,8 @@
   <div class="bg-gray-200 w-full p-1"></div>
   <div class="bg-white mt-3 p-3">
     <form class="px-3">
-      <div>
+      <div class="flex flex-col mt-8">
+        <div class="label-grey self-start">First Name:</div>
         <input
           class="addressInput"
           v-model="userObject.firstName"
@@ -19,7 +20,8 @@
           placeholder="*First Name"
         />
       </div>
-      <div>
+      <div class="flex flex-col mt-8">
+        <div class="label-grey self-start">Last Name:</div>
         <input
           class="addressInput"
           v-model="userObject.lastName"
@@ -28,7 +30,8 @@
         />
       </div>
 
-      <div>
+      <div class="flex flex-col mt-8">
+        <div class="label-grey self-start">Email:</div>
         <input
           class="addressInput"
           v-model="userObject.email"
@@ -36,7 +39,8 @@
           placeholder="*Email"
         />
       </div>
-      <div>
+      <div class="flex flex-col mt-8">
+        <div class="label-grey self-start">Address Line 1:</div>
         <input
           class="addressInput"
           v-model="userObject.addressLine1"
@@ -44,7 +48,8 @@
           placeholder="*Address Line 1"
         />
       </div>
-      <div>
+      <div class="flex flex-col mt-8">
+        <div class="label-grey self-start">Address Line 2:</div>
         <input
           class="addressInput"
           v-model="userObject.addressLine2"
@@ -52,8 +57,9 @@
           placeholder="Address Line 2"
         />
       </div>
-      <div class="flex justify-between">
-        <div class="mr-5">
+      <div class="flex justify-between sm:justify-around">
+        <div class="flex flex-col mt-8">
+          <div class="label-grey self-start">City:</div>
           <input
             class="addressInput"
             v-model="userObject.city"
@@ -61,7 +67,8 @@
             placeholder="*City"
           />
         </div>
-        <div class="ml-5">
+        <div class="flex flex-col mt-8">
+          <div class="label-grey self-start">Post Code:</div>
           <input
             class="addressInput"
             v-model="userObject.postcode"
@@ -70,7 +77,8 @@
           />
         </div>
       </div>
-      <div>
+      <div class="flex flex-col mt-8">
+        <div class="label-grey self-start">Country:</div>
         <input
           class="addressInput"
           v-model="userObject.country"
@@ -78,7 +86,8 @@
           placeholder="*Country"
         />
       </div>
-      <div>
+      <div class="flex flex-col mt-8">
+        <div class="label-grey self-start">Phone Number:</div>
         <input
           class="addressInput"
           v-model="userObject.phoneNumber"
