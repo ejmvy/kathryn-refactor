@@ -16,6 +16,7 @@ export default createStore({
       title: "",
       message: "",
     },
+    userKey: "",
   },
   mutations: {
     login(state, payload) {
@@ -27,25 +28,50 @@ export default createStore({
     logout(state) {
       state.isLoggedIn = false;
       state.user = {};
+      state.userKey = "";
     },
     saveAddress(state, payload) {
       console.log("address to save:");
       console.log(payload);
       state.user.userAddress = payload;
     },
+    setUserKey(state, payload) {
+      state.userKey = payload;
+      console.log("NEW KEY: " + state.userKey);
+    },
   },
   actions: {
     login: (context, payload) => context.commit("login", payload),
     logout: (context) => context.commit("logout"),
+    setUserKey: (context, payload) => context.commit("setUserKey", payload),
     saveAddress: (context, payload) => context.commit("saveAddress", payload),
+    updateUserDetails: ({ dispatch, getters }) => {
+      const key = getters["getUserKey"];
+      console.log("key: " + key);
+      fetch("http://localhost:3000/api/users/me", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": key,
+        },
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          dispatch("login", data);
+        })
+        .catch((e) => {
+          console.log(`err ${e}`);
+        });
+    },
   },
 
   getters: {
     isAuthenticated: (state) => state.isLoggedIn,
     getUserDetails: (state) => state.user,
-    // addressDetails: (state) => state.user.addressDetails,
     getAddress: (state) => state.user.userAddress,
     getUserOrders: (state) => state.user.orders,
-    getUserKey: (state) => state.user.userKey,
+    getUserKey: (state) => state.userKey,
   },
 });
