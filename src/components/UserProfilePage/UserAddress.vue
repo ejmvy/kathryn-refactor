@@ -1,111 +1,113 @@
 <template>
-  <div class="bg-white px-3 py-4 flex w-full justify-between items-center">
-    <img
-      @click="closeMenu()"
-      class="w-5 h-5 transform rotate-90"
-      src="https://i.ibb.co/dQxfSHq/down.png"
-    />
-    <p class="uppercase text-sm tracking-wider">Address Details</p>
-    <div class="w-5 h-5"></div>
-  </div>
-  <div class="bg-gray-200 w-full p-1"></div>
-  <div class="bg-white mt-3 p-3">
-    <form class="px-3">
-      <div class="flex flex-col mt-8">
-        <div class="label-grey self-start">First Name:</div>
-        <input
-          class="addressInput"
-          v-model="userObject.firstName"
-          type="text"
-          placeholder="*First Name"
-        />
-      </div>
-      <div class="flex flex-col mt-8">
-        <div class="label-grey self-start">Last Name:</div>
-        <input
-          class="addressInput"
-          v-model="userObject.lastName"
-          type="text"
-          placeholder="*Last Name"
-        />
-      </div>
-
-      <div class="flex flex-col mt-8">
-        <div class="label-grey self-start">Email:</div>
-        <input
-          class="addressInput"
-          v-model="userObject.email"
-          type="text"
-          placeholder="*Email"
-        />
-      </div>
-      <div class="flex flex-col mt-8">
-        <div class="label-grey self-start">Address Line 1:</div>
-        <input
-          class="addressInput"
-          v-model="userObject.addressLine1"
-          type="text"
-          placeholder="*Address Line 1"
-        />
-      </div>
-      <div class="flex flex-col mt-8">
-        <div class="label-grey self-start">Address Line 2:</div>
-        <input
-          class="addressInput"
-          v-model="userObject.addressLine2"
-          type="text"
-          placeholder="Address Line 2"
-        />
-      </div>
-      <div class="flex justify-between sm:justify-around">
+  <div>
+    <div class="bg-white px-3 py-4 flex w-full justify-between items-center">
+      <img
+        @click="closeMenu()"
+        class="w-5 h-5 transform rotate-90"
+        src="https://i.ibb.co/dQxfSHq/down.png"
+      />
+      <p class="uppercase text-sm tracking-wider">Address Details</p>
+      <div class="w-5 h-5"></div>
+    </div>
+    <div class="bg-gray-200 w-full p-1"></div>
+    <div class="bg-white mt-3 p-3">
+      <form class="px-3">
         <div class="flex flex-col mt-8">
-          <div class="label-grey self-start">City:</div>
+          <div class="label-grey self-start">First Name:</div>
           <input
             class="addressInput"
-            v-model="userObject.city"
+            v-model="userObject.firstName"
             type="text"
-            placeholder="*City"
+            placeholder="*First Name"
           />
         </div>
         <div class="flex flex-col mt-8">
-          <div class="label-grey self-start">Post Code:</div>
+          <div class="label-grey self-start">Last Name:</div>
           <input
             class="addressInput"
-            v-model="userObject.postcode"
+            v-model="userObject.lastName"
             type="text"
-            placeholder="*Post Code"
+            placeholder="*Last Name"
           />
         </div>
-      </div>
-      <div class="flex flex-col mt-8">
-        <div class="label-grey self-start">Country:</div>
-        <input
-          class="addressInput"
-          v-model="userObject.country"
-          type="text"
-          placeholder="*Country"
-        />
-      </div>
-      <div class="flex flex-col mt-8">
-        <div class="label-grey self-start">Phone Number:</div>
-        <input
-          class="addressInput"
-          v-model="userObject.phoneNumber"
-          type="text"
-          placeholder="*Phone Number"
-        />
-      </div>
-    </form>
 
-    <div class="buttonArea">
-      <!-- :class="{ disable: !missingValues }" -->
-      <button
-        class="btn-green btn-lrg mt-10"
-        @click="saveDetails()"
-        :class="{ disable: isDisabled }"
-      >
-        Confirm Details
-      </button>
+        <div class="flex flex-col mt-8">
+          <div class="label-grey self-start">Email:</div>
+          <input
+            class="addressInput"
+            v-model="userObject.email"
+            type="text"
+            placeholder="*Email"
+          />
+        </div>
+        <div class="flex flex-col mt-8">
+          <div class="label-grey self-start">Address Line 1:</div>
+          <input
+            class="addressInput"
+            v-model="userObject.addressLine1"
+            type="text"
+            placeholder="*Address Line 1"
+          />
+        </div>
+        <div class="flex flex-col mt-8">
+          <div class="label-grey self-start">Address Line 2:</div>
+          <input
+            class="addressInput"
+            v-model="userObject.addressLine2"
+            type="text"
+            placeholder="Address Line 2"
+          />
+        </div>
+        <div class="flex justify-between sm:justify-around">
+          <div class="flex flex-col mt-8">
+            <div class="label-grey self-start">City:</div>
+            <input
+              class="addressInput"
+              v-model="userObject.city"
+              type="text"
+              placeholder="*City"
+            />
+          </div>
+          <div class="flex flex-col mt-8">
+            <div class="label-grey self-start">Post Code:</div>
+            <input
+              class="addressInput"
+              v-model="userObject.postcode"
+              type="text"
+              placeholder="*Post Code"
+            />
+          </div>
+        </div>
+        <div class="flex flex-col mt-8">
+          <div class="label-grey self-start">Country:</div>
+          <input
+            class="addressInput"
+            v-model="userObject.country"
+            type="text"
+            placeholder="*Country"
+          />
+        </div>
+        <div class="flex flex-col mt-8">
+          <div class="label-grey self-start">Phone Number:</div>
+          <input
+            class="addressInput"
+            v-model="userObject.phoneNumber"
+            type="text"
+            placeholder="*Phone Number"
+          />
+        </div>
+      </form>
+
+      <div class="buttonArea">
+        <!-- :class="{ disable: !missingValues }" -->
+        <button
+          class="btn-green btn-lrg mt-10"
+          @click="saveDetails()"
+          :class="{ disable: isDisabled }"
+        >
+          Confirm Details
+        </button>
+      </div>
     </div>
   </div>
 </template>

@@ -1,57 +1,59 @@
 <template>
-  <div class="bg-white px-3 py-4 flex w-full justify-between items-center">
-    <img
-      @click="closeMenu()"
-      class="w-5 h-5 transform rotate-90"
-      src="https://i.ibb.co/dQxfSHq/down.png"
-    />
-    <p class="uppercase text-sm tracking-wider">My Details</p>
-    <div class="w-5 h-5"></div>
-  </div>
-  <div class="bg-gray-200 w-full p-1"></div>
-  <div class="bg-white mt-3 p-3">
-    <form class="px-3">
-      <div class="flex flex-col">
-        <div class="label-grey self-start">First Name:</div>
-        <input
-          class="addressInput"
-          v-model="userObject.firstName"
-          type="text"
-          placeholder="*First Name"
-        />
-      </div>
-      <div class="flex flex-col mt-8">
-        <div class="label-grey self-start">Last Name:</div>
-        <input
-          class="addressInput"
-          v-model="userObject.lastName"
-          type="text"
-          placeholder="*Last Name"
-        />
-      </div>
+  <div>
+    <div class="bg-white px-3 py-4 flex w-full justify-between items-center">
+      <img
+        @click="closeMenu()"
+        class="w-5 h-5 transform rotate-90"
+        src="https://i.ibb.co/dQxfSHq/down.png"
+      />
+      <p class="uppercase text-sm tracking-wider">My Details</p>
+      <div class="w-5 h-5"></div>
+    </div>
+    <div class="bg-gray-200 w-full p-1"></div>
+    <div class="bg-white mt-3 p-3">
+      <form class="px-3">
+        <div class="flex flex-col">
+          <div class="label-grey self-start">First Name:</div>
+          <input
+            class="addressInput"
+            v-model="userObject.firstName"
+            type="text"
+            placeholder="*First Name"
+          />
+        </div>
+        <div class="flex flex-col mt-8">
+          <div class="label-grey self-start">Last Name:</div>
+          <input
+            class="addressInput"
+            v-model="userObject.lastName"
+            type="text"
+            placeholder="*Last Name"
+          />
+        </div>
 
-      <div class="flex flex-col mt-8">
-        <div class="label-grey self-start">Email:</div>
-        <input
-          class="addressInput"
-          v-model="userObject.email"
-          type="text"
-          placeholder="*Email"
-        />
-      </div>
-      <div class="flex flex-col mt-8">
-        <div class="label-grey self-start">Phone Number:</div>
-        <input
-          class="addressInput"
-          v-model="userObject.phoneNumber"
-          type="text"
-          placeholder="*Phone Number"
-        />
-      </div>
-    </form>
-    <button class="btn-green btn-lrg mt-10" @click="saveDetails">
-      Save Changes
-    </button>
+        <div class="flex flex-col mt-8">
+          <div class="label-grey self-start">Email:</div>
+          <input
+            class="addressInput"
+            v-model="userObject.email"
+            type="text"
+            placeholder="*Email"
+          />
+        </div>
+        <div class="flex flex-col mt-8">
+          <div class="label-grey self-start">Phone Number:</div>
+          <input
+            class="addressInput"
+            v-model="userObject.phoneNumber"
+            type="text"
+            placeholder="*Phone Number"
+          />
+        </div>
+      </form>
+      <button class="btn-green btn-lrg mt-10" @click="saveDetails">
+        Save Changes
+      </button>
+    </div>
   </div>
 </template>
 
@@ -90,6 +92,7 @@ export default {
           console.log("updated user: ");
           console.log(updatedUser);
           this.$store.dispatch("updateUserDetails");
+          this.closeMenu();
         })
         .catch((e) => {
           console.log(`error: ${e}`);

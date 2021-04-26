@@ -1,47 +1,49 @@
 <template>
-  <div class="flex flex-col bg-white items-center pt-5">
-    <div
-      class="w-20 h-20 bg-green-dark border-4 border-gray-300 rounded-full text-4xl flex justify-center text-white items-center"
-    >
-      {{ getInitials }}
-    </div>
-    <div class="mt-6 mb-2">Hi,</div>
-    <div class="font-bold text-lg tracking-widest pb-5">{{ userName }}</div>
-  </div>
-  <div class="bg-gray-200 w-full p-1"></div>
-
-  <div
-    class="md:w-3/4 md:m-auto md:flex md:justify-center bg-white"
-    v-for="path in accountPaths"
-    :key="path"
-  >
-    <div
-      @click="showRoute(path.route)"
-      class="w-full flex items-center py-5 pl-6 border-b border-gray-400"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-7 w-7"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
+  <div>
+    <div class="flex flex-col bg-white items-center pt-5">
+      <div
+        class="w-20 h-20 bg-green-dark border-4 border-gray-300 rounded-full text-4xl flex justify-center text-white items-center"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          :d="path.icon"
-        />
-      </svg>
-      <p class="ml-10 tracking-wider text-gray-600 text-sm">
-        {{ path.pathName }}
-      </p>
+        {{ getInitials }}
+      </div>
+      <div class="mt-6 mb-2">Hi,</div>
+      <div class="font-bold text-lg tracking-widest pb-5">{{ userName }}</div>
     </div>
-  </div>
-  <div class="w-full absolute bottom-0 border-t-2 border-gray-300">
-    <div class="w-full flex justify-between p-2 text-xs">
-      <p>@2021 KC</p>
-      <p>Designed by EJ</p>
+    <div class="bg-gray-200 w-full p-1"></div>
+
+    <div
+      class="md:w-3/4 md:m-auto md:flex md:justify-center bg-white"
+      v-for="path in accountPaths"
+      :key="path"
+    >
+      <div
+        @click="showRoute(path.route)"
+        class="w-full flex items-center py-5 pl-6 border-b border-gray-400"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-7 w-7"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            :d="path.icon"
+          />
+        </svg>
+        <p class="ml-10 tracking-wider text-gray-600 text-sm">
+          {{ path.pathName }}
+        </p>
+      </div>
+    </div>
+    <div class="w-full absolute bottom-0 border-t-2 border-gray-300">
+      <div class="w-full flex justify-between p-2 text-xs">
+        <p>@2021 KC</p>
+        <p>Designed by EJ</p>
+      </div>
     </div>
   </div>
 </template>

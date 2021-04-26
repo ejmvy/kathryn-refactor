@@ -25,26 +25,34 @@
         </svg>
       </div>
 
-      <UserAccountMenu
-        v-if="!hideMenu"
-        @userSelect="openMenu"
-        :userName="userDetails.name"
-      ></UserAccountMenu>
+      <transition name="fade" mode="out-in">
+        <UserAccountMenu
+          v-if="!hideMenu"
+          @userSelect="openMenu"
+          :userName="userDetails.name"
+        ></UserAccountMenu>
+      </transition>
 
-      <UserOrders
-        v-if="menu.userOrders"
-        @closeMenu="closeMenuOption"
-      ></UserOrders>
+      <transition name="fade" mode="out-in">
+        <UserOrders
+          v-if="menu.userOrders"
+          @closeMenu="closeMenuOption"
+        ></UserOrders>
+      </transition>
 
-      <UserMainDetails
-        v-if="menu.userDetails"
-        @closeMenu="closeMenuOption"
-      ></UserMainDetails>
+      <transition name="fade" mode="out-in">
+        <UserMainDetails
+          v-if="menu.userDetails"
+          @closeMenu="closeMenuOption"
+        ></UserMainDetails>
+      </transition>
 
-      <UserAddress
-        v-if="menu.userAddress"
-        @closeMenu="closeMenuOption"
-      ></UserAddress>
+      <transition name="fade" mode="out-in">
+        <UserAddress
+          v-if="menu.userAddress"
+          @closeMenu="closeMenuOption"
+        ></UserAddress>
+      </transition>
     </div>
   </div>
 </template>
@@ -117,5 +125,20 @@ export default {
   justify-content: center;
   align-items: center;
   overflow: hidden; */
+}
+
+.fade-enter {
+  /* transform: translateX(10px); */
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-leave-to {
+  /* transform: translateX(-10px); */
+  opacity: 0;
 }
 </style>
