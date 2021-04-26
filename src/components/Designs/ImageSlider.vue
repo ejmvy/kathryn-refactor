@@ -1,8 +1,8 @@
 <template>
-  <div class="w-80">
-    <transition-group name="fade" tag="div">
+  <div class="w-full">
+    <transition-group name="fade" tag="div" mode="out-in">
       <div v-for="i in [currentIndex]" :key="i">
-        <img class="imgMain w-80 h-80 relative shadow-xl" :src="currentImg" />
+        <img class="imgMain w-full h-80 relative shadow-xl" :src="currentImg" />
       </div>
     </transition-group>
     <div class="flex justify-center relative -top-12">
@@ -91,6 +91,24 @@ export default {
 .fade-leave-to {
   visibility: hidden;
   /* width: 100%; */
+  opacity: 0;
+}
+
+.slide-fade-enter {
+  transform: translateX(10px);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.5s ease;
+  overflow: hidden;
+  position: absolute;
+}
+
+.slide-fade-leave-to {
+  transform: translateX(-10px);
   opacity: 0;
 }
 /*
