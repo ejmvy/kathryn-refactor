@@ -17,7 +17,7 @@
         <li class="li-class">
           <a href="#">Gallery</a>
         </li>
-        <li class="li-class">
+        <li class="li-class no-underline">
           <router-link :to="checkLoggedIn ? '/userprofile' : '/login'">
             <img class="w-5 h-5" src="https://i.ibb.co/pn8FWKn/userIcon.png" />
           </router-link>
@@ -36,13 +36,6 @@
               {{ getCartLength }}
             </div>
           </div>
-          <!-- <a href="#" class="no-underline">
-            <img
-              class="w-6 h-6"
-              src="https://i.ibb.co/vzdx4Vj/cart.png"
-              @click="openCart()"
-            />
-          </a> -->
         </li>
       </nav>
 
@@ -73,13 +66,6 @@
               {{ getCartLength }}
             </div>
           </div>
-          <!-- <a href="#">
-            <img
-              class="w-6 h-6"
-              src="https://i.ibb.co/vzdx4Vj/cart.png"
-              @click="openCart()"
-            />
-          </a> -->
         </div>
       </nav>
     </div>
