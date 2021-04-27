@@ -145,3 +145,11 @@ button:focus {
 .labelxs {
     @apply text-xs font-bold uppercase;
 }
+
+.adminLoginInput {
+    @apply bg-gray-200 px-3 py-3 tracking-widest rounded-sm border-2 border-transparent ;
+}
+
+.adminLoginInput:focus {
+    @apply border-2 border-green-light
+}
