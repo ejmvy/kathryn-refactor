@@ -3,7 +3,7 @@ import LandingPage from "../views/Home.vue";
 import Shop from "@/views/Shop.vue";
 import ItemDisplay from "../components/ItemDisplayPage/ItemDisplay.vue";
 import Contact from "@/views/Contact.vue";
-// import Admin from "@/components/views/Admin.vue";
+import Admin from "@/components/AdminPage/AdminMainPanel.vue";
 import CartView from "@/views/CartView.vue";
 import CartProcess from "../components/CartPage/CartProcess.vue";
 // import ShowCollection from "@/components/views/ShowCollection.vue";
@@ -37,11 +37,7 @@ const routes = [
     name: "Contact",
     component: Contact,
   },
-  // {
-  //   path: "/admin",
-  //   name: "Admin",
-  //   component: Admin,
-  // },
+
   {
     path: "/cart",
     name: "Cart",
@@ -66,6 +62,11 @@ const routes = [
     path: "/userprofile",
     name: "UserProfile",
     component: UserProfile,
+  },
+  {
+    path: "/admin",
+    name: "Admin",
+    component: Admin,
   },
   // {
   //   path: "/payment",
