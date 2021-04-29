@@ -10,6 +10,8 @@ module.exports = {
         green: {
           light: "rgba(32, 72, 88, 0.7)",
           dark: "#365a69",
+          // light: "#706993",
+          // dark: "#331E38",
         },
         coral: {
           light: "#f5f5f5",
