@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-white">
+  <div class="h-screen" :class="{ overlay: panelOpen }">
     <AdminLogin v-if="!userLoggedIn"></AdminLogin>
 
     <div v-if="userLoggedIn">
-      <AdminHeader @logout="logUserOut"></AdminHeader>
+      <AdminHeader></AdminHeader>
 
       <div class="w-2/3 m-auto my-10">
         <div class="flex justify-between items-center">
@@ -40,6 +40,8 @@
             class="panel"
             v-if="currentIndex === 0"
             key="1"
+            @showOverlay="openPanel"
+            @closeOverlay="closePanel"
           ></RecentOrderPanel>
         </div>
       </div>
@@ -58,14 +60,12 @@ import RecentOrderPanel from "../AdminPage/RecentOrderPanel.vue";
 export default {
   data() {
     return {
-      notificationType: "",
-      showNotification: "",
-      notificationMessage: "",
       openConfigPanel: true,
       openOrderPanel: false,
       openHistoryPanel: false,
       currentIndex: 0,
       back: false,
+      panelOpen: false,
     };
   },
   methods: {
@@ -83,24 +83,13 @@ export default {
       }
       // console.log(`CURRENT idx: ${this.currentIndex}`);
     },
-    showNotificationPopup(obj) {
-      this.notificationType = obj.type;
-      this.notificationMessage = obj.message;
-      this.showNotification = true;
-
-      setTimeout(() => {
-        this.showNotification = false;
-      }, 2000);
+    showOverlay() {
+      console.log("SHOW");
+      this.panelOpen = true;
     },
-    logUserOut() {
-      this.notificationType = "success";
-      this.notificationMessage = "Bye Kathryn!";
-      this.showNotification = true;
-
-      setTimeout(() => {
-        this.showNotification = false;
-      }, 2000);
-      this.userLoggedIn = false;
+    hideOverlay() {
+      console.log("CLOSE");
+      this.panelOpen = false;
     },
   },
   computed: {
@@ -137,5 +126,13 @@ export default {
   height: 3px;
   background: rgba(32, 72, 88, 0.7);
   border-radius: 5px;
+}
+
+.overlay {
+  background: #666666;
+  opacity: 0.8;
+  /* height: 100%; */
+  width: 100%;
+  z-index: 2;
 }
 </style>
