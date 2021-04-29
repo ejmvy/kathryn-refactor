@@ -6,81 +6,59 @@
       </h5>
 
       <div class="mt-10">
-        <div class="w-full p-4 bg-gray-100 flex justify-between text-xs">
-          <div v-for="title in tableTitles" :key="title">
-            <div class="text-center">{{ title }}</div>
-          </div>
-        </div>
+        <table class="w-full">
+          <tr class="bg-gray-100 text-xs text-gray-400">
+            <th class="py-4 text-left pl-5">Customer</th>
+            <th class="py-4">Items</th>
+            <th class="py-4">Amount</th>
+            <th class="py-4">Order Date</th>
+            <th class="py-4">Mark as Delivered</th>
+            <th class="py-4"></th>
+          </tr>
 
-        <div v-for="item in recentOrders" :key="item">
-          <div
-            class="flex justify-between text-sm border-b border-gray-200 px-4 py-6"
+          <tr
+            class="border-b border-gray-300 text-sm"
+            v-for="item in recentOrders"
+            :key="item"
           >
-            <div class="chunk text-left">{{ item.customerName }}</div>
-            <div class="chunk text-left pl-5">{{ item.products.length }}</div>
-            <div class="chunk text-left sm:pl-5">{{ item.totalAmount }}</div>
-            <div class="chunk text-left">{{ item.orderDate }}</div>
-            <div class="chunk">
-              <input class="chunk" type="checkbox" />
-            </div>
-            <div class="smChunk flex justify-end">
+            <td class="py-6 text-left pl-5">{{ item.customerName }}</td>
+            <td class="py-6">{{ item.products.length }}</td>
+            <td class="py-6">{{ item.totalAmount }}</td>
+            <td class="py-6">{{ item.orderDate }}</td>
+            <td class="py-6">
+              <input type="checkbox" />
+            </td>
+            <td class="py-6 flex justify-end mr-5">
               <img
-                @click="item.showDetails = !item.showDetails"
-                class="openIcon w-5 h-5 cursor-pointer"
+                @click="showOrderDetails(item)"
+                class="openIcon w-4 h-4 cursor-pointer"
                 src="https://i.ibb.co/Qm0BCkd/right.png"
                 :class="{ rotateArrow: item.showDetails }"
               />
-            </div>
-          </div>
-
-          <div v-if="item.showDetails" class="hiddenDetails">
-            <div class="productInfo">
-              <div
-                v-for="product in item.products"
-                :key="product"
-                class="productLine"
-              >
-                <img
-                  class="productImage"
-                  src="https://i.ibb.co/d6SqvBc/dish2.jpg"
-                />
-                <div>{{ product.name }}</div>
-                <div>{{ product.quantity }}</div>
-                <div>{{ product.colour }}</div>
-                <div>{{ product.price }}</div>
-              </div>
-            </div>
-            <div class="borderLine"></div>
-            <div class="customerInfo">
-              <div>{{ item.customerName }}</div>
-              <div class="addressArea">
-                <div>{{ item.customerAddress }}</div>
-                <div>{{ item.customerCity }}</div>
-                <div>{{ item.customerPostcode }}</div>
-              </div>
-              <div>{{ item.customerTel }}</div>
-              <div>{{ item.customerEmail }}</div>
-            </div>
-          </div>
-        </div>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
+    <transition name="slide-fade" mode="out-in" appear>
+      <ViewOrderDetails
+        v-if="showOrderPanel"
+        :orderDetails="viewOrder"
+        @closePopup="closeShowOrderDetails"
+      ></ViewOrderDetails>
+    </transition>
   </div>
 </template>
 
 <script>
+import ViewOrderDetails from "./ViewOrderDetails.vue";
 export default {
   data() {
     return {
       showDetails: false,
-      tableTitles: [
-        "Customer",
-        "Items",
-        "Amount",
-        "Order Date",
-        "Mark as Delivered",
-        "",
-      ],
+      viewOrder: {},
+      showOrderPanel: false,
+
       recentOrders: [
         {
           customerName: "EJ McVey",
@@ -204,15 +182,20 @@ export default {
       ],
     };
   },
+  methods: {
+    showOrderDetails(order) {
+      this.viewOrder = order;
+      this.showOrderPanel = true;
+      this.$emit("showOverlay");
+    },
+    closeShowOrderDetails() {
+      console.log("CLOSEEEE");
+      this.showOrderPanel = false;
+      this.$emit("closeOverlay");
+    },
+  },
+  components: {
+    ViewOrderDetails,
+  },
 };
 </script>
-
-<style scoped>
-.chunk {
-  width: 20%;
-}
-
-.smChunk {
-  width: 10%;
-}
-</style>
