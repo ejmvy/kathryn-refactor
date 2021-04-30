@@ -1,9 +1,18 @@
 <template>
   <div style="height: 100%">
     <div class="w-10/12 m-auto flex flex-col">
-      <h5 class="uppercase text-sm text-gray-500 font-bold">
-        Your Recent Orders
-      </h5>
+      <div class="flex justify-between">
+        <div class="w-5 h-5"></div>
+        <h5 class="uppercase text-sm text-gray-500 font-bold">
+          Your Recent Orders
+        </h5>
+        <div>
+          <img
+            class="w-5 h-5"
+            src="https://i.ibb.co/z7wkRzt/Document-Check-256.png"
+          />
+        </div>
+      </div>
 
       <div class="mt-10">
         <table class="w-full">
@@ -21,19 +30,23 @@
             v-for="item in recentOrders"
             :key="item"
           >
-            <td class="py-6 text-left pl-5">{{ item.customerName }}</td>
+            <td class="py-6 text-left pl-5">{{ item.customer.name }}</td>
             <td class="py-6">{{ item.products.length }}</td>
-            <td class="py-6">{{ item.totalAmount }}</td>
-            <td class="py-6">{{ item.orderDate }}</td>
+            <td class="py-6">{{ item.paymentTotal }}</td>
+            <td class="py-6">{{ convertDate(item.orderDate) }}</td>
             <td class="py-6">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                v-model="item.isDelivered"
+                @click="sendDelivered()"
+                id="deliveredCheck"
+              />
             </td>
             <td class="py-6 flex justify-end mr-5">
               <img
                 @click="showOrderDetails(item)"
-                class="openIcon w-4 h-4 cursor-pointer"
-                src="https://i.ibb.co/Qm0BCkd/right.png"
-                :class="{ rotateArrow: item.showDetails }"
+                class="w-5 h-5 cursor-pointer"
+                src="https://i.ibb.co/tPpm16k/specs.png"
               />
             </td>
           </tr>
@@ -58,128 +71,7 @@ export default {
       showDetails: false,
       viewOrder: {},
       showOrderPanel: false,
-
-      recentOrders: [
-        {
-          customerName: "EJ McVey",
-          customerAddress: "37 Victoria Road, Rathgar",
-          customerCity: "Dublin",
-          customerPostcode: "D06 EA30",
-          customerEmail: "ej@gmail.com",
-          customerTel: "0851417730",
-          orderDate: "2021-03-03 12:30:00",
-          totalAmount: "€243",
-          products: [
-            {
-              name: "Bowl 1",
-              quantity: 2,
-              description: "Serving Bowl",
-              colour: "Teal",
-              price: "12.99",
-            },
-            {
-              name: "Bowl 1",
-              quantity: 2,
-              description: "Serving Bowl",
-              colour: "Teal",
-              price: "12.99",
-            },
-          ],
-          isDelivered: false,
-          showDetails: false,
-        },
-        {
-          customerName: "Mia McVey",
-          customerAddress: "37 Victoria Road, Rathgar",
-          customerCity: "Dublin",
-          customerPostcode: "D06 EA30",
-          customerEmail: "ej@gmail.com",
-          customerTel: "0851417730",
-          orderDate: "2021-03-03 12:30:00",
-          totalAmount: "€81",
-          products: [
-            {
-              name: "Bowl 1",
-              quantity: 2,
-              description: "Serving Bowl",
-              colour: "Teal",
-              price: "12.99",
-            },
-          ],
-          isDelivered: false,
-          showDetails: false,
-        },
-        {
-          customerName: "Marco McVey",
-          customerAddress: "37 Victoria Road, Rathgar",
-          customerCity: "Dublin",
-          customerPostcode: "D06 EA30",
-          customerEmail: "ej@gmail.com",
-          customerTel: "0851417730",
-          orderDate: "2021-03-03 12:30:00",
-          totalAmount: "€45",
-          products: [
-            {
-              name: "Bowl 1",
-              quantity: 2,
-              description: "Serving Bowl",
-              colour: "Teal",
-              price: "12.99",
-            },
-            {
-              name: "Bowl 1",
-              quantity: 2,
-              description: "Serving Bowl",
-              colour: "Teal",
-              price: "12.99",
-            },
-            {
-              name: "Bowl 1",
-              quantity: 2,
-              description: "Serving Bowl",
-              colour: "Teal",
-              price: "12.99",
-            },
-            {
-              name: "Bowl 1",
-              quantity: 2,
-              description: "Serving Bowl",
-              colour: "Teal",
-              price: "12.99",
-            },
-          ],
-          isDelivered: false,
-          showDetails: false,
-        },
-        {
-          customerName: "Eoin McVey",
-          customerAddress: "37 Victoria Road, Rathgar",
-          customerCity: "Dublin",
-          customerPostcode: "D06 EA30",
-          customerEmail: "ej@gmail.com",
-          customerTel: "0851417730",
-          orderDate: "2021-03-03 12:30:00",
-          totalAmount: "€132",
-          products: [
-            {
-              name: "Bowl 1",
-              quantity: 2,
-              description: "Serving Bowl",
-              colour: "Teal",
-              price: "12.99",
-            },
-            {
-              name: "Bowl 1",
-              quantity: 2,
-              description: "Serving Bowl",
-              colour: "Teal",
-              price: "12.99",
-            },
-          ],
-          isDelivered: false,
-          showDetails: false,
-        },
-      ],
+      recentOrders: [],
     };
   },
   methods: {
@@ -193,6 +85,25 @@ export default {
       this.showOrderPanel = false;
       this.$emit("closeOverlay");
     },
+    convertDate(orderDate) {
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      return new Date(orderDate).toLocaleDateString(undefined, options);
+    },
+    sendDelivered() {
+      var isDelivered = document.getElementById("deliveredCheck");
+      console.log("delivered: ", isDelivered);
+    },
+  },
+  created() {
+    fetch("http://localhost:3000/api/orders/recent")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log("recent orders:");
+        console.log(data);
+        this.recentOrders = data;
+      });
   },
   components: {
     ViewOrderDetails,
