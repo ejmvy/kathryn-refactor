@@ -3,10 +3,12 @@
     <div class="purchases">
       <table class="productArea w-full mt-6 mb-10">
         <tr>
-          <th class="text-left pb-8 text-xs uppercase">Product</th>
-          <th class="pb-8 text-xs uppercase">Type</th>
-          <th class="pb-8 text-xs uppercase">Quantity</th>
-          <th class="pb-8 text-xs uppercase">Total</th>
+          <th class="text-left pb-8 text-xs uppercase text-gray-400">
+            Product
+          </th>
+          <th class="pb-8 text-xs uppercase text-gray-400">Type</th>
+          <th class="pb-8 text-xs uppercase text-gray-400">Quantity</th>
+          <th class="pb-8 text-xs uppercase text-gray-400">Total</th>
         </tr>
         <tbody class="w-full">
           <tr
@@ -15,24 +17,20 @@
             :key="idx"
           >
             <td>
-              <div class="flex flex-col text-left mb-3">
-                <img
-                  class="w-20 h-20"
-                  src="https://i.ibb.co/kHNCjdK/mug2.jpg"
-                />
-
-                <div class="text-xs text-gray-400">
-                  {{ product._id }}
-                </div>
-              </div>
+              <img
+                class="w-20 h-20 my-1"
+                src="https://i.ibb.co/kHNCjdK/mug2.jpg"
+              />
             </td>
             <td>
               <p>{{ product.name }}</p>
-              <div class="text-xs text-gray-400">{{ product.colour }}</div>
+              <div class="text-xs text-gray-400">
+                {{ product.colourSelected }}
+              </div>
             </td>
-            <td class="">{{ product.quantity }}</td>
+            <td class="">{{ product.qty }}</td>
             <td class="">
-              {{ (product.price * product.quantity).toFixed(2) }}
+              {{ (product.price * product.qty).toFixed(2) }}
             </td>
           </tr>
         </tbody>
@@ -41,7 +39,7 @@
         <p class="text-sm uppercase text-gray-500">Total</p>
 
         <div class="text-green-light text-lg font-bold">
-          {{ orderDetails.totalAmount }}
+          € {{ orderDetails.paymentTotal }}
         </div>
       </div>
     </div>
@@ -58,28 +56,35 @@
       >
         <div class="text-sm">
           <h5 class="text-sm text-white uppercase mb-8">Customer Details</h5>
-          <p class="my-2">{{ orderDetails.customerName }}</p>
+          <p class="my-2">{{ orderDetails.customer.name }}</p>
           <div>
             <label class="label-grey">Address: </label>
-            <p class="my-2">{{ orderDetails.customerAddress }}</p>
-            <p class="my-2">{{ orderDetails.customerCity }}</p>
-            <p class="my-2">{{ orderDetails.customerPostcode }}</p>
+            <p class="my-2">
+              {{ orderDetails.customer.userAddress.addressLine1 }}
+            </p>
+            <p class="my-2">{{ orderDetails.customer.userAddress.city }}</p>
+            <p class="my-2">{{ orderDetails.customer.userAddress.postcode }}</p>
           </div>
           <div>
             <label class="label-grey">Email: </label>
-            <p class="my-2">{{ orderDetails.customerEmail }}</p>
+            <p class="my-2">{{ orderDetails.customer.email }}</p>
           </div>
           <div>
             <label class="label-grey">Tel: </label>
-            <p class="my-2">{{ orderDetails.customerTel }}</p>
+            <p class="my-2">
+              {{ orderDetails.customer.userAddress.phoneNumber }}
+            </p>
           </div>
         </div>
         <div class="text-sm mt-16">
           <h5 class="text-sm text-white uppercase mb-8">Order Details</h5>
-          <p class="my-2">{{ orderDetails.orderNumber }}</p>
+          <div>
+            <label class="label-grey">Order Ref: </label>
+            <p class="my-2">{{ orderDetails.orderRef }}</p>
+          </div>
           <div>
             <label class="label-grey">Ordered: </label>
-            <p class="my-2">{{ orderDetails.orderDate }}</p>
+            <p class="my-2">{{ convertDate(orderDetails.orderDate) }}</p>
           </div>
           <div>
             <label class="label-grey">Delivered: </label>
@@ -106,6 +111,13 @@ export default {
   props: ["orderDetails"],
   data() {
     return {};
+  },
+
+  methods: {
+    convertDate(orderDate) {
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      return new Date(orderDate).toLocaleDateString(undefined, options);
+    },
   },
 };
 </script>
