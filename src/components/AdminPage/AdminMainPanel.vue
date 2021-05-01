@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen" :class="{ overlay: panelOpen }">
+  <div class="h-screen">
     <AdminLogin v-if="!userLoggedIn"></AdminLogin>
 
     <div v-if="userLoggedIn">
@@ -40,8 +40,6 @@
             class="panel"
             v-if="currentIndex === 0"
             key="1"
-            @showOverlay="openPanel"
-            @closeOverlay="closePanel"
           ></RecentOrderPanel>
         </div>
       </div>
@@ -65,7 +63,6 @@ export default {
       openHistoryPanel: false,
       currentIndex: 0,
       back: false,
-      panelOpen: false,
     };
   },
   methods: {
@@ -82,14 +79,6 @@ export default {
         this.currentIndex = newIdx;
       }
       // console.log(`CURRENT idx: ${this.currentIndex}`);
-    },
-    showOverlay() {
-      console.log("SHOW");
-      this.panelOpen = true;
-    },
-    hideOverlay() {
-      console.log("CLOSE");
-      this.panelOpen = false;
     },
   },
   computed: {
@@ -126,13 +115,5 @@ export default {
   height: 3px;
   background: rgba(32, 72, 88, 0.7);
   border-radius: 5px;
-}
-
-.overlay {
-  background: #666666;
-  opacity: 0.8;
-  /* height: 100%; */
-  width: 100%;
-  z-index: 2;
 }
 </style>
