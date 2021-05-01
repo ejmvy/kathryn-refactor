@@ -147,7 +147,7 @@ button:focus {
 }
 
 .adminLoginInput {
-    @apply bg-gray-200 px-3 py-3 tracking-widest rounded-sm border-2 border-transparent ;
+    @apply bg-gray-100 px-3 py-3 tracking-widest rounded-sm border-2 border-transparent ;
 }
 
 .adminLoginInput:focus {
