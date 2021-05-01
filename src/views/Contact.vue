@@ -4,14 +4,14 @@
     <section class="section pt-20 md:pt-24">
       <TitleDesign :title="titleText"></TitleDesign>
       <div class="flex justify-between mt-14 w-11/12">
-        <div class="flex flex-1 flex-col text-green-dark py-5 px-10 shadow-xl">
+        <div class="flex flex-1 flex-col text-green-dark px-10">
           <div class="flex flex-col mb-20">
             <div class="flex flex-col text-left">
-              <label class="uppercase text-xs py-5">Name</label>
+              <label class="uppercase text-xxs py-5">Name</label>
               <input class="contactInput h-8" v-model="form.name" type="text" />
             </div>
             <div class="flex flex-col text-left">
-              <label class="uppercase text-xs py-5">Email</label>
+              <label class="uppercase text-xxs py-5">Email</label>
               <input
                 class="contactInput h-8"
                 v-model="form.email"
@@ -20,7 +20,7 @@
             </div>
           </div>
           <div class="flex flex-col text-left">
-            <label class="uppercase text-xs pb-5">Message</label>
+            <label class="uppercase text-xxs pb-5">Message</label>
             <textarea
               class="contactInput h-24"
               v-model="form.message"
