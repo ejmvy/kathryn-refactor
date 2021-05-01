@@ -17,12 +17,12 @@
         <li class="li-class">
           <a href="#">Gallery</a>
         </li>
-        <li class="li-class no-underline">
+        <li class="li-class noUnderline">
           <router-link :to="checkLoggedIn ? '/userprofile' : '/login'">
             <img class="w-5 h-5" src="https://i.ibb.co/pn8FWKn/userIcon.png" />
           </router-link>
         </li>
-        <li class="li-class no-underline">
+        <li class="li-class cursor-pointer noUnderline">
           <div class="flex">
             <img
               class="w-6 h-6"
@@ -148,5 +148,9 @@ header {
 .slide-enter-active,
 .slide-leave-active {
   right: -100%;
+}
+
+.noUnderline:hover {
+  text-decoration: none;
 }
 </style>
