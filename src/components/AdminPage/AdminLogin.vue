@@ -25,13 +25,34 @@
         </div>
         <div class="flex flex-col mt-8">
           <div class="label-grey self-start mb-2">Password</div>
-          <input class="adminLoginInput" v-model="userPassword" />
+          <div class="">
+            <input
+              id="passwordInput"
+              class="adminLoginInput w-full"
+              v-model="userPassword"
+              type="password"
+            />
+            <span class="viewPassword cursor-pointer"
+              ><img
+                @click="viewPassword()"
+                class="w-5 h-5 opacity-0 passwordIcon"
+                :class="{ fullOpacity: userPassword }"
+                :src="
+                  !viewUserPassword
+                    ? 'https://i.ibb.co/tPpm16k/specs.png'
+                    : 'https://i.ibb.co/9Vg4C2v/Close-60.png'
+                "
+            /></span>
+          </div>
+          <p
+            class="self-end text-xs text-green-light mt-2"
+            @click="sendPassword()"
+          >
+            Forgot Password?
+          </p>
         </div>
 
-        <button
-          v-on:click="checkUserAuth"
-          class="bg-green-dark w-full py-3 text-white mt-16"
-        >
+        <button v-on:click="checkUserAuth" class="btn-green btn-lrg mt-10">
           Log In
         </button>
       </div>
@@ -45,6 +66,7 @@ export default {
     return {
       userEmail: "",
       userPassword: "",
+      viewUserPassword: false,
     };
   },
   methods: {
@@ -133,6 +155,16 @@ export default {
           });
         });
     },
+    viewPassword() {
+      const pass = document.getElementById("passwordInput");
+
+      this.viewUserPassword = !this.viewUserPassword;
+
+      return (pass.type = this.viewUserPassword ? "text" : "password");
+    },
+    sendPassword() {
+      console.log("send new password");
+    },
   },
   computed: {
     detailsEntered() {
@@ -160,5 +192,21 @@ export default {
 
 input {
   transition: all 0.3s ease-in-out;
+}
+
+.passwordIcon {
+  transition: all 0.2s ease-in-out;
+}
+
+.fullOpacity {
+  opacity: 1;
+}
+
+.viewPassword {
+  z-index: 2;
+  position: relative;
+  float: right;
+  right: 10px;
+  top: -35px;
 }
 </style>
