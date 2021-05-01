@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%">
+  <div style="height: 100%" class="flex flex-col justify-center">
     <div class="w-10/12 m-auto flex flex-col">
       <div class="flex justify-between">
         <div class="w-5 h-5"></div>
@@ -8,7 +8,8 @@
         </h5>
         <div>
           <img
-            class="w-5 h-5"
+            class="w-5 h-5 cursor-pointer"
+            @click="onOpen()"
             src="https://i.ibb.co/z7wkRzt/Document-Check-256.png"
           />
         </div>
@@ -60,11 +61,23 @@
         @closePopup="closeShowOrderDetails"
       ></ViewOrderDetails>
     </transition>
+    <div>
+      <overlay :opened="opened" :visible="visible" @closed="onClosed()">
+        <ConfirmPopup
+          v-if="showPopup"
+          :popupData="popupMessage"
+          @closePopup="closePopup"
+          @confirmAction="saveAction"
+        ></ConfirmPopup>
+      </overlay>
+    </div>
   </div>
 </template>
 
 <script>
+import Overlay from "vuejs-overlay";
 import ViewOrderDetails from "./ViewOrderDetails.vue";
+import ConfirmPopup from "../Designs/ConfirmPopup.vue";
 export default {
   data() {
     return {
@@ -72,18 +85,25 @@ export default {
       viewOrder: {},
       showOrderPanel: false,
       recentOrders: [],
+      showPopup: false,
+      popupMessage: {
+        title: "",
+        message: "",
+      },
+      opened: false,
+      visible: false,
     };
   },
   methods: {
     showOrderDetails(order) {
       this.viewOrder = order;
       this.showOrderPanel = true;
-      this.$emit("showOverlay");
+      // this.$emit("showOverlay");
     },
     closeShowOrderDetails() {
       console.log("CLOSEEEE");
       this.showOrderPanel = false;
-      this.$emit("closeOverlay");
+      // this.$emit("closeOverlay");
     },
     convertDate(orderDate) {
       const options = { year: "numeric", month: "long", day: "numeric" };
@@ -93,6 +113,25 @@ export default {
       var isDelivered = document.getElementById("deliveredCheck");
       console.log("delivered: ", isDelivered);
     },
+    onOpen() {
+      this.popupMessage.title = "Save Changes ?";
+      this.popupMessage.message =
+        "Please confirm if you would like to save the updated delivery status of your orders";
+      // this.showPopup = true;
+      this.opened = true;
+      this.visible = true;
+      console.log(this.popupMessage);
+    },
+    onClosed() {
+      this.opened = false;
+      this.visible = false;
+    },
+    closePopup() {
+      this.showPopup = false;
+    },
+    saveAction() {
+      console.log("save action");
+    },
   },
   created() {
     fetch("http://localhost:3000/api/orders/recent")
@@ -100,13 +139,15 @@ export default {
         return res.json();
       })
       .then((data) => {
-        console.log("recent orders:");
-        console.log(data);
         this.recentOrders = data;
       });
   },
   components: {
     ViewOrderDetails,
+    ConfirmPopup,
+    Overlay,
   },
 };
 </script>
+
+//
