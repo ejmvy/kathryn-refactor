@@ -95,7 +95,7 @@ h1 {
 }
 
 .noteTransition {
-  transition: all 0.8s ease-in-out;
+  transition: all 0.5s ease-in-out;
   right: 0;
   top: 0;
   position: fixed;
@@ -105,7 +105,7 @@ h1 {
 .appear-enter,
 .appear-enter-active,
 .appear-leave-active {
-  top: -100px;
+  top: -130px;
 }
 
 .slide-fade-enter {
