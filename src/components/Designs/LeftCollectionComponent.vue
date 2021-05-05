@@ -18,7 +18,7 @@
         <div class="dot mb-5 mt-3"></div>
       </div>
       <div>
-        <h2 class="text-sm font-bold pb-4 md:pb-10 uppercase">
+        <h2 class="text-sm font-bold pb-4 md:pb-8 uppercase">
           {{ displayCollection.title }}
         </h2>
         <p class="text-xs">
