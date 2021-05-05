@@ -108,18 +108,44 @@ h1 {
   top: -130px;
 }
 
-.slide-fade-enter {
-  transform: translateX(10px);
+.slide-fade-enter-from {
   opacity: 0;
 }
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: all 0.5s ease;
+  transition: transform 0.3s ease;
+  transition: opacity 0.5s ease-in;
 }
 
 .slide-fade-leave-to {
   transform: translateX(-10px);
+  opacity: 0;
+}
+
+/* SLIDE IN  */
+.slide-in-enter-active {
+  transition: all 0.8s ease;
+}
+.slide-in-leave-active {
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-in-enter-from,
+.slide-in-leave-to {
+  transform: translateX(30px);
+  opacity: 0;
+}
+
+/* SLIDE UP */
+.slide-up-enter-active {
+  transition: all 0.8s ease;
+}
+.slide-up-leave-active {
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-up-enter-from,
+.slide-up-leave-to {
+  transform: translatey(30px);
   opacity: 0;
 }
 </style>
