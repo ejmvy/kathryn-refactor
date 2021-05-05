@@ -2,11 +2,13 @@ import { createStore } from "vuex";
 
 import cartModule from "./modules/cart.js";
 import productModule from "./modules/products.js";
+import recentOrders from "./modules/recentOrders.js";
 
 export default createStore({
   modules: {
     prods: productModule,
     cart: cartModule,
+    recentOrders: recentOrders,
   },
   state: {
     isLoggedIn: false,
