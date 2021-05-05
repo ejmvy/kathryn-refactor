@@ -25,29 +25,58 @@
         </div>
         <div class="flex flex-col mt-8">
           <div class="label-grey self-start mb-2">Password</div>
-          <div class="">
+          <div>
             <input
               id="passwordInput"
               class="adminLoginInput w-full"
               v-model="userPassword"
               type="password"
             />
-            <span class="viewPassword cursor-pointer"
-              ><img
-                @click="viewPassword()"
-                class="w-5 h-5 opacity-0 passwordIcon"
-                :class="{ fullOpacity: userPassword }"
-                :src="
-                  !viewUserPassword
-                    ? 'https://i.ibb.co/tPpm16k/specs.png'
-                    : 'https://i.ibb.co/9Vg4C2v/Close-60.png'
-                "
-            /></span>
+
+            <transition name="fade-button">
+              <span class="viewPassword cursor-pointer">
+                <svg
+                  v-if="!viewUserPassword"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  @click="viewPassword()"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                  />
+                </svg>
+                <svg
+                  v-else
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  @click="viewPassword()"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  />
+                </svg>
+              </span>
+            </transition>
           </div>
-          <p
-            class="self-end text-xs text-green-light mt-2"
-            @click="sendPassword()"
-          >
+          <p class="self-end text-xs text-green-light" @click="sendPassword()">
             Forgot Password?
           </p>
         </div>
@@ -208,5 +237,21 @@ input {
   float: right;
   right: 10px;
   top: -35px;
+}
+
+.fade-button-enter-from,
+.fade-button-leave-to {
+  opacity: 0;
+}
+.fade-button-enter-active {
+  transition: opacity 0.6s ease-out;
+}
+
+.fade-button-leave-active {
+  transition: opacity 0.6s ease-in;
+}
+.fade-button-enter-to,
+.fade-button-leave-from {
+  opacity: 1;
 }
 </style>
