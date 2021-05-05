@@ -23,13 +23,13 @@
               />
             </td>
             <td>
-              <p>{{ product.name }}</p>
+              <p class="text-sm font-bold">{{ product.name }}</p>
               <div class="text-xs text-gray-400">
                 {{ product.colourSelected }}
               </div>
             </td>
             <td class="">{{ product.qty }}</td>
-            <td class="">
+            <td class="text-sm">
               {{ (product.price * product.qty).toFixed(2) }}
             </td>
           </tr>
@@ -46,7 +46,7 @@
     <div class="buySection bg-green-dark">
       <div class="absolute right-0 flex self-end p-2">
         <img
-          @click="$emit('closePopup')"
+          @click="closePopup()"
           class="w-4 h-4 cursor-pointer"
           src="https://i.ibb.co/tmmDGnL/close-x.png"
         />
@@ -55,7 +55,7 @@
         class="relative text-left pl-3 my-10 text-white flex h-11/12 flex-col justify-between"
       >
         <div class="text-sm">
-          <h5 class="text-sm text-white uppercase mb-8">Customer Details</h5>
+          <h5 class="text-sm text-gray-300 uppercase mb-8">Customer Details</h5>
           <p class="my-2">{{ orderDetails.customer.name }}</p>
           <div>
             <label class="label-grey">Address: </label>
@@ -77,7 +77,7 @@
           </div>
         </div>
         <div class="text-sm mt-16">
-          <h5 class="text-sm text-white uppercase mb-8">Order Details</h5>
+          <h5 class="text-sm text-gray-300 uppercase mb-8">Order Details</h5>
           <div>
             <label class="label-grey">Order Ref: </label>
             <p class="my-2">{{ orderDetails.orderRef }}</p>
@@ -96,7 +96,7 @@
               v-if="!orderDetails.deliveredDate"
               class="flex items-center mt-2"
             >
-              <input type="checkbox" />
+              <input type="checkbox" v-model="isChecked" />
               <p class="ml-8">Mark as Delivered</p>
             </div>
           </div>
@@ -110,13 +110,25 @@
 export default {
   props: ["orderDetails"],
   data() {
-    return {};
+    return {
+      isChecked: false,
+    };
   },
 
   methods: {
     convertDate(orderDate) {
       const options = { year: "numeric", month: "long", day: "numeric" };
       return new Date(orderDate).toLocaleDateString(undefined, options);
+    },
+    closePopup() {
+      console.log("checked: " + this.isChecked);
+      if (this.isChecked) {
+        this.$store.dispatch(
+          "recentOrders/updateDeliveredStatus",
+          this.orderDetails._id
+        );
+      }
+      this.$emit("closePopup");
     },
   },
 };
