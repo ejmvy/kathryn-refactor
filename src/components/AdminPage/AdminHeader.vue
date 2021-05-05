@@ -30,12 +30,7 @@ export default {
   },
   methods: {
     logoutUser() {
-      this.$store.dispatch("logout");
-      // this.$router.push("/");
-      this.emitter.emit("showNotification", {
-        state: true,
-        message: "Bye for now",
-      });
+      this.$emit("logout");
     },
   },
 };
