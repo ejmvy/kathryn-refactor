@@ -22,8 +22,8 @@
             <img class="w-5 h-5" src="https://i.ibb.co/pn8FWKn/userIcon.png" />
           </router-link>
         </li>
-        <li class="li-class cursor-pointer noUnderline">
-          <div class="flex">
+        <li class="li-class cursor-pointer noUnderline hover:no-underline">
+          <div class="flex hover:no-underline">
             <img
               class="w-6 h-6"
               src="https://i.ibb.co/vzdx4Vj/cart.png"
@@ -31,7 +31,7 @@
             />
             <div
               v-if="getCartLength"
-              class="w-5 h-5 text-xs flex items-center justify-center bg-white rounded-full text-green font-bold relative -top-2"
+              class="w-5 h-5 text-xs flex items-center justify-center bg-white rounded-full text-green-light font-bold relative -top-2"
             >
               {{ getCartLength }}
             </div>
@@ -53,7 +53,7 @@
           </router-link>
         </div>
         <div class="ml-4">
-          <div class="flex">
+          <div class="flex cursor-pointer">
             <img
               class="w-6 h-6"
               src="https://i.ibb.co/vzdx4Vj/cart.png"
@@ -151,6 +151,6 @@ header {
 }
 
 .noUnderline:hover {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 </style>
