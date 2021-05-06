@@ -39,7 +39,7 @@
       >
         <div class="flex h-36 items-center justify-between">
           <div class="w-24 h-28">
-            <!-- <img class="h-28 w-24" :src="product.imageUrlArray[0]" /> -->
+            <img class="h-28 w-24" :src="getImageUrl(product._id)" />
           </div>
           <div class="itemDesc flex flex-col items-center justify-between px-8">
             <div class="flex items-center justify-between w-full pb-4">
@@ -79,6 +79,14 @@ export default {
   methods: {
     clearCart() {
       this.$store.dispatch("cart/clearCart");
+    },
+    getImageUrl(productId) {
+      const products = this.$store.getters["prods/products"];
+      const product = products.find((prod) => prod._id == productId);
+
+      return product
+        ? product.imageUrlArray[0]
+        : "https://i.ibb.co/NCDk0sY/corrupt-Image.png";
     },
   },
 
