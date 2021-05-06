@@ -131,11 +131,27 @@
             placeholder="Email"
             v-model="newUser.email"
           />
-          <input
-            class="loginInput mobileInput"
-            placeholder="Password"
-            v-model="newUser.password"
-          />
+          <div class="w-full">
+            <input
+              id="passwordInput"
+              class="loginInput mobileInput"
+              placeholder="Password"
+              v-model="newUser.password"
+              type="password"
+            />
+            <transition name="fade-button">
+              <span class="viewPassword cursor-pointer">
+                <PasswordShowSvg
+                  v-if="!viewUserPassword"
+                  @svgClicked="viewPassword()"
+                ></PasswordShowSvg>
+                <PasswordHideSvg
+                  v-else
+                  @svgClicked="viewPassword()"
+                ></PasswordHideSvg>
+              </span>
+            </transition>
+          </div>
           <button
             class="btn-full-white btn-lrg"
             @click="registerUser"
@@ -171,11 +187,27 @@
             placeholder="Email"
             v-model="loginUser.email"
           />
-          <input
-            class="loginInput mobileInput"
-            placeholder="Password"
-            v-model="loginUser.password"
-          />
+          <div class="w-full">
+            <input
+              id="passwordInput"
+              class="loginInput mobileInput"
+              placeholder="Password"
+              v-model="loginUser.password"
+              type="password"
+            />
+            <transition name="fade-button">
+              <span class="viewPassword cursor-pointer">
+                <PasswordShowSvg
+                  v-if="!viewUserPassword"
+                  @svgClicked="viewPassword()"
+                ></PasswordShowSvg>
+                <PasswordHideSvg
+                  v-else
+                  @svgClicked="viewPassword()"
+                ></PasswordHideSvg>
+              </span>
+            </transition>
+          </div>
           <button
             @click="loginUserFn"
             class="btn-full-white btn-lrg"
@@ -200,6 +232,8 @@
 </template>
 
 <script>
+import PasswordShowSvg from "../components/Designs/PasswordShowSvg.vue";
+import PasswordHideSvg from "../components/Designs/PasswordHideSvg.vue";
 export default {
   data() {
     return {
@@ -214,6 +248,7 @@ export default {
         email: "",
         password: "",
       },
+      viewUserPassword: false,
     };
   },
   methods: {
@@ -226,6 +261,13 @@ export default {
       console.log("Sign Up!");
       const container = this.$refs.containerRef;
       container.classList.add("right-panel-active");
+    },
+    viewPassword() {
+      const pass = document.getElementById("passwordInput");
+
+      this.viewUserPassword = !this.viewUserPassword;
+
+      return (pass.type = this.viewUserPassword ? "text" : "password");
     },
 
     loginUserFn(e) {
@@ -361,6 +403,10 @@ export default {
       return true;
     },
   },
+  components: {
+    PasswordShowSvg,
+    PasswordHideSvg,
+  },
 };
 </script>
 
@@ -371,6 +417,14 @@ export default {
 
 span {
   font-size: 12px;
+}
+
+.viewPassword {
+  z-index: 2;
+  position: relative;
+  float: right;
+  right: 10px;
+  top: -35px;
 }
 
 .container {
