@@ -114,12 +114,12 @@ h1 {
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: transform 0.3s ease;
+  /* transition: transform 0.3s ease; */
   transition: opacity 0.5s ease-in;
 }
 
 .slide-fade-leave-to {
-  transform: translateX(-10px);
+  /* transform: translateX(-10px); */
   opacity: 0;
 }
 
