@@ -17,12 +17,12 @@
         <li class="li-class">
           <a href="#">Gallery</a>
         </li>
-        <li class="li-class noUnderline">
+        <div class="li-class">
           <router-link :to="checkLoggedIn ? '/userprofile' : '/login'">
             <img class="w-5 h-5" src="https://i.ibb.co/pn8FWKn/userIcon.png" />
           </router-link>
-        </li>
-        <li class="li-class cursor-pointer noUnderline hover:no-underline">
+        </div>
+        <div class="li-class cursor-pointer">
           <div class="flex hover:no-underline">
             <img
               class="w-6 h-6"
@@ -36,7 +36,7 @@
               {{ getCartLength }}
             </div>
           </div>
-        </li>
+        </div>
       </nav>
 
       <!-- MOBILE NAV -->
