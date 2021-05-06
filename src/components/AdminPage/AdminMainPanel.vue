@@ -9,26 +9,26 @@
         <div class="flex justify-between items-center">
           <img
             @click="changeWindow('recentOrders')"
-            class="w-10 h-10 cursor-pointer"
+            class="w-8 h-8 sm:w-10 sm:h-10 cursor-pointer"
             src="https://i.ibb.co/W3kjX3s/file-green.png"
           />
-          <div class="line"></div>
+          <div class="w-20 mx-2 sm:w-24 h-0.5 bg-green-light"></div>
 
           <img
             @click="changeWindow('statsPanel')"
-            class="w-10 h-10 cursor-pointer"
+            class="w-8 h-8 sm:w-10 sm:h-10 cursor-pointer"
             src="https://i.ibb.co/HdwZh2S/graph.png"
           />
-          <div class="line"></div>
+          <div class="w-20 mx-2 sm:w-24 h-0.5 bg-green-light"></div>
           <img
             @click="changeWindow('orderHistory')"
-            class="w-10 h-10 cursor-pointer"
+            class="w-8 h-8 sm:w-10 sm:h-10 cursor-pointer"
             src="https://i.ibb.co/DRD73Z5/list-green.png"
           />
-          <div class="line"></div>
+          <div class="w-20 mx-2 sm:w-24 h-0.5 bg-green-light"></div>
           <img
             @click="changeWindow('editPanel')"
-            class="w-10 h-10 cursor-pointer"
+            class="w-8 h-8 sm:w-10 sm:h-10 cursor-pointer"
             src="https://i.ibb.co/N6vxTqj/pencil-green.png"
           />
         </div>
@@ -112,6 +112,8 @@ export default {
       });
 
     console.log(`user logged: `, this.$store.state.user);
+
+    this.$store.dispatch("prods/callProductsApi");
   },
   components: {
     AdminLogin,
@@ -137,8 +139,8 @@ export default {
 .component-fade-leave-active {
   transition: opacity 0.5s ease;
 }
-.component-fade-enter, .component-fade-leave-to
-/* .component-fade-leave-active below version 2.1.8 */ {
+.component-fade-enter,
+.component-fade-leave-to {
   opacity: 0;
 }
 </style>
