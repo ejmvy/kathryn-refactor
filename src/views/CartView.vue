@@ -21,7 +21,7 @@
           </div>
         </div>
 
-        <div class="mainContent bg-gray-100 h-4/5 overflow-auto">
+        <div class="mainContent h-4/5 bg-gray-100 overflow-auto">
           <div class="bg-white h-11/12 mt-5">
             <div
               v-for="(product, idx) in cartItems"
