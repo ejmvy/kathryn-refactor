@@ -17,10 +17,7 @@
             :key="idx"
           >
             <td>
-              <img
-                class="w-20 h-20 my-1"
-                src="https://i.ibb.co/kHNCjdK/mug2.jpg"
-              />
+              <img class="w-20 h-20 my-1" :src="getImageUrl(product._id)" />
             </td>
             <td>
               <p class="text-sm font-bold">{{ product.name }}</p>
@@ -35,10 +32,10 @@
           </tr>
         </tbody>
       </table>
-      <div class="flex absolute bottom-3 w-1/2 items-center justify-between">
+      <div class="flex absolute bottom-5 w-1/2 items-center justify-between">
         <p class="text-sm uppercase text-gray-500">Total</p>
 
-        <div class="text-green-light text-lg font-bold">
+        <div class="text-green-light text-3xl font-bold">
           € {{ orderDetails.paymentTotal }}
         </div>
       </div>
@@ -55,7 +52,11 @@
         class="relative text-left pl-3 my-10 text-white flex h-11/12 flex-col justify-between"
       >
         <div class="text-sm">
-          <h5 class="text-sm text-gray-300 uppercase mb-8">Customer Details</h5>
+          <h5
+            class="text-sm text-gray-400 uppercase mb-8 font-bold tracking-widest"
+          >
+            Customer Details
+          </h5>
           <p class="my-2">{{ orderDetails.customer.name }}</p>
           <div>
             <label class="label-grey">Address: </label>
@@ -77,7 +78,11 @@
           </div>
         </div>
         <div class="text-sm mt-16">
-          <h5 class="text-sm text-gray-300 uppercase mb-8">Order Details</h5>
+          <h5
+            class="text-sm text-gray-400 uppercase mb-8 font-bold tracking-widest"
+          >
+            Order Details
+          </h5>
           <div>
             <label class="label-grey">Order Ref: </label>
             <p class="my-2">{{ orderDetails.orderRef }}</p>
@@ -129,6 +134,14 @@ export default {
         );
       }
       this.$emit("closePopup");
+    },
+    getImageUrl(productId) {
+      const products = this.$store.getters["prods/products"];
+      const product = products.find((prod) => prod._id == productId);
+
+      return product
+        ? product.imageUrlArray[0]
+        : "https://i.ibb.co/NCDk0sY/corrupt-Image.png";
     },
   },
 };
