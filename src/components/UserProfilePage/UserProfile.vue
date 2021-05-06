@@ -127,16 +127,12 @@ export default {
   overflow: hidden; */
 }
 
-.fade-enter {
-  /* transform: translateX(10px); */
-  opacity: 0;
-}
-
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease-in;
 }
 
+.fade-enter,
 .fade-leave-to {
   /* transform: translateX(-10px); */
   opacity: 0;
