@@ -72,6 +72,20 @@ export default {
       icon: "https://i.ibb.co/KbjV0KG/star.png",
     },
   }),
+  created() {
+    // https://stackoverflow.com/questions/39917092/mongodb-store-sales-data-by-month-schema
+    // getTotalSales() {
+    // get total of orders
+    // query on this month
+    // get total orders & query on last month
+    // compare
+    // find percentage and display icon
+    // }
+    // getNewUsers {
+    //   get total of users from this this.monthl
+    //   compare
+    // }
+  },
 
   components: {
     StatCard,
