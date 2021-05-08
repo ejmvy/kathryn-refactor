@@ -153,3 +153,7 @@ button:focus {
 .adminLoginInput:focus {
     @apply border-2 border-green-light
 }
+
+.footerCol {
+    @apply flex flex-col text-sm sm:text-left leading-10 text-gray-200 mt-5 sm:mt-0;
+}
