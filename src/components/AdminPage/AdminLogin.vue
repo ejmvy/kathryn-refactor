@@ -1,11 +1,13 @@
 <template>
   <div class="w-full h-screen flex bg-white">
     <div class="imageArea w-1/3 h-screen">
-      <div class="logo text-white text-4xl absolute top-3 left-8">KC</div>
-      <img
+      <div class="logo text-white text-4xl absolute top-3 left-8 bg-green-dark">
+        KC
+      </div>
+      <!-- <img
         class="w-full h-screen leftImage"
         src="https://i.ibb.co/YffVZ9q/cups1.jpg"
-      />
+      /> -->
     </div>
     <div class="flex w-2/3 flex-col justify-center items-center">
       <div class="absolute top-2 right-2">
