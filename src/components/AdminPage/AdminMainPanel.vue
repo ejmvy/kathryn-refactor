@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <div class="pt-8 border-t border-gray-200">
+      <div class="pt-8 mb-8 border-t border-gray-200">
         <transition name="component-fade" mode="out-in">
           <keep-alive>
             <component :is="view"></component>
