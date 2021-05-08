@@ -119,13 +119,33 @@ export default {
       this.showOrderPanel = false;
     },
     saveAction() {
-      console.log("save action");
       const orders = this.getRecentOrders;
 
-      const updateOrders = orders.forEach((order) => order.isDelivered);
+      const updateOrders = orders.filter((order) => order.isDelivered);
 
       console.log("ORDERS to save:");
       console.log(updateOrders);
+
+      updateOrders.forEach((orderDelivered) => {
+        fetch(`http://localhost:3000/api/orders/${orderDelivered._id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            isDelivered: true,
+          }),
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            console.log("SEnt");
+            console.log(data);
+            this.$store.dispatch("recentOrders/callOrdersAPI");
+            this.closePopup();
+          });
+      });
     },
   },
   computed: {
