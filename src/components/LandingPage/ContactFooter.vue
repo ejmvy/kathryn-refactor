@@ -1,20 +1,40 @@
 <template>
-  <div class="flex flex-col w-full pt-20 items-center">
-    <div class="flex w-1/2 justify-center pb-20">
-      <div
-        class="circle flex justify-center text-white p-2 bg-green-light rounded-full mx-5 sm:mx-8 cursor-pointer"
-        v-for="logo in logos"
-        :key="logo"
-      >
-        <img class="w-7 h-7" :src="logo" />
+  <div class="bg-green-dark flex flex-col w-full pt-10">
+    <div
+      class="flex flex-col sm:flex-row justify-between items-center sm:px-20 lg:w-3/4 lg:m-auto"
+    >
+      <div class="logo">
+        <img class="h-24 w-24" src="https://i.ibb.co/wBkvvKz/owl.png" />
+      </div>
+
+      <div class="footerCol">
+        <div class="uppercase text-gray-500 font-bold">About</div>
+        <p>Home</p>
+        <p>FAQ's</p>
+        <p>Get in Touch</p>
+      </div>
+      <div class="footerCol">
+        <div class="uppercase text-gray-500 font-bold">Products</div>
+        <p>How It Works</p>
+        <p>Shipping Info</p>
+        <p>Returns</p>
+      </div>
+
+      <div class="footerCol">
+        <div class="uppercase text-gray-500 font-bold">Contact</div>
+        <p>+353 85 2577 656</p>
+        <p>kathrynokelly@gmail.com</p>
+        <p>Rathgar, Dublin, Ireland</p>
       </div>
     </div>
-    <p class="text-sm leading-10">+353 85 2577 656</p>
-    <p class="text-sm leading-10">kathrynokelly@gmail.com</p>
-    <p class="text-sm leading-10">RATHGAR, DUBLIN, IRELAND</p>
 
-    <div class="w-full mt-32 border-t-2 border-gray-300">
-      <div class="w-full flex justify-between p-2 text-xs">
+    <div class="flex justify-between m-auto w-1/3 my-12">
+      <div v-for="icon in logos" :key="icon">
+        <img :src="icon" class="w-7 h-7 cursor-pointer" />
+      </div>
+    </div>
+    <div class="w-full border-t border-gray-500">
+      <div class="w-full flex justify-between p-2 text-xs text-gray-200">
         <p>@2021 {{ getfooterText ? shortName : longName }}</p>
         <p>Designed by EJ</p>
       </div>
