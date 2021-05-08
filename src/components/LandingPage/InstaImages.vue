@@ -1,5 +1,5 @@
 <template>
-  <section class="section py-14">
+  <section class="section py-14 mb-16">
     <TitleDesign :title="titleText"></TitleDesign>
     <div class="flex justify-between w-11/12 overflow-auto mt-10">
       <div v-for="img in imagesToDisplay" :key="img">
