@@ -1,10 +1,10 @@
 <template>
-  <div class="bg-white mt-3 p-3">
+  <div class="bg-white mt-3 p-3 md:pb-8 md:mb-10">
     <h5 class="uppercase text-xs pb-4">Shipping Address</h5>
     <form class="px-3">
       <div>
         <input
-          class="addressInput"
+          class="addressInput md:mt-10"
           v-model="userObject.firstName"
           type="text"
           placeholder="*First Name"
@@ -12,7 +12,7 @@
       </div>
       <div>
         <input
-          class="addressInput"
+          class="addressInput md:mt-10"
           v-model="userObject.lastName"
           type="text"
           placeholder="*Last Name"
@@ -21,7 +21,7 @@
 
       <div>
         <input
-          class="addressInput"
+          class="addressInput md:mt-10"
           v-model="userObject.email"
           type="text"
           placeholder="*Email"
@@ -29,7 +29,7 @@
       </div>
       <div>
         <input
-          class="addressInput"
+          class="addressInput md:mt-10"
           v-model="userObject.addressLine1"
           type="text"
           placeholder="*Address Line 1"
@@ -37,7 +37,7 @@
       </div>
       <div>
         <input
-          class="addressInput"
+          class="addressInput md:mt-10"
           v-model="userObject.addressLine2"
           type="text"
           placeholder="Address Line 2"
@@ -46,7 +46,7 @@
       <div class="flex justify-between">
         <div class="mr-5">
           <input
-            class="addressInput"
+            class="addressInput md:mt-10"
             v-model="userObject.city"
             type="text"
             placeholder="*City"
@@ -54,7 +54,7 @@
         </div>
         <div class="ml-5">
           <input
-            class="addressInput"
+            class="addressInput md:mt-10"
             v-model="userObject.postcode"
             type="text"
             placeholder="*Post Code"
@@ -63,7 +63,7 @@
       </div>
       <div>
         <input
-          class="addressInput"
+          class="addressInput md:mt-10"
           v-model="userObject.country"
           type="text"
           placeholder="*Country"
@@ -71,7 +71,7 @@
       </div>
       <div>
         <input
-          class="addressInput"
+          class="addressInput md:mt-10"
           v-model="userObject.phoneNumber"
           type="text"
           placeholder="*Phone Number"
