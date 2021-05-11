@@ -28,7 +28,7 @@
         <h5 class="labelxs">Shipping Address</h5>
         <img
           @click="changeAddress()"
-          class="w-4 h-4"
+          class="w-4 h-4 cursor-pointer"
           src="https://i.ibb.co/N6vxTqj/pencil-green.png"
         />
       </div>

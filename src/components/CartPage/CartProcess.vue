@@ -1,9 +1,7 @@
 <template>
-  <div
-    class="md:flex md:absolute w-screen h-screen bg-green-light md:justify-center md:items-center"
-  >
+  <div class="">
     <div
-      class="w-full h-screen md:w-4/5 md:h-4/5 bg-white shadow-2xl flex flex-col items-center"
+      class="w-full h-screen md:h-4/5 bg-white shadow-2xl flex flex-col items-center"
     >
       <div
         class="relative w-full flex justify-between items-center p-2 bg-green-light"
@@ -52,7 +50,7 @@
         </div>
       </div>
       <div class="w-full bg-gray-200">
-        <div class="w-full">
+        <div class="w-full md:w-2/3 md:m-auto md:mb-10">
           <AddressDetails v-if="getPaymentStep == 1"> </AddressDetails>
           <ConfirmOrder
             v-if="getPaymentStep == 2"

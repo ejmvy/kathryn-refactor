@@ -11,32 +11,38 @@
     </div>
     <div class="bg-gray-200 w-full p-1"></div>
 
+    <!-- Main Account Menu  -->
+
     <div
-      class="md:w-3/4 md:m-auto md:flex md:justify-center bg-white"
-      v-for="path in accountPaths"
-      :key="path"
+      class="hidden md:flex md:flex-col md:w-full md:h-full md:pb-32 md:bg-gray-200"
     >
       <div
-        @click="showRoute(path.route)"
-        class="w-full flex items-center py-5 pl-6 border-b border-gray-400"
+        class="md:w-2/3 lg:w-1/2 md:m-auto md:flex md:justify-center mb-20 bg-white"
+        v-for="path in accountPaths"
+        :key="path"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-7 w-7"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+        <div
+          @click="showRoute(path.route)"
+          class="w-full flex items-center py-5 pl-6 border-b border-gray-400 cursor-pointer hover:bg-gray-100"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            :d="path.icon"
-          />
-        </svg>
-        <p class="ml-10 tracking-wider text-gray-600 text-sm">
-          {{ path.pathName }}
-        </p>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-7 w-7"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              :d="path.icon"
+            />
+          </svg>
+          <p class="ml-10 tracking-wider text-gray-600 text-sm">
+            {{ path.pathName }}
+          </p>
+        </div>
       </div>
     </div>
     <div class="w-full absolute bottom-0 border-t-2 border-gray-300">
@@ -81,6 +87,18 @@ export default {
           pathName: "Where's my order?",
           icon:
             "M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+          route: "userOrderLocation",
+        },
+        {
+          pathName: "Delivery Info",
+          icon:
+            "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01",
+          route: "userOrderLocation",
+        },
+        {
+          pathName: "Returns",
+          icon:
+            "M12.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0019 16V8a1 1 0 00-1.6-.8l-5.333 4zM4.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0011 16V8a1 1 0 00-1.6-.8l-5.334 4z",
           route: "userOrderLocation",
         },
       ],

@@ -25,14 +25,13 @@
         </svg>
       </div>
 
-      <transition name="fade" mode="out-in">
-        <UserAccountMenu
-          v-if="!hideMenu"
-          @userSelect="openMenu"
-          :userName="userDetails.name"
-        ></UserAccountMenu>
-      </transition>
+      <UserAccountMenu
+        v-if="!hideMenu"
+        @userSelect="openMenu"
+        :userName="userDetails.name"
+      ></UserAccountMenu>
 
+      <!-- <div class="bg-gray-500 w-full"> -->
       <transition name="fade" mode="out-in">
         <UserOrders
           v-if="menu.userOrders"
@@ -53,6 +52,7 @@
           @closeMenu="closeMenuOption"
         ></UserAddress>
       </transition>
+      <!-- </div> -->
     </div>
   </div>
 </template>
