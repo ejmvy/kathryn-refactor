@@ -10,7 +10,7 @@
       <!-- <img class="reasonImage" src="../../assets/latestDesigns/dish1.jpeg" /> -->
     </div>
     <div
-      class="flex flex-col items-center text-center relative -top-10 md:top-0 w-3/4 md:-left-5 p-8 md:flex-1 md:w-40 z-10 bg-white shadow-2xl"
+      class="flex flex-col items-center text-center relative -top-10 md:top-0 w-3/4 md:-left-5 p-8 md:flex-1 md:w-40 z-10 bg-white shadow-xl"
     >
       <div class="lineTop">
         <div class="line1 w-48 md:w-36"></div>
