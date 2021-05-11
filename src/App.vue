@@ -50,6 +50,11 @@ export default {
   color: #2c3e50;
 }
 
+h1 {
+  /* font-family: "Cormorant Unicase", serif; */
+  font-family: "Playfair Display SC", serif;
+}
+
 #nav {
   padding: 30px;
 }
@@ -65,7 +70,7 @@ export default {
 
 button {
   /* font-family: "Nova Mono", monospace; */
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 
 button:hover {
@@ -99,7 +104,7 @@ h1 {
   right: 0;
   top: 0;
   position: fixed;
-  z-index: 5;
+  z-index: 12;
 }
 
 .appear-enter,
