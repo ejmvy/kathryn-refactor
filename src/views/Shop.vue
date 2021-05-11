@@ -1,9 +1,9 @@
 <template>
   <div>
     <Header></Header>
-    <section class="section pb-8 pt-16 md:pt-24 bg-gray-100">
-      <TitleDesign :title="titleText"></TitleDesign>
-      <div class="w-11/12 sm:mt-6 flex justify-between">
+    <section class="section pb-8 mb-24">
+      <h1 class="text-2xl sm:text-4xl mt-5">Our Collection</h1>
+      <div class="w-11/12 sm:mt-6 flex justify-between text-gray-dark">
         <div class="flex">
           <p>Collections</p>
           <div class="px-5">/</div>
@@ -24,7 +24,7 @@
         <p>{{ productData.length }} items</p>
       </div>
       <div
-        class="w-11/12 flex justify-center pt-10 md:pt-6 md:justify-between flex-wrap"
+        class="w-11/12 flex justify-center pt-6 md:justify-between flex-wrap"
       >
         <div v-for="item in productData" :key="item">
           <ItemCard :displayItem="item"></ItemCard>
@@ -38,7 +38,6 @@
 <script>
 import Header from "../components/LandingPage/Header.vue";
 import Footer from "../components/LandingPage/Footer.vue";
-import TitleDesign from "../components/Designs/TitleDesign.vue";
 import ItemCard from "../components/Designs/ItemCard.vue";
 
 export default {
@@ -102,13 +101,15 @@ export default {
   components: {
     Header,
     Footer,
-    TitleDesign,
     ItemCard,
   },
 };
 </script>
 
 <style scoped>
+h1 {
+  font-family: "Playfair Display SC", serif;
+}
 .routerLink {
   transition: all 0.2s ease;
 }
