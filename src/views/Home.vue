@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header></Header>
-    <MainPhoto></MainPhoto>
+    <MainLanding></MainLanding>
     <MainMessage></MainMessage>
     <LatestDesigns></LatestDesigns>
     <Collection></Collection>
@@ -12,7 +12,7 @@
 
 <script>
 import Header from "../components/LandingPage/Header.vue";
-import MainPhoto from "../components/LandingPage/MainPhoto.vue";
+import MainLanding from "../components/LandingPage/MainLanding.vue";
 import MainMessage from "../components/LandingPage/MainMessage.vue";
 import LatestDesigns from "../components/LandingPage/LatestDesigns.vue";
 import Collection from "../components/LandingPage/Collection.vue";
@@ -28,7 +28,7 @@ export default {
   },
   components: {
     Header,
-    MainPhoto,
+    MainLanding,
     MainMessage,
     LatestDesigns,
     Collection,
