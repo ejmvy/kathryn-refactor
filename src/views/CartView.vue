@@ -8,7 +8,7 @@
         :class="{ blackBg: customisePanel }"
       >
         <div
-          class="relative flex justify-between items-center p-2 bg-green-light"
+          class="relative flex justify-between items-center p-2 bg-green-light md:hidden"
         >
           <router-link class="logo text-3xl text-white" to="/">KC</router-link>
           <div class="flex">
@@ -21,12 +21,23 @@
           </div>
         </div>
 
-        <div class="mainContent h-4/5 bg-gray-100 overflow-auto">
-          <div class="bg-white h-11/12 mt-5">
+        <div
+          class="mainContent h-4/5 md:h-full md:w-3/4 bg-gray-100 overflow-auto"
+        >
+          <div class="hidden md:flex w-3/4 md:items-center p-5">
+            <router-link to="/shop">
+              <img
+                class="w-5 h-5 transform rotate-180 cursor-pointer"
+                src="https://i.ibb.co/Qm0BCkd/right.png"
+              />
+            </router-link>
+            <h5 class="uppercase font-bold tracking-wider pl-5">My Bag</h5>
+          </div>
+          <div class="h-11/12 md:mx-5">
             <div
               v-for="(product, idx) in cartItems"
               :key="idx"
-              class="w-full h-36 flex flex-col justify-center border-b border-gray-300 px-3 py-4"
+              class="bg-white w-full h-36 flex flex-col justify-center border-b border-gray-300 px-3 py-4 mb-3"
             >
               <div class="flex h-36 items-center justify-between">
                 <div class="w-24 h-28">
@@ -69,28 +80,59 @@
         </div>
 
         <div
-          class="absolute bottom-0 w-full py-5 bg-green-dark p-3 flex justify-between items-center text-white"
+          class="absolute bottom-0 w-full py-5 bg-green-dark p-3 flex justify-between items-center text-white md:relative md:right-0 md:w-1/4 md:flex-col md:justify-center md:items-start"
         >
-          <div class="flex flex-col text-left">
-            <div class="text-xs text-white uppercase">Total:</div>
-            <div class="font-bold">€ {{ getTotal }}</div>
+          <div class="flex flex-col text-left text-white">
+            <div class="md:hidden">
+              <div class="text-xs uppercase">Total:</div>
+              <div class="font-bold">€ {{ getTotal }}</div>
+            </div>
+            <div class="hidden md:flex flex-col">
+              <div
+                class="text-sm uppercase font-bold pb-3 mb-6 border-b border-gray-light tracking-wider"
+              >
+                Total:
+              </div>
+              <div class="flex items-center justify-between">
+                <p class="mr-2 text-xs">Sub Total:</p>
+                <div class="font-bold text-right">€ {{ getTotal }}</div>
+              </div>
+              <div class="flex items-center justify-between mt-5">
+                <p class="mr-2 text-xs">Delivery:</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.8"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+            </div>
           </div>
           <button
-            class="btn-white btn-lrg"
+            class="btn-white btn-lrg md:mt-20"
             :class="{ disable: !getCartLength }"
             @click="checkLoginDetails"
           >
             Checkout
           </button>
+          <p class="text-xxs mt-5 hidden md:flex">* Payment with Stripe</p>
         </div>
       </div>
     </div>
-    <transition name="slideUp" class="transition">
+    <transition :name="mobileWidth ? 'slideUp' : 'slide-up'" class="transition">
       <div
         v-if="customisePanel"
-        class="customisePanel absolute w-full flex flex-col items-center bg-white"
+        class="customisePanel absolute bottom-0 md:relative md:top-1/3 md:w-1/2 md:m-auto w-full flex flex-col items-center bg-white"
       >
-        <div class="py-3">
+        <div class="py-3 md:pt-8">
           <div class="font-bold">{{ customiseItem.name }}</div>
           <div class="text-gray-500 py-4">
             {{ customiseItem.description }}
@@ -272,7 +314,7 @@ export default {
   min-height: 50%;
 }
 .customisePanel {
-  bottom: 0;
+  /* bottom: 0; */
   transition: all 0.5s ease-in-out;
   z-index: 5;
 }

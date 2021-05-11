@@ -1,6 +1,6 @@
-<template class="">
+<template>
   <div
-    class="absolute top-0 w-screen h-screen overflow-hidden right-0 lg:w-1/4 flex flex-col bg-green-dark mt-0 pb-5 z-10"
+    class="cartPopup h-screen overflow-hidden lg:w-1/4 flex flex-col bg-green-dark mt-0 pb-5"
   >
     <div class="absolute right-3 top-3 cursor-pointer">
       <img
@@ -10,7 +10,7 @@
       />
     </div>
     <div
-      class="flex items-center justify-between px-8 py-3 mt-8 border-b border-gray-300"
+      class="flex items-center justify-between px-8 py-3 mt-8 border-b border-gray-light"
     >
       <div class="flex">
         <img class="w-5 h-5" src="https://i.ibb.co/vzdx4Vj/cart.png" />
@@ -24,7 +24,7 @@
     </div>
 
     <div
-      class="h-2/3 overflow-y-auto overflow-y-scroll mt-10 md:mt-20 px-5 sm:px-16"
+      class="h-2/3 overflow-y-auto overflow-y-scroll mt-10 md:mt-20 px-5 sm:px-16 md:px-32 lg:px-5"
     >
       <h5 v-if="!getCartLength" class="text-white">
         There are no items in your cart
@@ -107,4 +107,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.cartPopup {
+  z-index: 5;
+}
+</style>
