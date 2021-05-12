@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Header></Header>
+    <Header :addShadow="true"></Header>
     <section class="section pb-8 mb-24">
-      <h1 class="text-2xl sm:text-4xl mt-5">Our Collection</h1>
+      <h1 class="text-2xl sm:text-4xl mt-5 mb-10 md:mb-0">Our Collection</h1>
       <div class="w-11/12 sm:mt-6 flex justify-between text-gray-dark">
         <div class="flex">
           <p>Collections</p>
@@ -10,7 +10,6 @@
           <select
             class="bg-transparent pr-10 cursor-pointer"
             v-model="categorySelected"
-            @change="changeCategory"
           >
             <option
               v-for="category in categoryOptions"
@@ -23,12 +22,13 @@
         </div>
         <p>{{ productData.length }} items</p>
       </div>
-      <div
-        class="w-11/12 flex justify-center pt-6 md:justify-between flex-wrap"
-      >
-        <div v-for="item in productData" :key="item">
+
+      <div class="w-11/12 pt-0 md:pt-6 flex flex-wrap justify-center">
+        <!-- <transition-group name="projects"> -->
+        <div v-for="(item, idx) in getProductData" :key="idx">
           <ItemCard :displayItem="item"></ItemCard>
         </div>
+        <!-- </transition-group> -->
       </div>
     </section>
     <Footer></Footer>
@@ -69,32 +69,21 @@ export default {
           this.categorySelected =
             this.categoryName.slice(0, 1).toUpperCase() +
             this.categoryName.slice(1);
-          return this.findItems(this.categoryName);
         }
         this.productData = data;
       });
-    const products = this.$store.getters["prods/products"];
-    console.log("PRODS FROM STORE:");
-    console.log(products);
-    // const total = this.$store.getters["prods/productTotal"];
+    // const products = this.$store.getters["prods/products"];
+    // console.log("PRODS FROM STORE:");
+    // console.log(products);
   },
 
-  methods: {
-    findItems(searchCategory) {
-      var dataArr = [];
-      this.serverData.forEach((item) => {
-        if (item.category.name == searchCategory) {
-          dataArr.push(item);
-        }
-      });
-      this.productData = dataArr;
-    },
-    changeCategory() {
-      console.log(`this cat: ${this.categorySelected}`);
-      if (this.categorySelected === "All") {
-        return (this.productData = this.serverData);
-      }
-      this.findItems(this.categorySelected);
+  computed: {
+    getProductData() {
+      return this.productData.filter((item) =>
+        this.categorySelected == "All"
+          ? this.productData
+          : item.category.name == this.categorySelected
+      );
     },
   },
 
@@ -120,5 +109,20 @@ h1 {
 
 select:focus {
   outline: none;
+}
+
+.projects-enter-active {
+  transform: scale(0.5) translatey(-80px);
+  opacity: 0;
+}
+
+.projects-leave-to {
+  transform: translatey(30px);
+  opacity: 0;
+}
+
+.projects-leave-active {
+  position: absolute;
+  z-index: -1;
 }
 </style>
