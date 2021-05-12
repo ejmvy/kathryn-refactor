@@ -14,10 +14,10 @@
     <!-- Main Account Menu  -->
 
     <div
-      class="hidden md:flex md:flex-col md:w-full md:h-full md:pb-32 md:bg-gray-200"
+      class="md:flex md:flex-col md:w-full md:h-full md:pb-32 md:bg-gray-200"
     >
       <div
-        class="md:w-2/3 lg:w-1/2 md:m-auto md:flex md:justify-center mb-20 bg-white"
+        class="md:w-2/3 lg:w-1/2 md:m-auto md:flex md:justify-center bg-white"
         v-for="path in accountPaths"
         :key="path"
       >
