@@ -51,8 +51,8 @@ export default {
 }
 
 h1 {
-  /* font-family: "Cormorant Unicase", serif; */
   font-family: "Playfair Display SC", serif;
+  letter-spacing: 2px;
 }
 
 #nav {
@@ -69,7 +69,6 @@ h1 {
 }
 
 button {
-  /* font-family: "Nova Mono", monospace; */
   transition: all 0.3s ease;
 }
 
@@ -80,10 +79,6 @@ button:hover {
 button:focus,
 input:focus {
   outline: none;
-}
-
-h1 {
-  font-family: "Nova Mono", monospace;
 }
 
 .logo {
@@ -152,5 +147,30 @@ h1 {
 .slide-up-leave-to {
   transform: translatey(30px);
   opacity: 0;
+}
+
+.elementSlideUp {
+  animation: slide_up_img 0.6s ease;
+}
+
+.elementSlideUp2 {
+  animation: slide_up_img 0.9s ease;
+}
+
+.elementSlideUp3 {
+  animation: slide_up_img 1.2s ease;
+}
+
+.elementSlideUp4 {
+  animation: slide_up_img 1.5s ease;
+}
+
+@keyframes slide_up_img {
+  0% {
+    transform: translateY(250px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 </style>
