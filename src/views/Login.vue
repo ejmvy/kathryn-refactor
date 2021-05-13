@@ -327,7 +327,7 @@ export default {
             }
             return this.$router.push("/checkout");
           } else {
-            this.$router.push("/shop");
+            this.$router.push("/userprofile");
           }
         })
         .catch((err) => {
@@ -370,7 +370,7 @@ export default {
             if (cartProcess > 0) {
               return this.$router.push("/checkout");
             } else {
-              this.$router.push("/shop");
+              this.$router.push("/userprofile");
             }
           })
           .catch((err) => {
