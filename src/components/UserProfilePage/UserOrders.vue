@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <div class="bg-white px-3 py-4 flex w-full justify-between items-center">
+  <div class="md:bg-white">
+    <div
+      class="bg-white px-3 py-4 flex w-full justify-between md:justify-center items-center md:shadow-lg"
+    >
       <img
         @click="closeMenu()"
-        class="w-5 h-5 transform rotate-90 curos"
+        class="w-5 h-5 md:hidden transform rotate-90 curos"
         src="https://i.ibb.co/dQxfSHq/down.png"
       />
       <p class="uppercase text-sm tracking-wider">My Orders</p>
@@ -57,7 +59,7 @@
         </div>
       </div>
     </div>
-    <div class="w-full relative bottom-0 border-t-2 border-gray-300">
+    <div class="md:hidden w-full relative bottom-0 border-t-2 border-gray-300">
       <div class="w-full flex justify-between p-2 text-xs">
         <p>@2021 KC</p>
         <p>Designed by EJ</p>
