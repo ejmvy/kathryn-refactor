@@ -18,60 +18,60 @@
 
     <div class="w-full flex mt-10 sm:mt-4" v-if="showImages == 'favourites'">
       <img
-        class="imageSlideUp w-1/2 h-96"
+        class="elementSlideUp w-1/2 h-96"
         :src="require(`../../assets/latestDesigns/mug1.jpeg`)"
       />
 
       <img
-        class="imageSlideUp2 w-1/2 h-96"
+        class="elementSlideUp2 w-1/2 h-96"
         :src="require(`../../assets/latestDesigns/misc1.jpeg`)"
       />
     </div>
 
     <div class="w-full flex mt-7" v-if="showImages == 'tableware'">
       <img
-        class="imageSlideUp w-1/2 h-96"
+        class="elementSlideUp w-1/2 h-96"
         :src="require(`../../assets/latestDesigns/dish1.jpeg`)"
       />
 
       <img
-        class="imageSlideUp2 w-1/2 h-96"
+        class="elementSlideUp2 w-1/2 h-96"
         :src="require(`../../assets/latestDesigns/dish2.jpeg`)"
       />
     </div>
 
     <div class="w-full flex mt-7" v-if="showImages == 'cups'">
       <img
-        class="imageSlideUp w-1/2 h-96"
+        class="elementSlideUp w-1/2 h-96"
         :src="require(`../../assets/latestDesigns/mug1.jpeg`)"
       />
 
       <img
-        class="imageSlideUp2 w-1/2 h-96"
+        class="elementSlideUp2 w-1/2 h-96"
         :src="require(`../../assets/latestDesigns/mug2.jpeg`)"
       />
     </div>
 
     <div class="w-full flex mt-7" v-if="showImages == 'garden'">
       <img
-        class="imageSlideUp w-1/2 h-96"
+        class="elementSlideUp w-1/2 h-96"
         :src="require(`../../assets/latestDesigns/misc1.jpeg`)"
       />
 
       <img
-        class="imageSlideUp2 w-1/2 h-96"
+        class="elementSlideUp2 w-1/2 h-96"
         :src="require(`../../assets/latestDesigns/misc1.jpeg`)"
       />
     </div>
 
     <div class="w-full flex mt-7" v-if="showImages == 'misc'">
       <img
-        class="imageSlideUp w-1/2 h-96"
+        class="elementSlideUp w-1/2 h-96"
         :src="require(`../../assets/latestDesigns/bowl1.jpeg`)"
       />
 
       <img
-        class="imageSlideUp2 w-1/2 h-96"
+        class="elementSlideUp2 w-1/2 h-96"
         :src="require(`../../assets/latestDesigns/bowl2.jpeg`)"
       />
     </div>
@@ -127,22 +127,5 @@ li:hover {
 .activeClass {
   color: #c4c3c5;
   border-bottom: 1px solid #c4c3c5;
-}
-
-.imageSlideUp {
-  animation: slide_up_img 0.6s ease;
-}
-
-.imageSlideUp2 {
-  animation: slide_up_img 0.9s ease;
-}
-
-@keyframes slide_up_img {
-  0% {
-    transform: translateY(250px);
-  }
-  100% {
-    transform: translateY(0);
-  }
 }
 </style>
