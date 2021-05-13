@@ -35,7 +35,7 @@
       <div class="flex absolute bottom-5 w-1/2 items-center justify-between">
         <p class="text-sm uppercase text-gray-500">Total</p>
 
-        <div class="text-green-light text-3xl font-bold">
+        <div class="text-green-light text-2xl font-bold">
           € {{ orderDetails.paymentTotal }}
         </div>
       </div>
@@ -95,7 +95,7 @@
             <label class="label-grey">Delivered: </label>
 
             <p v-if="orderDetails.deliveredDate" class="my-2">
-              {{ orderDetails.deliveredDate }}
+              {{ convertDate(orderDetails.deliveredDate) }}
             </p>
             <div
               v-if="!orderDetails.deliveredDate"
