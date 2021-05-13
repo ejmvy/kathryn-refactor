@@ -17,15 +17,17 @@
         >
       </div>
       <div class="w-2/3">
-        <h5 class="text-4xl text-left mb-4">Log In</h5>
-        <p class="text-left text-gray-500 mb-12 text-xs">
-          Enter your details to access the Admin Panel
-        </p>
-        <div class="flex flex-col">
+        <div class="elementSlideUp">
+          <h5 class="text-4xl text-left mb-4">Log In</h5>
+          <p class="text-left text-gray-500 mb-12 text-xs">
+            Enter your details to access the Admin Panel
+          </p>
+        </div>
+        <div class="flex flex-col elementSlideUp2">
           <div class="label-grey self-start mb-2">Email</div>
           <input class="adminLoginInput" v-model="userEmail" />
         </div>
-        <div class="flex flex-col mt-8">
+        <div class="flex flex-col mt-8 elementSlideUp3">
           <div class="label-grey self-start mb-2">Password</div>
           <div>
             <input
@@ -83,7 +85,10 @@
           </p>
         </div>
 
-        <button v-on:click="checkUserAuth" class="btn-green btn-lrg mt-10">
+        <button
+          v-on:click="checkUserAuth"
+          class="btn-green btn-lrg mt-10 elementSlideUp4"
+        >
           Log In
         </button>
       </div>
