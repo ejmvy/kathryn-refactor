@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <div class="pt-8 mb-8 border-t border-gray-200">
+      <div class="pt-8 mb-20 border-t border-gray-200">
         <transition name="component-fade" mode="out-in">
           <keep-alive>
             <component :is="view"></component>
@@ -57,10 +57,10 @@
 <script>
 import AdminLogin from "../AdminPage/AdminLogin.vue";
 import AdminHeader from "../AdminPage/AdminHeader.vue";
-// import AdminConfigPangel from "../AdminPage/AdminConfigPanel.vue";
 import RecentOrderPanel from "../AdminPage/RecentOrderPanel.vue";
 import OrderHistoryPanel from "../AdminPage/OrderHistoryPanel.vue";
 import StatsPanel from "../AdminPage/StatsPanel.vue";
+import EditPanel from "../AdminPage/EditPanel.vue";
 import ConfirmPopup from "../Designs/ConfirmPopup.vue";
 
 export default {
@@ -119,10 +119,10 @@ export default {
     AdminLogin,
     AdminHeader,
     ConfirmPopup,
-    // AdminConfigPangel,
     recentOrders: RecentOrderPanel,
     statsPanel: StatsPanel,
     orderHistory: OrderHistoryPanel,
+    editPanel: EditPanel,
   },
 };
 </script>
