@@ -77,23 +77,6 @@ export default {
   opacity: 0.7;
 }
 
-/* .fade-enter-active,
-.fade-leave-active {
-  transition: all 0.9s ease;
-  overflow: hidden;
-  visibility: visible;
-  position: absolute;
-  width: 100%;
-  opacity: 1;
-}
-
-.fade-enter,
-.fade-leave-to {
-  visibility: hidden;
-  width: 100%;
-  opacity: 0;
-} */
-
 .fade-enter-active,
 .fade-leave-active {
   /* transition: all 0.9s ease; */
@@ -128,4 +111,9 @@ export default {
   transform: translateX(-10px);
   opacity: 0;
 }
+
+/* https://www.vuescript.com/full-featured-carousel/
+https://fengyuanchen.github.io/vue-carousel/#
+https://github.com/fengyuanchen/vue-carousel
+https://codepen.io/BracketMan/pen/QzYxvQ */
 </style>
