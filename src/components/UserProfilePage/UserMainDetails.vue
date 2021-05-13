@@ -1,16 +1,18 @@
 <template>
   <div>
-    <div class="bg-white px-3 py-4 flex w-full justify-between items-center">
+    <div
+      class="bg-white px-3 py-4 flex w-full justify-between md:justify-center items-center"
+    >
       <img
         @click="closeMenu()"
-        class="w-5 h-5 transform rotate-90 cursor-pointer"
+        class="w-5 h-5 md:hidden transform rotate-90 cursor-pointer"
         src="https://i.ibb.co/dQxfSHq/down.png"
       />
       <p class="uppercase text-sm tracking-wider">My Details</p>
       <div class="w-5 h-5"></div>
     </div>
     <div class="bg-gray-200 w-full p-1"></div>
-    <div class="bg-white mt-3 p-3 md:flex md:flex-col md:w-2/3 md:m-auto">
+    <div class="bg-white mt-3 p-3 md:flex md:flex-col md:w-full md:m-auto">
       <form class="px-3 mt-10">
         <div class="flex flex-col">
           <div class="label-grey self-start">First Name:</div>
