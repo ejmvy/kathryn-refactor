@@ -14,52 +14,65 @@
     <!-- Main Account Menu  -->
 
     <div
-      class="md:flex md:flex-col md:w-full md:h-full md:pb-32 md:bg-gray-200"
+      class="md:flex md:w-full md:px-10 lg:px-32 xl:px-44 md:h-full md:pb-32 md:bg-gray-200"
     >
-      <div
-        class="md:w-2/3 lg:w-1/2 md:m-auto md:flex md:justify-center bg-white"
-        v-for="path in accountPaths"
-        :key="path"
-      >
+      <div class="md:w-1/3">
         <div
-          @click="showRoute(path.route)"
-          class="w-full flex items-center py-5 pl-6 border-b border-gray-400 cursor-pointer hover:bg-gray-100"
+          class="md:w-full md:m-auto md:flex md:justify-center bg-white"
+          v-for="path in accountPaths"
+          :key="path"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-7 w-7"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+          <div
+            @click="showRoute(path.route)"
+            class="w-full flex items-center py-5 pl-6 border-b border-gray-400 cursor-pointer hover:bg-gray-100"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              :d="path.icon"
-            />
-          </svg>
-          <p class="ml-10 tracking-wider text-gray-600 text-sm">
-            {{ path.pathName }}
-          </p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-7 w-7"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                :d="path.icon"
+              />
+            </svg>
+            <p class="ml-10 tracking-wider text-gray-600 text-sm">
+              {{ path.pathName }}
+            </p>
+          </div>
         </div>
       </div>
+      <div class="hidden md:ml-5 md:flex md:flex-col md:w-2/3">
+        <UserOrders></UserOrders>
+        <transition name="component-fade" mode="out-in">
+          <keep-alive>
+            <component :is="view"></component>
+          </keep-alive>
+        </transition>
+      </div>
     </div>
-    <div class="w-full absolute bottom-0 border-t-2 border-gray-300">
+    <!-- <div class="w-full absolute bottom-0 border-t-2 border-gray-300">
       <div class="w-full flex justify-between p-2 text-xs">
         <p>@2021 KC</p>
         <p>Designed by EJ</p>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+import UserOrders from "./UserOrders.vue";
+import UserAddress from "./UserAddress.vue";
+import UserMainDetails from "./UserMainDetails.vue";
 export default {
-  //   props: ["userName"],
   data() {
     return {
       userName: "",
+      view: "userOrders",
       accountPaths: [
         {
           pathName: "My orders",
@@ -107,7 +120,11 @@ export default {
 
   methods: {
     showRoute(path) {
-      this.$emit("userSelect", path);
+      if (window.innerWidth < 768) {
+        this.$emit("userSelect", path);
+      } else {
+        this.view = path;
+      }
     },
   },
   computed: {
@@ -125,5 +142,21 @@ export default {
     const userDetails = this.$store.getters["getUserDetails"];
     this.userName = userDetails.name;
   },
+  components: {
+    userOrders: UserOrders,
+    userDetails: UserMainDetails,
+    userAddress: UserAddress,
+  },
 };
 </script>
+
+<style scoped>
+.component-fade-enter-active,
+.component-fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.component-fade-enter,
+.component-fade-leave-to {
+  opacity: 0;
+}
+</style>
