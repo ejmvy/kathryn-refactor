@@ -25,32 +25,34 @@
             <th class="py-4">Mark as Delivered</th>
             <th class="py-4"></th>
           </tr>
-
-          <tr
-            class="border-b border-gray-300 text-sm"
-            v-for="item in getRecentOrders"
-            :key="item"
-          >
-            <td class="py-6 text-left pl-5">{{ item.customer.name }}</td>
-            <td class="py-6">{{ item.products.length }}</td>
-            <td class="py-6">{{ item.paymentTotal }}</td>
-            <td class="py-6">{{ convertDate(item.orderDate) }}</td>
-            <td class="py-6">
-              <input
-                type="checkbox"
-                v-model="item.isDelivered"
-                @click="sendDelivered()"
-                id="deliveredCheck"
-              />
-            </td>
-            <td class="py-6 flex justify-end mr-5">
-              <img
-                @click="showOrderDetails(item)"
-                class="w-5 h-5 cursor-pointer"
-                src="https://i.ibb.co/tPpm16k/specs.png"
-              />
-            </td>
-          </tr>
+          <transition-group tag="tbody" name="list" mode="out-in">
+            <tr
+              class="border-b border-gray-300 text-sm"
+              v-for="item in getRecentOrders"
+              :key="item"
+            >
+              <td class="py-6 text-left pl-5">{{ item.customer.name }}</td>
+              <td class="py-6">{{ item.products.length }}</td>
+              <td class="py-6">{{ item.paymentTotal }}</td>
+              <td class="py-6">{{ convertDate(item.orderDate) }}</td>
+              <td class="py-6">
+                <input
+                  type="checkbox"
+                  class="checkbox"
+                  v-model="item.isDelivered"
+                  @click="sendDelivered()"
+                  id="deliveredCheck"
+                />
+              </td>
+              <td class="py-6 flex justify-end mr-5">
+                <img
+                  @click="showOrderDetails(item)"
+                  class="w-5 h-5 cursor-pointer"
+                  src="https://i.ibb.co/tPpm16k/specs.png"
+                />
+              </td>
+            </tr>
+          </transition-group>
         </table>
       </div>
     </div>
@@ -163,4 +165,13 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.list-enter-active,
+.list-leave-active {
+  transition: all 1s;
+}
+.list-enter-from, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
+</style>
