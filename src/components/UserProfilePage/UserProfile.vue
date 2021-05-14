@@ -42,7 +42,6 @@
         :userName="userDetails.name"
       ></UserAccountMenu>
 
-      <!-- <div class="bg-gray-500 w-full"> -->
       <transition name="fade" mode="out-in">
         <UserOrders
           v-if="menu.userOrders"
@@ -63,7 +62,6 @@
           @closeMenu="closeMenuOption"
         ></UserAddress>
       </transition>
-      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -115,6 +113,7 @@ export default {
   },
   mounted() {
     this.userDetails = this.$store.getters["getUserDetails"];
+    this.$store.dispatch("prods/callProductsApi");
   },
   components: {
     UserAccountMenu,
