@@ -1,6 +1,6 @@
 <template>
   <div
-    class="cartPopup h-screen overflow-hidden lg:w-1/4 flex flex-col bg-green-dark mt-0 pb-5"
+    class="cartPopup h-screen lg:absolute lg:right-0 overflow-hidden lg:w-1/4 flex flex-col bg-green-dark mt-0 pb-5"
   >
     <div class="absolute right-3 top-3 cursor-pointer">
       <img
