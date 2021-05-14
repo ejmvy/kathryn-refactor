@@ -23,7 +23,7 @@
 
         <div class="flex flex-col mt-5">
           <div class="label-grey">Order Status</div>
-          <p class="text-xs">Received</p>
+          <p class="text-xs">{{ orderDetails.orderStatus }}</p>
         </div>
       </div>
     </div>
