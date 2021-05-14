@@ -82,7 +82,7 @@
         <div
           class="absolute bottom-0 w-full py-5 bg-green-dark p-3 flex justify-between items-center text-white md:relative md:right-0 md:w-1/4 md:flex-col md:justify-center md:items-start"
         >
-          <div class="flex flex-col text-left text-white">
+          <div class="flex w-full flex-col text-left text-white">
             <div class="md:hidden">
               <div class="text-xs uppercase">Total:</div>
               <div class="font-bold">€ {{ getTotal }}</div>
@@ -116,14 +116,16 @@
               </div>
             </div>
           </div>
-          <button
-            class="btn-white btn-lrg md:mt-20"
-            :class="{ disable: !getCartLength }"
-            @click="checkLoginDetails"
-          >
-            Checkout
-          </button>
-          <p class="text-xxs mt-5 hidden md:flex">* Payment with Stripe</p>
+          <div class="w-full flex flex-col items-center">
+            <button
+              class="btn-white btn-lrg md:mt-20"
+              :class="{ disable: !getCartLength }"
+              @click="checkLoginDetails"
+            >
+              Checkout
+            </button>
+            <p class="text-xxs mt-5 hidden md:flex">* Payment with Stripe</p>
+          </div>
         </div>
       </div>
     </div>
