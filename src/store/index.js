@@ -13,6 +13,7 @@ export default createStore({
   state: {
     isLoggedIn: false,
     user: {},
+    userOrders: [],
     notification: {
       state: "",
       title: "",
@@ -40,6 +41,9 @@ export default createStore({
     setUserKey(state, payload) {
       state.userKey = payload;
     },
+    setUserOrders(state, payload) {
+      state.userOrders = payload;
+    },
   },
   actions: {
     login: (context, payload) => context.commit("login", payload),
@@ -66,6 +70,19 @@ export default createStore({
           console.log(`err ${e}`);
         });
     },
+    getUserOrders: (context, userId) => {
+      fetch(`http://localhost:3000/api/orders/userhistory/${userId}`)
+        .then((res) => {
+          console.log(res);
+          return res.json();
+        })
+        .then((data) => {
+          context.commit("setUserOrders", data);
+        })
+        .catch((e) => {
+          console.log(`err ${e}`);
+        });
+    },
     setKey: (context, payload) => {
       context.commit("setUserKey", payload);
     },
@@ -75,7 +92,7 @@ export default createStore({
     isAuthenticated: (state) => state.isLoggedIn,
     getUserDetails: (state) => state.user,
     getAddress: (state) => state.user.userAddress,
-    getUserOrders: (state) => state.user.orders,
+    getUserOrders: (state) => state.userOrders,
     getUserKey: (state) => state.userKey,
   },
 });
