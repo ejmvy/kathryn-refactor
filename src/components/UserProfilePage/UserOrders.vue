@@ -14,16 +14,18 @@
     <div class="bg-gray-200 w-full p-1"></div>
 
     <div class="md:flex md:flex-col md:w-2/3 md:m-auto">
-      <div class="mt-10" v-if="!userOrders.length">
+      <div class="mt-10" v-if="!getUserOrders.length">
         <p class="text-xs text-gray-500">There are no orders to show</p>
         <button class="btn-green btn-sm mt-10">Start Shopping now!</button>
       </div>
 
       <div>
-        <div class="w-full mt-4" v-for="order in userOrders" :key="order">
+        <div class="w-full mt-4" v-for="order in getUserOrders" :key="order">
           <div class="flex items-center px-3">
             <div class="labelxs mr-10">Status:</div>
-            <div>Processing..</div>
+            <div>
+              {{ order.orderStatus ? order.orderStatus : "Processing.." }}
+            </div>
           </div>
           <div class="w-full h-0.5 bg-gray-200 my-2"></div>
           <div
@@ -34,7 +36,7 @@
               v-for="product in order.products"
               :key="product"
             >
-              <img class="h-24 w-24 mx-2" :src="product.imageUrlArray[0]" />
+              <img class="h-24 w-24 mx-2" :src="getImageUrl(product._id)" />
             </div>
           </div>
           <div class="flex flex-col items-start pl-8">
@@ -54,7 +56,9 @@
             </div>
           </div>
 
-          <button class="mt-10 btn-green btn-lrg">View Order</button>
+          <button class="mt-10 btn-green btn-lrg" @click="viewOrder(order)">
+            View Order
+          </button>
           <div class="bg-gray-200 w-full p-1 my-5"></div>
         </div>
       </div>
@@ -65,14 +69,23 @@
         <p>Designed by EJ</p>
       </div>
     </div>
+
+    <OrderViewPopup
+      v-if="openOrder"
+      :orderList="viewChosenOrder"
+      @closePopop="openOrder = false"
+    ></OrderViewPopup>
   </div>
 </template>
 
 <script>
+import OrderViewPopup from "./OrderViewPopup.vue";
 export default {
   data() {
     return {
       userOrders: [],
+      openOrder: false,
+      viewChosenOrder: {},
     };
   },
   methods: {
@@ -83,12 +96,33 @@ export default {
       const options = { year: "numeric", month: "long", day: "numeric" };
       return new Date(orderDate).toLocaleDateString(undefined, options);
     },
+    getImageUrl(productId) {
+      const products = this.$store.getters["prods/products"];
+      const product = products.find((prod) => prod._id == productId);
+
+      return product
+        ? product.imageUrlArray[0]
+        : "https://i.ibb.co/NCDk0sY/corrupt-Image.png";
+    },
+    viewOrder(order) {
+      console.log("view order");
+      console.log(order);
+      this.viewChosenOrder = order.products;
+      this.openOrder = true;
+    },
+  },
+  computed: {
+    getUserOrders() {
+      return this.$store.getters["getUserOrders"];
+    },
   },
 
   created() {
-    this.userOrders = this.$store.getters["getUserOrders"];
-    console.log("user orders");
-    console.log(this.userOrders);
+    let user = this.$store.getters["getUserDetails"];
+    this.$store.dispatch("getUserOrders", user._id);
+  },
+  components: {
+    OrderViewPopup,
   },
 };
 </script>
