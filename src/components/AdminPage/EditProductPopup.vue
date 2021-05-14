@@ -198,7 +198,7 @@ export default {
   props: ["productObject"],
   data() {
     return {
-      imageUrl: "",
+      // imageUrl: "",
       imageRaw: null,
       isNewProduct: false,
       editTitle: "Edit ",
@@ -211,10 +211,10 @@ export default {
         dimensions: "",
         colours: "",
         stock: "",
-        imageUrl: "",
+        // imageUrl: "",
         imageRaw: null,
         smallImage1Url: "",
-        imageUrlArray: ["", "", "", ""],
+        imageUrlArray: [],
         imageRawFiles: [],
       },
     };
@@ -253,11 +253,8 @@ export default {
         numberInStock: this.editedProduct.stock
           ? this.editedProduct.stock
           : this.productObject.numberInStock,
-        imageUrl: this.editedProduct.imageUrl[0]
-          ? this.editedProduct.imageUrl[0]
-          : this.productObject.imageUrl[0],
         imageRaw: this.editedProduct.imageRaw,
-        imageUrlArray: this.editedProduct.imageUrlArray
+        imageUrlArray: this.editedProduct.imageUrlArray.length
           ? this.editedProduct.imageUrlArray
           : this.productObject.imageUrlArray,
       };
@@ -318,7 +315,7 @@ export default {
     console.log("EDIT OBJECT:");
     const objKeys = Object.keys(this.productObject);
     this.isNewProduct = objKeys.length ? false : true;
-    console.log(this.isNewProduct);
+    console.log(this.productObject);
   },
 };
 </script>
