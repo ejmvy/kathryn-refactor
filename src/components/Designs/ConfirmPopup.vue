@@ -1,5 +1,7 @@
 <template>
-  <div class="w-screen h-screen fixed top-0 left-0 flex justify-center">
+  <div
+    class="popupIndex w-screen h-screen fixed top-0 left-0 flex justify-center"
+  >
     <div class="popupArea w-1/2 bg-white shadow-xl m-auto">
       <div
         class="w-full py-3 uppercase text-left pl-5 text-xs bg-green-dark text-white font-bold"
