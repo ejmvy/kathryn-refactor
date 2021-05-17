@@ -160,9 +160,11 @@ export default {
   methods: {
     showOrderDetails(order) {
       this.viewOrder = order;
+      this.emitter.emit("showOverlay");
       this.showOrderPanel = true;
     },
     closeShowOrderDetails() {
+      this.emitter.emit("hideOverlay");
       this.showOrderPanel = false;
     },
     convertDate(orderDate) {
@@ -188,8 +190,6 @@ export default {
   computed: {
     displayedPosts() {
       let ordersToDisplay = [];
-      console.log("name");
-      console.log(this.nameValue);
 
       if (this.nameValue) {
         ordersToDisplay = this.orders.filter((order) => {
