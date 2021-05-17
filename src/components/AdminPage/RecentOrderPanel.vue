@@ -98,6 +98,7 @@ export default {
   methods: {
     showOrderDetails(order) {
       this.viewOrder = order;
+      this.emitter.emit("showOverlay");
       this.showOrderPanel = true;
     },
 
@@ -114,10 +115,12 @@ export default {
       this.popupMessage.title = "Save Changes ?";
       this.popupMessage.message =
         "Please confirm if you would like to save the updated delivery status of your orders";
+      this.emitter.emit("showOverlay");
       this.showPopup = true;
     },
     closePopup() {
       this.showPopup = false;
+      this.emitter.emit("hideOverlay");
       this.showOrderPanel = false;
     },
     saveAction() {
