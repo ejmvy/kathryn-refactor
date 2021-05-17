@@ -1,5 +1,5 @@
 <template>
-  <div class="mainPopupArea w-4/5 fixed flex justify-center">
+  <div class="popupIndex mainPopupArea w-4/5 fixed flex justify-center">
     <div class="bg-white rounded-sm shadow-lg flex">
       <div class="textArea flex flex-col p-1 pt-4">
         <h2 class="mt-5 uppercase text-sm font-bold text-gray-dark">
@@ -324,8 +324,6 @@ export default {
 .mainPopupArea {
   top: 15%;
   left: 10%;
-  z-index: 2;
-
   height: 600px;
 }
 
