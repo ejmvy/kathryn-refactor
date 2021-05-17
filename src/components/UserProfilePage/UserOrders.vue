@@ -70,11 +70,13 @@
       </div>
     </div>
 
-    <OrderViewPopup
-      v-if="openOrder"
-      :orderList="viewChosenOrder"
-      @closePopop="openOrder = false"
-    ></OrderViewPopup>
+    <transition name="slide-up">
+      <OrderViewPopup
+        v-if="openOrder"
+        :orderInfo="viewChosenOrder"
+        @closePopop="closePopup"
+      ></OrderViewPopup>
+    </transition>
   </div>
 </template>
 
@@ -92,6 +94,10 @@ export default {
     closeMenu() {
       this.$emit("closeMenu", "userOrders");
     },
+    closePopup() {
+      this.openOrder = false;
+      this.emitter.emit("hideOverlay");
+    },
     convertDate(orderDate) {
       const options = { year: "numeric", month: "long", day: "numeric" };
       return new Date(orderDate).toLocaleDateString(undefined, options);
@@ -105,9 +111,8 @@ export default {
         : "https://i.ibb.co/NCDk0sY/corrupt-Image.png";
     },
     viewOrder(order) {
-      console.log("view order");
-      console.log(order);
-      this.viewChosenOrder = order.products;
+      this.viewChosenOrder = order;
+      this.emitter.emit("showOverlay");
       this.openOrder = true;
     },
   },
