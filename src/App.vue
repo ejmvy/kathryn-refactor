@@ -1,5 +1,6 @@
 <template>
-  <div class="indexMain">
+  <div id="indexMain">
+    <div :class="{ overlay: showOverlay }" id="indexMain"></div>
     <transition name="appear">
       <div v-if="showNotification" class="noteTransition">
         <Notification :notificationObj="noteObjet"></Notification>
@@ -22,6 +23,7 @@ export default {
     return {
       showNotification: "",
       noteObjet: {},
+      showOverlay: false,
     };
   },
   mounted() {
@@ -33,6 +35,13 @@ export default {
         this.noteObjet = {};
         this.showNotification = false;
       }, 4000);
+    });
+
+    this.emitter.on("showOverlay", () => {
+      this.showOverlay = true;
+    });
+    this.emitter.on("hideOverlay", () => {
+      this.showOverlay = false;
     });
   },
   components: {
@@ -48,6 +57,37 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.indexMain {
+  transition: all 1s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+}
+
+.overlay {
+  transition: opacity 1s ease;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; */
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.6);
+  /* overflow: hidden;
+  background: #000000; */
+  /* overscroll-behavior: contain; */
+  opacity: 1;
 }
 
 h1 {
@@ -83,6 +123,10 @@ input:focus {
 
 .logo {
   font-family: "Megrim", cursive;
+}
+
+.popupIndex {
+  z-index: 12;
 }
 
 @keyframes appear {
@@ -167,9 +211,11 @@ input:focus {
 
 @keyframes slide_up_img {
   0% {
+    opacity: 0;
     transform: translateY(250px);
   }
   100% {
+    opacity: 1;
     transform: translateY(0);
   }
 }
