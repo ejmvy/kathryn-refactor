@@ -118,6 +118,7 @@ export default {
       this.productToEdit = product;
       product.edit = !product.edit;
       this.hideProductBtn = !this.hideProductBtn;
+      this.emitter.emit("showOverlay");
       this.showEditProductPopup = !this.showEditProductPopup;
     },
     addNewProductBtn() {
@@ -129,6 +130,7 @@ export default {
       console.log("CLOSE POPUP");
       this.productToEdit = {};
       this.showEditProductPopup = false;
+      this.emitter.emit("hideOverlay");
     },
     refreshProducts() {
       fetch(
