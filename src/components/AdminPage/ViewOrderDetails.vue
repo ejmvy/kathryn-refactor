@@ -1,5 +1,7 @@
 <template>
-  <div class="cartArea fixed w-10/12 h-10/12 bg-white shadow-xl flex">
+  <div
+    class="cartArea popupIndex fixed w-10/12 h-10/12 bg-white shadow-xl flex"
+  >
     <div class="purchases">
       <table class="productArea w-full mt-6 mb-10">
         <tr>
@@ -151,7 +153,6 @@ export default {
 .cartArea {
   top: 10%;
   left: 10%;
-  z-index: 2;
 }
 
 .purchases {
