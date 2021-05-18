@@ -1,5 +1,5 @@
 <template>
-  <section class="section py-14 bg-gray-50">
+  <section class="mainMessage section py-14 bg-gray-50">
     <div class="flex flex-col w-4/6 items-center justify-center pb-5">
       <div class="lineTop mb-14">
         <div class="line1 w-60"></div>
@@ -25,4 +25,9 @@
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.mainMessage {
+  opacity: 0;
+  animation: slide_up_content 2s forwards 3s;
+}
+</style>
