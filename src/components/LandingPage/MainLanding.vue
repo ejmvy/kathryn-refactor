@@ -139,30 +139,4 @@ li:hover {
   opacity: 0;
   animation: slide_up_content 2s forwards 3s;
 }
-
-@keyframes slide_up_content {
-  0% {
-    transform: translateY(100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slide_up_entrance {
-  0% {
-    opacity: 0;
-    transform: translateY(250px);
-  }
-  10% {
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(250px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
 </style>
