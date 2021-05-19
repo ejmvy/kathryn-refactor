@@ -125,18 +125,6 @@ export default {
 </script>
 
 <style scoped>
-.mainSection {
-  /* position: absolute;
-  /* z-index: 5; 
-  width: 100%;
-  height: 100%;
-  background-color: rgba(32, 72, 88, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden; */
-}
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s ease-in;
