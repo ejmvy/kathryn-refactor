@@ -42,15 +42,12 @@ export default {
       icon: "https://i.ibb.co/8NbhCC5/dollar.png",
     },
     top1: {
-      cardTitle: "Bowl 4",
       icon: "https://i.ibb.co/KbjV0KG/star.png",
     },
     top2: {
-      cardTitle: "Mug 1",
       icon: "https://i.ibb.co/KbjV0KG/star.png",
     },
     top3: {
-      cardTitle: "Misc 3",
       icon: "https://i.ibb.co/KbjV0KG/star.png",
     },
   }),
@@ -63,7 +60,7 @@ export default {
       .then((res) => res.json())
       .then((data) => {
         console.log("data");
-        console.log(data);
+        console.log(data.topSales);
         this.totalSales.cardFigure = data.current;
         this.totalSales.change = `${data.orderDifference}%`;
         this.totalSales.direction = data.current > data.prev ? "up" : "down";
@@ -72,8 +69,13 @@ export default {
         this.monthlyIncome.change = `${data.salesDifference}%`;
         this.monthlyIncome.direction =
           data.currentSales > data.prevSales ? "up" : "down";
-        console.log("sales:");
-        console.log(data.currentSales, data.prevSales);
+
+        this.top1.cardTitle = data.topSales[0].name;
+        this.top1.cardFigure = data.topSales[0].amount;
+        this.top2.cardTitle = data.topSales[1].name;
+        this.top2.cardFigure = data.topSales[1].amount;
+        this.top3.cardTitle = data.topSales[2].name;
+        this.top3.cardFigure = data.topSales[2].amount;
       });
 
     fetch(`http://localhost:3000/api/users/${year}/${month}`)
