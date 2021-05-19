@@ -18,7 +18,7 @@
         />
       </div>
     </div>
-    <div class="flex items-center self-start">
+    <div v-if="cardObject.direction" class="flex items-center self-start">
       <img
         class="w-4 h-4"
         :src="
@@ -45,5 +45,6 @@ export default {
 
 .cardItem {
   border-top: 4px solid #365a69;
+  width: 300px;
 }
 </style>
