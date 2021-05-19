@@ -31,60 +31,59 @@ export default {
 
     totalSales: {
       cardTitle: "Total Sales",
-      cardFigure: "134",
-      change: "3.48%",
-      direction: "down",
       icon: "https://i.ibb.co/vzdx4Vj/cart.png",
     },
     newUsers: {
       cardTitle: "New Users",
-      cardFigure: "24",
-      change: "7.52%",
-      direction: "up",
       icon: "https://i.ibb.co/pn8FWKn/userIcon.png",
     },
     monthlyIncome: {
       cardTitle: "Monthly Income",
-      cardFigure: "2,586",
-      change: "4.22%",
-      direction: "up",
       icon: "https://i.ibb.co/8NbhCC5/dollar.png",
     },
     top1: {
       cardTitle: "Bowl 4",
-      cardFigure: "12",
-      change: "1.89%",
-      direction: "up",
       icon: "https://i.ibb.co/KbjV0KG/star.png",
     },
     top2: {
       cardTitle: "Mug 1",
-      cardFigure: "7",
-      change: "14.50%",
-      direction: "up",
       icon: "https://i.ibb.co/KbjV0KG/star.png",
     },
     top3: {
       cardTitle: "Misc 3",
-      cardFigure: "11",
-      change: "53.20%",
-      direction: "up",
       icon: "https://i.ibb.co/KbjV0KG/star.png",
     },
   }),
   created() {
-    // https://stackoverflow.com/questions/39917092/mongodb-store-sales-data-by-month-schema
-    // getTotalSales() {
-    // get total of orders
-    // query on this month
-    // get total orders & query on last month
-    // compare
-    // find percentage and display icon
-    // }
-    // getNewUsers {
-    //   get total of users from this this.monthl
-    //   compare
-    // }
+    const timestamp = new Date();
+    const year = timestamp.getFullYear();
+    const month = timestamp.getMonth();
+
+    fetch(`http://localhost:3000/api/orders/${year}/${month}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("data");
+        console.log(data);
+        this.totalSales.cardFigure = data.current;
+        this.totalSales.change = `${data.orderDifference}%`;
+        this.totalSales.direction = data.current > data.prev ? "up" : "down";
+
+        this.monthlyIncome.cardFigure = `€ ${data.currentSales}`;
+        this.monthlyIncome.change = `${data.salesDifference}%`;
+        this.monthlyIncome.direction =
+          data.currentSales > data.prevSales ? "up" : "down";
+        console.log("sales:");
+        console.log(data.currentSales, data.prevSales);
+      });
+
+    fetch(`http://localhost:3000/api/users/${year}/${month}`)
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        this.newUsers.cardFigure = data.current;
+        this.newUsers.change = `${data.difference}%`;
+        this.newUsers.direction = data.current > data.prev ? "up" : "down";
+      });
   },
 
   components: {
