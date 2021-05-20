@@ -17,7 +17,7 @@
     </router-link>
     <div class="p-3 pb-1 text-left w-full">
       <div class="pb-3">
-        <h3 class="font-bold">{{ displayItem.name }}</h3>
+        <h2 class="mb-3 text-xl">{{ displayItem.name }}</h2>
         <h3 class="pt-1 text-gray-dark text-sm">
           {{ displayItem.description }}
         </h3>
@@ -43,15 +43,25 @@
       <div
         class="flex justify-between items-center border-t border-gray-light pt-1"
       >
-        <p class="text-xs uppercase font-bold">Quick Add</p>
+        <p class="text-xs uppercase font-bold text-green-dark">Quick Add</p>
         <div
           class="bg-transparant cursor-pointer p-2 hover:bg-gray-100 focus:ring-2 rounded-full"
         >
-          <img
+          <svg
             @click="addItemToCart(displayItem)"
-            class="w-4 h-4"
-            src="https://i.ibb.co/z7TdxXP/Add-New-256.png"
-          />
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="#627F8A"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+            />
+          </svg>
         </div>
       </div>
     </div>
