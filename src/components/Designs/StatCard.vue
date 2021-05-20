@@ -27,7 +27,7 @@
             : 'https://i.ibb.co/qksddSx/redDown.png'
         "
       />
-      <div class="px-8">{{ cardObject.change }}</div>
+      <div class="px-4 flex">{{ cardObject.change }}</div>
       <p class="text-gray-400 text-sm">Since last month</p>
     </div>
   </div>
@@ -42,9 +42,9 @@ export default {
 <style scoped>
 /* increaseColor = #4BDD68   #71CC98*/
 /* decreaseColor = #E23F36 */
-
+/* // #365a69; */
 .cardItem {
-  border-top: 4px solid #365a69;
+  border-top: 4px solid #627f8a;
   width: 300px;
 }
 </style>
