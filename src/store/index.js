@@ -73,7 +73,6 @@ export default createStore({
     getUserOrders: (context, userId) => {
       fetch(`http://localhost:3000/api/orders/userhistory/${userId}`)
         .then((res) => {
-          console.log(res);
           return res.json();
         })
         .then((data) => {
