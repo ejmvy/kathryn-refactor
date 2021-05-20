@@ -1,22 +1,22 @@
 <template>
   <div style="height: 100%">
     <div class="flex flex-col h-full w-full items-center">
-      <h5 class="mb-10 labelxs text-gray-500">This Month</h5>
-      <div class="flex w-full justify-around">
+      <h5 class="mb-3 labelxs text-gray-500">This Month</h5>
+      <div class="flex w-full justify-around flex-wrap">
         <transition appear>
-          <StatCard class="mx-2" :cardObject="totalSales"></StatCard>
+          <StatCard class="mx-2 mt-8" :cardObject="totalSales"></StatCard>
         </transition>
-        <StatCard class="mx-2" :cardObject="newUsers"></StatCard>
-        <StatCard class="mx-2" :cardObject="monthlyIncome"></StatCard>
+        <StatCard class="mx-2 mt-8" :cardObject="newUsers"></StatCard>
+        <StatCard class="mx-2 mt-8" :cardObject="monthlyIncome"></StatCard>
       </div>
 
-      <h5 class="pt-20 mb-10 labelxs text-gray-500">
+      <h5 class="pt-20 mb-3 labelxs text-gray-500">
         Popular Products this month
       </h5>
-      <div class="flex w-full justify-around">
-        <StatCard class="mx-2" :cardObject="top1"></StatCard>
-        <StatCard class="mx-2" :cardObject="top2"></StatCard>
-        <StatCard class="mx-2" :cardObject="top3"></StatCard>
+      <div class="flex w-full justify-around flex-wrap">
+        <StatCard class="mx-2 mt-8" :cardObject="top1"></StatCard>
+        <StatCard class="mx-2 mt-8" :cardObject="top2"></StatCard>
+        <StatCard class="mx-2 mt-8" :cardObject="top3"></StatCard>
       </div>
     </div>
   </div>
@@ -42,12 +42,18 @@ export default {
       icon: "https://i.ibb.co/8NbhCC5/dollar.png",
     },
     top1: {
+      direction: "up",
+      change: "Top 3",
       icon: "https://i.ibb.co/KbjV0KG/star.png",
     },
     top2: {
+      direction: "up",
+      change: "Top 3",
       icon: "https://i.ibb.co/KbjV0KG/star.png",
     },
     top3: {
+      direction: "up",
+      change: "Top 3",
       icon: "https://i.ibb.co/KbjV0KG/star.png",
     },
   }),
