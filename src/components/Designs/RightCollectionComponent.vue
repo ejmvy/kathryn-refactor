@@ -5,26 +5,25 @@
     <div
       class="flex flex-col order-last md:order-first items-center text-center relative -top-10 md:top-0 w-3/4 md:-right-5 p-8 md:flex-1 md:w-40 z-10 bg-white shadow-xl"
     >
-      <div class="lineTop">
-        <div class="line1 w-48 md:w-36"></div>
-        <div class="line2 w-24 mt-3"></div>
-        <div class="dot mb-5 mt-3"></div>
-      </div>
       <div>
-        <h2 class="text-sm font-bold pb-4 md:pb-8 uppercase">
+        <h1 class="text-left text-lg pb-2 mb-5 border-b border-gray-200">
           {{ displayCollection.title }}
-        </h2>
-        <p class="text-xs">
+        </h1>
+        <p class="text-xs tracking-wider text-left leading-5 text-gray-500">
           {{
             getProductText
               ? displayCollection.shortText
               : displayCollection.longText
           }}
         </p>
+        <div class="flex items-center mt-5">
+          <p class="text-gray-500 text-xs mr-5">From</p>
+          <h1 class="text-xl font-bold">€24</h1>
+        </div>
         <router-link
           :to="{ name: 'ShowCollection', params: { category: collection } }"
         >
-          <button class="btn-green btn-sm mt-8">SHOP NOW</button>
+          <button class="btn-green-full btn-sm mt-8">SHOP NOW</button>
         </router-link>
       </div>
     </div>
