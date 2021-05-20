@@ -2,9 +2,9 @@
   <section class="section w-full mt-20">
     <TitleDesign :title="titleText"></TitleDesign>
 
-    <div class="flex w-11/12 mt-10">
+    <div class="flex w-11/12 xl:w-3/4 mt-10">
       <div class="flex flex-1 flex-col text-left px-2">
-        <div class="pb-5">
+        <div class="pb-5 md:flex md:items-center">
           <label class="title1 text-xs pr-10">{{ itemInfo.name }}</label>
           <p class="text-gray-dark">{{ itemInfo.description }}</p>
         </div>
@@ -18,8 +18,10 @@
         </div>
       </div>
       <div class="flex flex-1 flex-col text-left px-2">
-        <label class="title1 text-xs pr-10">Washing Instructions</label>
-        <p class="text-gray-dark">{{ itemInfo.washing }}</p>
+        <div class="md:flex md:flex-row md:items-center">
+          <label class="title1 text-xs pr-10">Washing Instructions</label>
+          <p class="text-gray-dark">{{ itemInfo.washing }}</p>
+        </div>
       </div>
     </div>
   </section>
