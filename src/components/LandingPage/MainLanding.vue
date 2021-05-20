@@ -137,6 +137,6 @@ li:hover {
 
 .mainLanding {
   opacity: 0;
-  animation: slide_up_content 2s forwards 3s;
+  animation: slide_up_content 1.5s forwards 3.5s;
 }
 </style>
