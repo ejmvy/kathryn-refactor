@@ -46,7 +46,7 @@
         <ConfirmPopup
           v-if="showPopup"
           :popupData="popupMessage"
-          @closePopup="showPopup = false"
+          @closePopup="closePopup"
           @confirmAction="saveAction"
         ></ConfirmPopup>
       </transition>
@@ -76,6 +76,7 @@ export default {
       popupMessage: {
         title: "",
         message: "",
+        icon: "",
       },
     };
   },
@@ -86,15 +87,23 @@ export default {
     logoutUser() {
       this.popupMessage.title = "Logout ?";
       this.popupMessage.message = "Are you sure you wish to leave?";
+      this.popupMessage.icon =
+        "M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z";
+      this.emitter.emit("showOverlay");
       this.showPopup = true;
     },
     saveAction() {
       this.showPopup = false;
+      this.emitter.emit("hideOverlay");
       this.$store.dispatch("logout");
       this.emitter.emit("showNotification", {
         state: true,
         message: "Bye for now",
       });
+    },
+    closePopup() {
+      this.showPopup = false;
+      this.emitter.emit("hideOverlay");
     },
   },
   computed: {
