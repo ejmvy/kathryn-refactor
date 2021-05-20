@@ -29,9 +29,7 @@ button:hover {
     @apply  bg-transparent text-pink-light  border-black-dark rounded-full;
 }
 
-.btn-primary-full {
-    @apply bg-pink-light border-pink-dark rounded-full text-black-dark font-bold;
-}
+
 
 .btn-black {
     @apply bg-transparent text-black-dark  border-black-dark rounded-full;
@@ -47,6 +45,18 @@ button:hover {
 
 .btn-green {
     @apply  bg-transparent text-green-dark  border-green-dark rounded-full;
+}
+
+.btn-light-green-full {
+    @apply bg-green-med border-green-med rounded-full text-white font-bold;
+}
+
+.btn-light-green {
+    @apply bg-transparent border-green-med rounded-full text-green-med font-bold;
+}
+
+.btn-green-full {
+    @apply bg-green-light border-green-light rounded-full text-white font-bold;
 }
 
 .btn-green:hover, .btn-green:focus {
@@ -74,7 +84,7 @@ button:hover {
 }
 
 .btn-sm {
-    @apply text-xs px-6 py-1;
+    @apply text-xxs px-6 py-2;
 }
 
 .section {
