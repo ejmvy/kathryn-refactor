@@ -126,7 +126,7 @@
           </svg>
         </div>
       </div>
-      <transition name="slide-in">
+      <transition name="slide-up">
         <ViewOrderDetails
           v-if="showOrderPanel"
           :orderDetails="viewOrder"

@@ -74,7 +74,7 @@
       </div>
     </div>
 
-    <transition name="slide-in">
+    <transition name="slide-up">
       <EditProductPopup
         v-if="showEditProductPopup"
         :productObject="productToEdit"
