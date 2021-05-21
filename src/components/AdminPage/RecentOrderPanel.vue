@@ -180,4 +180,13 @@ export default {
   opacity: 0;
   transform: translateY(30px);
 }
+/* 
+<transition-group  name='flip-list'>
+
+
+csss
+
+.flip-list-move {
+  transition: transform 0.5s
+} */
 </style>
