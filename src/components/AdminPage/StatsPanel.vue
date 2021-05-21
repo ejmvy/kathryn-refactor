@@ -100,4 +100,7 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+/* https://www.npmjs.com/package/vue3-chart-v2 */
+/* https://vue3-chart-v2.netlify.app/guide/ */
+</style>
