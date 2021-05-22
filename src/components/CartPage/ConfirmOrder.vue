@@ -79,13 +79,18 @@
       </div>
       <div class="font-bold">€ {{ getTotalAmount }}</div>
     </div>
-    <button class="btn-green btn-lrg mt-4" @click="stripePayment">
+    <div class="w-full p-3">
+      <div id="cardElement"></div>
+    </div>
+    <button class="btn-green btn-lrg mt-4" @click="processPayment()">
       Confirm
     </button>
   </div>
 </template>
 
 <script>
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -93,11 +98,13 @@ export default {
       userDetails: {},
       shippingFee: 6.99,
       totalAmount: 0,
+      stripe: {},
+      cardElement: {},
     };
   },
 
   methods: {
-    stripePayment() {
+    async processPayment() {
       const confirmOrder = {
         userId: this.userDetails._id,
         cartTotal: this.getItemsAmount,
@@ -108,6 +115,67 @@ export default {
       console.log("payment pobj:");
       console.log(confirmOrder);
 
+      const { paymentMethod, error } = await this.stripe.createPaymentMethod(
+        "card",
+        this.cardElement,
+        {
+          billing_details: {
+            name: "EJ McVey",
+          },
+        }
+      );
+
+      if (error) {
+        alert(error);
+        console.log("error1", error);
+      } else {
+        confirmOrder.payment_method_id = paymentMethod.id;
+
+        axios
+          .post(
+            "http://localhost:3000/api/payments/create-payment-intent",
+            confirmOrder
+          )
+          .then((response) => {
+            console.log("payment response");
+            console.log(response);
+
+            this.payWithCard(
+              this.stripe,
+              this.cardElement,
+              response.data.clientSecret,
+              confirmOrder
+            );
+          })
+          .catch((error) => {
+            console.log("error", error);
+            alert(error);
+          });
+      }
+    },
+    payWithCard(stripe, card, clientSecret, confirmOrder) {
+      // loading(true);
+      let isSuccessful = false;
+      stripe
+        .confirmCardPayment(clientSecret, {
+          payment_method: {
+            card: card,
+          },
+        })
+        .then(function (result) {
+          if (result.error) {
+            // Show error to your customer
+            console.log("error 3", result.error);
+          } else {
+            // The payment succeeded!
+            console.log("successsss", confirmOrder);
+            console.log(result);
+            isSuccessful = true;
+          }
+        });
+      if (isSuccessful) this.sendOrderToDB(confirmOrder);
+    },
+    sendOrderToDB(confirmOrder) {
       fetch("http://localhost:3000/api/orders", {
         method: "POST",
         headers: {
@@ -179,6 +247,22 @@ export default {
 
       return (parseFloat(this.shippingFee) + itemsAmount).toFixed(2);
     },
+  },
+
+  async mounted() {
+    this.stripe = await loadStripe(
+      "pk_test_51IsWpaAPVQ6hfOWZhtQaeXAKkvTKreGX7EJEL1RDVle6p1s0LIkOwIzyYtkfJ2UqFAW71Ticdo441qhEO0woWPcF0031xNl9Oo"
+    );
+
+    const elements = this.stripe.elements();
+    this.cardElement = elements.create("card", {
+      classes: {
+        base:
+          "bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 outline-none text-gray-700 p-3 leading-8",
+      },
+    });
+
+    this.cardElement.mount("#cardElement");
   },
 
   created() {
