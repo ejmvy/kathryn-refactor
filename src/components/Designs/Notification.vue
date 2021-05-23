@@ -6,7 +6,7 @@
       xmlns="http://www.w3.org/2000/svg"
       class="h-8 w-8 mr-5"
       viewBox="0 0 20 20"
-      :fill="notificationObj.state ? '#51e68a' : 'red'"
+      :fill="notificationObj.state ? '#50ccc7' : 'red'"
     >
       <path
         fill-rule="evenodd"
