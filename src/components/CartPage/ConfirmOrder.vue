@@ -83,8 +83,10 @@
       <div id="cardElement"></div>
     </div>
     <button class="btn-green btn-lrg mt-4" @click="processPayment()">
-      Confirm
+      <div class="spinner hidden" id="spinner"></div>
+      <span id="button-text">Confirm</span>
     </button>
+    <p id="card-error"></p>
   </div>
 </template>
 
@@ -100,10 +102,22 @@ export default {
       totalAmount: 0,
       stripe: {},
       cardElement: {},
+      paymentComplete: false,
     };
   },
 
   methods: {
+    loading(isLoading) {
+      if (isLoading) {
+        document.querySelector("button").disabled = true;
+        document.querySelector("#spinner").classList.remove("hidden");
+        document.querySelector("#button-text").classList.add("hidden");
+      } else {
+        document.querySelector("button").disabled = false;
+        document.querySelector("#spinner").classList.add("hidden");
+        document.querySelector("#button-text").classList.remove("hidden");
+      }
+    },
     async processPayment() {
       const confirmOrder = {
         userId: this.userDetails._id,
@@ -113,7 +127,7 @@ export default {
       };
 
       console.log("payment pobj:");
-      console.log(confirmOrder);
+      console.log(this.userDetails);
 
       const { paymentMethod, error } = await this.stripe.createPaymentMethod(
         "card",
@@ -154,26 +168,40 @@ export default {
       }
     },
     payWithCard(stripe, card, clientSecret, confirmOrder) {
-      // loading(true);
-      let isSuccessful = false;
+      this.loading(true);
       stripe
         .confirmCardPayment(clientSecret, {
           payment_method: {
             card: card,
+            billing_details: {
+              address: {
+                city: this.userDetails.userAddress.city,
+                country: "IE",
+                line1: this.userDetails.userAddress.addressLine1,
+                line2: this.userDetails.userAddress.addressLine2,
+                postal_code: this.userDetails.userAddress.postcode,
+              },
+              email: this.userDetails.email,
+              name: this.userDetails.name,
+              phone: this.userDetails.phoneNumber,
+            },
           },
         })
         .then(function (result) {
           if (result.error) {
+            // this.loading(false);
             // Show error to your customer
+            this.showError(result.error.message);
             console.log("error 3", result.error);
           } else {
+            // this.loading(false);
             // The payment succeeded!
             console.log("successsss", confirmOrder);
             console.log(result);
-            isSuccessful = true;
+            //
           }
         });
-      if (isSuccessful) this.sendOrderToDB(confirmOrder);
+      this.sendOrderToDB(confirmOrder);
     },
     sendOrderToDB(confirmOrder) {
       fetch("http://localhost:3000/api/orders", {
@@ -233,6 +261,15 @@ export default {
           console.log(`err ${e}`);
         });
     },
+    // Show the customer the error from Stripe if their card fails to charge
+    showError(errorMsgText) {
+      this.loading(false);
+      var errorMsg = document.querySelector("#card-error");
+      errorMsg.textContent = errorMsgText;
+      setTimeout(function () {
+        errorMsg.textContent = "";
+      }, 4000);
+    },
   },
 
   computed: {
@@ -275,5 +312,90 @@ export default {
 <style scoped>
 .pic {
   min-width: 40px;
+}
+
+.hidden {
+  display: none;
+}
+#card-error {
+  color: rgb(105, 115, 134);
+  text-align: left;
+  font-size: 13px;
+  line-height: 17px;
+  margin-top: 12px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* spinner/processing state, errors */
+.spinner,
+.spinner:before,
+.spinner:after {
+  border-radius: 50%;
+}
+.spinner {
+  color: #ffffff;
+  font-size: 22px;
+  text-indent: -99999px;
+  margin: 0px auto;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  box-shadow: inset 0 0 0 2px;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.spinner:before,
+.spinner:after {
+  position: absolute;
+  content: "";
+}
+.spinner:before {
+  width: 10.4px;
+  height: 20.4px;
+  background: #5469d4;
+  border-radius: 20.4px 0 0 20.4px;
+  top: -0.2px;
+  left: -0.2px;
+  -webkit-transform-origin: 10.4px 10.2px;
+  transform-origin: 10.4px 10.2px;
+  -webkit-animation: loading 2s infinite ease 1.5s;
+  animation: loading 2s infinite ease 1.5s;
+}
+.spinner:after {
+  width: 10.4px;
+  height: 10.2px;
+  background: #5469d4;
+  border-radius: 0 10.2px 10.2px 0;
+  top: -0.1px;
+  left: 10.2px;
+  -webkit-transform-origin: 0px 10.2px;
+  transform-origin: 0px 10.2px;
+  -webkit-animation: loading 2s infinite ease;
+  animation: loading 2s infinite ease;
+}
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 </style>
