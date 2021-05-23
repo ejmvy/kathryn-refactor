@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="slowShow">
     <div
       class="bg-white px-3 py-4 flex w-full justify-between md:justify-center items-center"
     >

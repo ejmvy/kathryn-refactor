@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="slowShow">
     <div class="flex flex-col bg-white items-center pt-5">
       <div
         class="w-20 h-20 bg-green-dark border-4 border-gray-300 rounded-full text-4xl flex justify-center text-white items-center"

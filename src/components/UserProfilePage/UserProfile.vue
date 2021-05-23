@@ -1,5 +1,5 @@
 <template>
-  <div class="mainSection h-screen">
+  <div class="mainSection slowShow h-screen">
     <div class="w-screen h-full">
       <div
         class="bg-green-light w-full flex items-center justify-between p-2 md:p-3 shadow-xl"
