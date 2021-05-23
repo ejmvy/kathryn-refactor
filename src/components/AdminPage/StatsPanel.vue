@@ -1,33 +1,65 @@
 <template>
   <div style="height: 100%">
-    <div class="flex flex-col h-full w-full items-center">
+    <div
+      v-if="!showChart"
+      class="slowShow flex flex-col h-full w-full items-center"
+    >
       <h5 class="mb-3 labelxs text-gray-500">This Month</h5>
       <div class="flex w-full justify-around flex-wrap">
         <transition appear>
-          <StatCard class="mx-2 mt-8" :cardObject="totalSales"></StatCard>
+          <StatCard
+            @click="showBarChart('totalSales')"
+            class="mx-2 mt-8"
+            :cardObject="totalSales"
+          ></StatCard>
         </transition>
-        <StatCard class="mx-2 mt-8" :cardObject="newUsers"></StatCard>
-        <StatCard class="mx-2 mt-8" :cardObject="monthlyIncome"></StatCard>
+        <StatCard
+          @click="showBarChart('newUsers')"
+          class="mx-2 mt-8"
+          :cardObject="newUsers"
+        ></StatCard>
+        <StatCard
+          @click="showBarChart('monthlyIncome')"
+          class="mx-2 mt-8"
+          :cardObject="monthlyIncome"
+        ></StatCard>
       </div>
 
       <h5 class="pt-20 mb-3 labelxs text-gray-500">
         Popular Products this month
       </h5>
       <div class="flex w-full justify-around flex-wrap">
-        <StatCard class="mx-2 mt-8" :cardObject="top1"></StatCard>
+        <StatCard
+          @click="showBarChart('mostPopular')"
+          class="mx-2 mt-8"
+          :cardObject="top1"
+        ></StatCard>
         <StatCard class="mx-2 mt-8" :cardObject="top2"></StatCard>
         <StatCard class="mx-2 mt-8" :cardObject="top3"></StatCard>
       </div>
+    </div>
+    <div v-else class="w-full flex justify-center py-2 px-5">
+      <ChartArea
+        class="slowShow"
+        :chartData="chartData"
+        @closeChart="closeChart()"
+      ></ChartArea>
     </div>
   </div>
 </template>
 
 <script>
 import StatCard from "../Designs/StatCard.vue";
+import ChartArea from "./ChartArea.vue";
+import axios from "axios";
+
 export default {
   data: () => ({
-    totalProducts: "52",
-    newCustomers: "16",
+    showChart: false,
+    chartData: {
+      name: "",
+      data: [],
+    },
 
     totalSales: {
       cardTitle: "Total Sales",
@@ -57,6 +89,25 @@ export default {
       icon: "https://i.ibb.co/KbjV0KG/star.png",
     },
   }),
+  methods: {
+    async showBarChart(chartName) {
+      await axios
+        .get(`http://localhost:3000/api/stats/${chartName}`)
+        .then((data) => {
+          this.chartData.name = chartName;
+          this.chartData.data = Object.values(data.data);
+          if (chartName == "mostPopular")
+            this.chartData.labels = Object.keys(data.data);
+          this.showChart = true;
+        })
+        .catch((error) => {
+          console.log("error: " + error);
+        });
+    },
+    closeChart() {
+      this.showChart = false;
+    },
+  },
   created() {
     const timestamp = new Date();
     const year = timestamp.getFullYear();
@@ -65,14 +116,12 @@ export default {
     fetch(`http://localhost:3000/api/orders/${year}/${month}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("data");
-        console.log(data.topSales);
         this.totalSales.cardFigure = data.current;
         this.totalSales.change = `${data.orderDifference}%`;
         this.totalSales.direction = data.current > data.prev ? "up" : "down";
 
         this.monthlyIncome.cardFigure = `€ ${data.currentSales}`;
-        this.monthlyIncome.change = `${data.salesDifference}%`;
+        this.monthlyIncome.change = `${data.salesDifference.toFixed(0)}%`;
         this.monthlyIncome.direction =
           data.currentSales > data.prevSales ? "up" : "down";
 
@@ -96,6 +145,7 @@ export default {
 
   components: {
     StatCard,
+    ChartArea,
   },
 };
 </script>
