@@ -1,6 +1,6 @@
 <template>
   <div
-    class="cardItem border border-gray-300 shadow-xl py-5 px-10 flex flex-col justify-between rounded-xl h-44 hover:shadow-2xl cursor-pointer"
+    class="cardItem border border-gray-300 shadow-xl py-5 px-6 flex flex-col justify-between rounded-xl h-44 hover:shadow-2xl cursor-pointer"
   >
     <div class="flex justify-between items-center">
       <div class="flex flex-col">
