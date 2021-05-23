@@ -204,6 +204,10 @@ input:focus {
   animation: slide_up_img 1.5s ease;
 }
 
+.slowShow {
+  animation: appear 1s ease;
+}
+
 @keyframes slide_up_img {
   0% {
     opacity: 0;
