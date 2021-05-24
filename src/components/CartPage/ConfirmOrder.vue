@@ -126,8 +126,8 @@ export default {
         products: this.cartItems,
       };
 
-      console.log("payment pobj:");
-      console.log(this.userDetails);
+      console.log("payment obj:");
+      console.log(confirmOrder);
 
       const { paymentMethod, error } = await this.stripe.createPaymentMethod(
         "card",
@@ -237,9 +237,6 @@ export default {
     changeAddress() {
       console.log("change address");
       this.$store.dispatch("cart/setPaymentStep", 1);
-    },
-    generateOrderNumber() {
-      return;
     },
     updateUserDetails() {
       const key = this.$store.getters["getUserKey"];
