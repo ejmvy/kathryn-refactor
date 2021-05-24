@@ -19,24 +19,30 @@
 
       <div class="w-full flex mt-10 sm:mt-4" v-if="showImages == 'favourites'">
         <img
-          class="elementSlideUp w-1/2 h-96"
+          data-aos="fade-up"
+          class="w-1/2 h-96"
           :src="require(`../../assets/latestDesigns/mug1.jpeg`)"
         />
 
         <img
-          class="elementSlideUp2 w-1/2 h-96"
+          data-aos="fade-up"
+          data-aos-delay="150"
+          class="w-1/2 h-96"
           :src="require(`../../assets/latestDesigns/misc1.jpeg`)"
         />
       </div>
 
       <div class="w-full flex mt-7" v-if="showImages == 'tableware'">
         <img
-          class="elementSlideUp w-1/2 h-96"
+          data-aos="fade-up"
+          class="w-1/2 h-96"
           :src="require(`../../assets/latestDesigns/dish1.jpeg`)"
         />
 
         <img
-          class="elementSlideUp2 w-1/2 h-96"
+          data-aos="fade-up"
+          data-aos-delay="150"
+          class="w-1/2 h-96"
           :src="require(`../../assets/latestDesigns/dish2.jpeg`)"
         />
       </div>
