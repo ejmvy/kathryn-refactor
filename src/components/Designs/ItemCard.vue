@@ -1,5 +1,6 @@
 <template>
   <div
+    data-aos="fade-up"
     class="bg-white w-80 flex justify-center flex-col items-center shadow-xl my-10 mx-4"
   >
     <router-link :to="{ name: 'ItemDisplay', params: { id: displayItem._id } }">
