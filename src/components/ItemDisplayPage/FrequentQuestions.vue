@@ -9,13 +9,22 @@
       >
         <div class="flex items-center w-full justify-between mt-8">
           <div class="questionTitle">{{ question.title }}</div>
-
-          <img
-            class="arrow w-5 h-5 cursor-pointer"
-            src="https://i.ibb.co/dQxfSHq/down.png"
+          <svg
             @click="question.answerShow = !question.answerShow"
             :class="{ rotateArrow: question.answerShow }"
-          />
+            xmlns="http://www.w3.org/2000/svg"
+            class="arrow w-6 h-6 cursor-pointer"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="#627F8A"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
         </div>
         <div :class="{ answerArea: question.answerShow }">
           <p class="answerText text-xs mt-5 text-left opacity-0">
