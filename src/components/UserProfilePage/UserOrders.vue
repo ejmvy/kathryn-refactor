@@ -63,13 +63,6 @@
         </div>
       </div>
     </div>
-    <div class="md:hidden w-full relative bottom-0 border-t-2 border-gray-300">
-      <div class="w-full flex justify-between p-2 text-xs">
-        <p>@2021 KC</p>
-        <p>Designed by EJ</p>
-      </div>
-    </div>
-
     <transition name="slide-up">
       <OrderViewPopup
         v-if="openOrder"
