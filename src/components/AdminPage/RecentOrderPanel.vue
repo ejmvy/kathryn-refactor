@@ -151,6 +151,7 @@ export default {
             console.log("SEnt");
             console.log(data);
             this.$store.dispatch("recentOrders/callOrdersAPI");
+            this.emitter.emit("reloadData");
             this.closePopup();
           });
       });
@@ -176,17 +177,19 @@ export default {
 .list-leave-active {
   transition: all 1s;
 }
-.list-enter-from, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+.list-enter-from,
+.list-leave-to {
   opacity: 0;
-  transform: translateY(30px);
+  /* transform: translateY(30px); */
+  transition: transform 0.5s;
 }
 /* 
-<transition-group  name='flip-list'>
+<transition-group  >
 
 
-csss
+csss*/
 
 .flip-list-move {
-  transition: transform 0.5s
-} */
+  transition: transform 0.5s;
+}
 </style>
