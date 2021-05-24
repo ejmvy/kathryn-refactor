@@ -1,6 +1,12 @@
 <template>
   <div class="flex flex-col items-center py-14 bg-green-white">
-    <h1 class="text-4xl font-bold">Keep in Touch ?</h1>
+    <h1
+      data-aos="fade-right"
+      data-aos-duration="1000"
+      class="text-4xl font-bold"
+    >
+      Keep in Touch ?
+    </h1>
     <div class="flex justify-between m-auto w-1/3 my-14">
       <div v-for="icon in logos" :key="icon">
         <img :src="icon" class="w-7 h-7 cursor-pointer" />
