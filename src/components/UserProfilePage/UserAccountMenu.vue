@@ -1,66 +1,63 @@
 <template>
   <div class="slowShow">
-    <div class="flex flex-col bg-white items-center pt-5">
-      <div
-        class="w-20 h-20 bg-green-dark border-4 border-gray-300 rounded-full text-4xl flex justify-center text-white items-center"
-      >
-        {{ getInitials }}
-      </div>
-      <div class="mt-6 mb-2">Hi,</div>
-      <div class="font-bold text-lg tracking-widest pb-5">{{ userName }}</div>
-    </div>
-    <div class="bg-gray-200 w-full p-1"></div>
-
-    <!-- Main Account Menu  -->
-
-    <div
-      class="md:flex md:w-full md:px-10 lg:px-32 xl:px-44 md:h-full md:pb-32 md:bg-gray-200"
-    >
-      <div class="md:w-1/3">
+    <div v-if="userLoggedIn">
+      <div class="flex flex-col bg-white items-center pt-5">
         <div
-          class="md:w-full md:m-auto md:flex md:justify-center bg-white"
-          v-for="path in accountPaths"
-          :key="path"
+          class="w-20 h-20 bg-green-dark border-4 border-gray-300 rounded-full text-4xl flex justify-center text-white items-center"
         >
+          {{ getInitials }}
+        </div>
+        <div class="mt-6 mb-2">Hi,</div>
+        <div class="font-bold text-lg tracking-widest pb-5">{{ userName }}</div>
+      </div>
+      <div class="bg-gray-200 w-full p-1"></div>
+
+      <!-- Main Account Menu  -->
+
+      <div
+        class="md:flex md:w-full md:px-10 lg:px-32 xl:px-44 md:h-full md:pb-32 md:bg-gray-200"
+      >
+        <div class="md:w-1/3">
           <div
-            @click="showRoute(path.route)"
-            class="w-full flex items-center py-5 pl-6 border-b border-gray-400 cursor-pointer hover:bg-gray-100"
+            class="md:w-full md:m-auto md:flex md:justify-center bg-white"
+            v-for="path in accountPaths"
+            :key="path"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-7 w-7"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+            <div
+              @click="showRoute(path.route)"
+              class="w-full flex items-center py-5 pl-6 border-b border-gray-400 cursor-pointer hover:bg-gray-100"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                :d="path.icon"
-              />
-            </svg>
-            <p class="ml-10 tracking-wider text-gray-600 text-sm">
-              {{ path.pathName }}
-            </p>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-7 w-7"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  :d="path.icon"
+                />
+              </svg>
+              <p class="ml-10 tracking-wider text-gray-600 text-sm">
+                {{ path.pathName }}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="hidden md:ml-5 md:flex md:flex-col md:w-2/3">
-        <UserOrders></UserOrders>
-        <transition name="component-fade" mode="out-in">
-          <keep-alive>
-            <component :is="view"></component>
-          </keep-alive>
-        </transition>
+        <div class="hidden md:ml-5 md:flex md:flex-col md:w-2/3">
+          <UserOrders></UserOrders>
+          <transition name="component-fade" mode="out-in">
+            <keep-alive>
+              <component :is="view"></component>
+            </keep-alive>
+          </transition>
+        </div>
       </div>
     </div>
-    <!-- <div class="w-full absolute bottom-0 border-t-2 border-gray-300">
-      <div class="w-full flex justify-between p-2 text-xs">
-        <p>@2021 KC</p>
-        <p>Designed by EJ</p>
-      </div>
-    </div> -->
+    <Footer></Footer>
   </div>
 </template>
 
@@ -68,6 +65,7 @@
 import UserOrders from "./UserOrders.vue";
 import UserAddress from "./UserAddress.vue";
 import UserMainDetails from "./UserMainDetails.vue";
+import Footer from "../LandingPage/Footer.vue";
 export default {
   data() {
     return {
@@ -137,12 +135,23 @@ export default {
       }
       return "";
     },
+
+    userLoggedIn() {
+      const isLogged = this.$store.getters["isAuthenticated"];
+      return isLogged;
+    },
   },
   mounted() {
     const userDetails = this.$store.getters["getUserDetails"];
     this.userName = userDetails.name;
+    const isLogged = this.$store.getters["isAuthenticated"];
+    if (!isLogged) {
+      console.log("to login");
+      this.$router.push("/login");
+    }
   },
   components: {
+    Footer,
     userOrders: UserOrders,
     userDetails: UserMainDetails,
     userAddress: UserAddress,
