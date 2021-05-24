@@ -8,17 +8,22 @@
       <div class="flex w-full justify-around flex-wrap">
         <transition appear>
           <StatCard
+            data-aos="fade-up"
             @click="showBarChart('totalSales')"
             class="mx-2 mt-8"
             :cardObject="totalSales"
           ></StatCard>
         </transition>
         <StatCard
+          data-aos="fade-up"
+          data-aos-delay="100"
           @click="showBarChart('newUsers')"
           class="mx-2 mt-8"
           :cardObject="newUsers"
         ></StatCard>
         <StatCard
+          data-aos="fade-up"
+          data-aos-delay="150"
           @click="showBarChart('monthlyIncome')"
           class="mx-2 mt-8"
           :cardObject="monthlyIncome"
@@ -30,12 +35,24 @@
       </h5>
       <div class="flex w-full justify-around flex-wrap">
         <StatCard
+          data-aos="fade-up"
+          data-aos-delay="200"
           @click="showBarChart('mostPopular')"
           class="mx-2 mt-8"
           :cardObject="top1"
         ></StatCard>
-        <StatCard class="mx-2 mt-8" :cardObject="top2"></StatCard>
-        <StatCard class="mx-2 mt-8" :cardObject="top3"></StatCard>
+        <StatCard
+          data-aos="fade-up"
+          data-aos-delay="250"
+          class="mx-2 mt-8"
+          :cardObject="top2"
+        ></StatCard>
+        <StatCard
+          data-aos="fade-up"
+          data-aos-delay="300"
+          class="mx-2 mt-8"
+          :cardObject="top3"
+        ></StatCard>
       </div>
     </div>
     <div v-else class="w-full flex justify-center py-2 px-5">
@@ -113,7 +130,7 @@ export default {
     const year = timestamp.getFullYear();
     const month = timestamp.getMonth();
 
-    fetch(`http://localhost:3000/api/orders/${year}/${month}`)
+    fetch(`http://localhost:3000/api/stats/orders/${year}/${month}`)
       .then((res) => res.json())
       .then((data) => {
         this.totalSales.cardFigure = data.current;
