@@ -186,6 +186,16 @@ export default {
       let to = page * perPage;
       return orders.slice(from, to);
     },
+    loadData() {
+      fetch("http://localhost:3000/api/orders/history")
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          this.orders = data;
+          this.ordersLength = data.length;
+        });
+    },
   },
   computed: {
     displayedPosts() {
@@ -209,16 +219,11 @@ export default {
     },
   },
   mounted() {
-    fetch("http://localhost:3000/api/orders/history")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log("history");
-        this.orders = data;
-        this.ordersLength = data.length;
-        console.log(data);
-      });
+    this.loadData();
+    this.emitter.on("reloadData", () => {
+      console.log("reload");
+      this.loadData();
+    });
   },
   components: {
     ViewOrderDetails,
