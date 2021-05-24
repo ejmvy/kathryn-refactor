@@ -6,7 +6,7 @@
         <div class="line2 w-32 mt-5"></div>
         <div class="dot mt-5"></div>
       </div>
-      <div class="mt-5">
+      <div class="mt-5" data-aos="fade-up">
         <h4 class="font-bold text-2xl mb-5">
           "Thoughtful, Authentic, Personal"
         </h4>

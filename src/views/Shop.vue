@@ -26,7 +26,7 @@
       <div class="w-11/12 pt-0 md:pt-6 flex flex-wrap justify-center">
         <!-- <transition-group name="projects"> -->
         <div v-for="(item, idx) in getProductData" :key="idx">
-          <ItemCard :displayItem="item"></ItemCard>
+          <ItemCard data-aos="fade-up" :displayItem="item"></ItemCard>
         </div>
         <!-- </transition-group> -->
       </div>
