@@ -1,5 +1,7 @@
 <template>
   <div
+    data-aos="fade-left"
+    data-aos-duration="1000"
     class="flex flex-col justify-center items-center my-5 md:flex-row w-11/12 md:w-3/4"
   >
     <div
