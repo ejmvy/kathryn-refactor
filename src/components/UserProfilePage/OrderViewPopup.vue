@@ -3,7 +3,7 @@
     class="popupIndex h-screen w-screen fixed top-0 left-0 flex justify-center items-center"
   >
     <div
-      class="bg-white border-2 border-red-500 w-11/12 h-4/5 md:w-2/3 lg:w-1/2 md:h-2/3 flex flex-col rounded-sm"
+      class="bg-white w-11/12 h-4/5 md:w-2/3 lg:w-1/2 md:h-2/3 flex flex-col rounded-sm"
     >
       <div class="w-full flex items-center border-b-4 border-gray-100 p-4">
         <svg
