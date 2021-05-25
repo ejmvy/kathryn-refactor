@@ -7,15 +7,32 @@
         <h5 class="uppercase text-green-dark text-xs font-bold">
           {{ cardObject.cardTitle }}
         </h5>
-        <p class="text-left text-4xl mt-3 font-bo text-green-dark">
+        <p
+          class="text-left mt-3 text-green-dark"
+          :class="cardObject.change == 'Top 1' ? 'text-2xl' : ' text-4xl'"
+        >
           {{ cardObject.cardFigure }}
         </p>
       </div>
       <div class="cardIcon">
-        <img
-          class="bg-green-dark p-4 h-16 w-16 rounded-full"
-          :src="cardObject.icon"
-        />
+        <div
+          class="bg-green-dark p-4 h-16 w-16 flex justify-center items-center rounded-full"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="white"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              :d="cardObject.icon"
+            />
+          </svg>
+        </div>
       </div>
     </div>
     <div v-if="cardObject.direction" class="flex items-center self-start">
