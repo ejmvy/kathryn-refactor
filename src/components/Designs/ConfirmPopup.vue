@@ -2,7 +2,7 @@
   <div
     class="popupIndex w-screen h-screen fixed top-0 left-0 flex justify-center"
   >
-    <div class="popupArea w-1/2 bg-white shadow-xl m-auto rounded-md">
+    <div class="popupArea w-1/2 lg:w-1/3 bg-white shadow-xl m-auto rounded-md">
       <div
         class="w-14 h-14 bg-green-med relative m-auto -top-5 rounded-full flex items-center justify-center"
       >
