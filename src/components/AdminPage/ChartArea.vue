@@ -30,7 +30,11 @@
       </div>
     </div>
     <div class="mt-14">
-      <div v-if="chartData.name != 'monthlyIncome'">
+      <div
+        v-if="
+          chartData.name != 'monthlyIncome' && chartData.name != 'averageOrder'
+        "
+      >
         <BarChart :chartData="chartData"></BarChart>
       </div>
       <div v-else>
@@ -53,6 +57,7 @@ export default {
         newUsers: "New Users",
         monthlyIncome: "Monthly Income",
         mostPopular: "Most Popular Products This Month",
+        averageOrder: "Average Order Value",
       },
       months: [
         "January",
