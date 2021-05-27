@@ -22,7 +22,8 @@
     <div class="w-full">
       <div class="flex flex-wrap justify-center">
         <div
-          class="h-80 my-20 mx-10"
+          style="width: 300px; height: 300px"
+          class="my-20 mx-10"
           v-for="category in categoryNames"
           :key="category"
         >
