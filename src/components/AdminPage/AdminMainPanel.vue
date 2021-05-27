@@ -36,9 +36,9 @@
 
       <div class="pt-8 mb-20 border-t border-gray-200">
         <transition name="component-fade" mode="out-in">
-          <keep-alive>
-            <component :is="view"></component>
-          </keep-alive>
+          <!-- <keep-alive> -->
+          <component :is="view"></component>
+          <!-- </keep-alive> -->
         </transition>
       </div>
 
