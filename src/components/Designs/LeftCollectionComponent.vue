@@ -2,7 +2,7 @@
   <div
     data-aos="fade-right"
     data-aos-duration="1000"
-    class="flex flex-col justify-center items-center my-5 md:flex-row w-11/12 md:w-3/4"
+    class="flex flex-col justify-center items-center lg:relative lg:-left-20 my-5 md:flex-row w-11/12 md:w-3/4 lg:w-2/3 xl:w-1/2"
   >
     <div class="h-96 w-full md:w-8/12 z-0 shadow-xl">
       <img
