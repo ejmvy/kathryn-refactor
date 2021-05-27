@@ -34,6 +34,7 @@ export default defineComponent({
             : this.chartData.labels,
         datasets: [
           {
+            barPercentage: 0.4,
             label: "Total per month",
             backgroundColor: "#627F8A",
             height: "500px",
@@ -41,7 +42,10 @@ export default defineComponent({
           },
         ],
       },
-      { responsive: true, maintainAspectRatio: false }
+      {
+        responsive: true,
+        maintainAspectRatio: false,
+      }
     );
   },
 });
