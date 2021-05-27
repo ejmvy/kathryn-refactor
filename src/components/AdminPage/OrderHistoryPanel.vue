@@ -1,27 +1,40 @@
 <template>
   <div style="height: 100%">
     <div
-      class="flex flex-col h-full w-11/12 m-auto items-center justify-center"
+      class="flex flex-col h-full w-11/12 lg:w-5/6 m-auto items-center justify-center mb-10"
     >
       <div class="w-full flex justify-between items-center">
-        <select class="w-16" v-model="currentEntries" @change="paginateEntries">
+        <select
+          class="w-16 cursor-pointer focus:outline-none"
+          v-model="currentEntries"
+          @change="paginateEntries"
+        >
           <option v-for="entry in showEntries" :key="entry" :value="entry">
             {{ entry }}
           </option>
         </select>
         <h5 class="labelxs text-gray-500">Order history</h5>
         <!-- showSearch = !showSearch -->
-        <img
+        <!-- <img
           @click="loadData()"
           class="w-7 h-7 cursor-pointer hover:scale-110"
           src="https://i.ibb.co/tPpm16k/specs.png"
-        />
+        /> -->
+        <div>
+          <input
+            type="search"
+            class="w-32 border-b border-green-light"
+            placeholder="Search here.."
+            v-model="searchInput"
+            @keyup="searchEvent"
+          />
+        </div>
       </div>
 
       <TableData :columns="columns" :entries="filteredEntries" />
 
       <div
-        class="absolute bottom-5 w-full px-10 flex items-center justify-between my-12 py-3"
+        class="mt-16 w-full px-10 flex items-center justify-between my-12 py-3"
       >
         <div class="text-xs">
           Page {{ currentPage + 1 }} of {{ allPages }} for
@@ -128,6 +141,8 @@ export default {
     filteredEntries: [],
     currentPage: 0,
     allPages: 1,
+    searchInput: "",
+    searchEntries: [],
 
     showSearch: false,
     viewOrder: {},
@@ -153,10 +168,17 @@ export default {
           this.filteredEntries = this.entries.slice(0, this.currentEntries);
           this.ordersLength = data.length;
           this.allPages = this.entries.length / this.currentEntries;
-          if (this.allPages % 1 != 0) this.allPages = Math.round(this.allPages);
+          if (this.allPages % 1 != 0)
+            this.allPages = Math.round(this.allPages + 1);
         });
     },
     paginateEntries() {
+      if (this.searchInput.length >= 3) {
+        this.searchEntries = this.entries.filter(this.searchInput);
+        // const start = this.currentPage * this.currentEntries;
+        // const end = this.currentPage * this.currentEntries + this.currentEntries;
+        // this.filteredEntries = this.entries.slice(start, end);
+      }
       const start = this.currentPage * this.currentEntries;
       const end = this.currentPage * this.currentEntries + this.currentEntries;
       this.filteredEntries = this.entries.slice(start, end);
@@ -177,10 +199,15 @@ export default {
       this.currentPage++;
       this.paginateEntries();
     },
+    searchEvent() {
+      this.currentPage = 1;
+      this.paginateEntries();
+    },
   },
 
   computed: {
     showInfo() {
+      // const getCurrentEntries = (this.searchEntries.length <= 0) ? this.entries: this.searchEntries;
       const showObj = {
         current: this.currentPage,
         of: this.currentEntries,
