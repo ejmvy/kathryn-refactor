@@ -1,5 +1,5 @@
 <template>
-  <table class="w-full border-none mt-8" cellspacing="0" cellpadding="0">
+  <table class="w-full border-none mt-8 mb-16" cellspacing="0" cellpadding="0">
     <thead class="bg-green-light text-white uppercase text-xs">
       <th class="py-3" v-for="th in tableHeader" :key="th">
         <div class="flex justify-center items-center">
@@ -15,7 +15,7 @@
         <td>{{ order.orderStatus }}</td>
         <td>{{ convertDate(order.deliveredDate) }}</td>
         <td>{{ order.products.length }}</td>
-        <td>{{ order.paymentTotal }}</td>
+        <td>€ {{ order.paymentTotal }}</td>
       </tr>
     </tbody>
   </table>
