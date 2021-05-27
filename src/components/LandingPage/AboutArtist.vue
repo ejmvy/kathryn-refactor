@@ -2,7 +2,7 @@
   <section class="section py-14">
     <TitleDesign :title="titleHeader"></TitleDesign>
 
-    <div class="flex flex-col md:flex-row w-4/5 py-20 items-center">
+    <div class="flex flex-col md:flex-row w-4/5 lg:w-2/3 py-20 items-center">
       <div
         class="order-2 md:order-first w-4/5 md:w-3/5 py-12 md:pr-16 line leading-10"
       >
