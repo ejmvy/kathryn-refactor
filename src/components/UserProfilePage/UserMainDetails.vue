@@ -13,20 +13,20 @@
     </div>
     <div class="bg-gray-200 w-full p-1"></div>
     <div class="bg-white mt-3 p-3 md:flex md:flex-col md:w-full md:m-auto">
-      <form class="px-3 mt-10">
-        <div class="flex flex-col">
-          <div class="label-grey self-start">First Name:</div>
+      <form class="px-3 mt-10 md:w-3/4 md:m-auto">
+        <div class="flex items-center justify-between mt-8">
+          <div class="label-grey mr-10">First Name:</div>
           <input
-            class="addressInput"
+            class="userDetailsInput w-1/2"
             v-model="userObject.firstName"
             type="text"
             placeholder="*First Name"
           />
         </div>
-        <div class="flex flex-col mt-8">
-          <div class="label-grey self-start">Last Name:</div>
+        <div class="flex items-center justify-between mt-8">
+          <div class="label-grey mr-10">Last Name:</div>
           <input
-            class="addressInput"
+            class="userDetailsInput w-1/2"
             v-model="userObject.lastName"
             type="text"
             placeholder="*Last Name"
@@ -34,18 +34,18 @@
         </div>
 
         <div class="flex flex-col mt-8">
-          <div class="label-grey self-start">Email:</div>
+          <div class="label-grey self-start mb-3">Email:</div>
           <input
-            class="addressInput"
+            class="userDetailsInput"
             v-model="userObject.email"
             type="text"
             placeholder="*Email"
           />
         </div>
         <div class="flex flex-col mt-8">
-          <div class="label-grey self-start">Phone Number:</div>
+          <div class="label-grey self-start mb-3">Phone Number:</div>
           <input
-            class="addressInput"
+            class="userDetailsInput"
             v-model="userObject.phoneNumber"
             type="text"
             placeholder="*Phone Number"
@@ -53,7 +53,7 @@
         </div>
       </form>
       <div>
-        <button class="btn-green btn-lrg mt-10" @click="saveDetails">
+        <button class="btn-green btn-lrg my-10" @click="saveDetails">
           Save Changes
         </button>
       </div>

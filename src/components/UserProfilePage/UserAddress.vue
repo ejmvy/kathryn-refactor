@@ -15,20 +15,20 @@
     <div class="bg-gray-200 w-full p-1"></div>
 
     <div class="bg-white mt-3 p-3 md:flex md:flex-col md:w-full md:m-auto">
-      <form class="px-3">
-        <div class="flex flex-col mt-8">
-          <div class="label-grey self-start">First Name:</div>
+      <form class="px-3 md:w-3/4 md:m-auto">
+        <div class="flex items-center justify-between mt-8">
+          <div class="label-grey mr-10">First Name:</div>
           <input
-            class="addressInput"
+            class="userDetailsInput w-1/2"
             v-model="userObject.firstName"
             type="text"
             placeholder="*First Name"
           />
         </div>
-        <div class="flex flex-col mt-8">
-          <div class="label-grey self-start">Last Name:</div>
+        <div class="flex items-center justify-between mt-8">
+          <div class="label-grey mr-10">Last Name:</div>
           <input
-            class="addressInput"
+            class="userDetailsInput w-1/2"
             v-model="userObject.lastName"
             type="text"
             placeholder="*Last Name"
@@ -36,76 +36,78 @@
         </div>
 
         <div class="flex flex-col mt-8">
-          <div class="label-grey self-start">Email:</div>
+          <div class="label-grey self-start mb-3">Email:</div>
           <input
-            class="addressInput"
+            class="userDetailsInput"
             v-model="userObject.email"
             type="text"
             placeholder="*Email"
           />
         </div>
         <div class="flex flex-col mt-8">
-          <div class="label-grey self-start">Address Line 1:</div>
+          <div class="label-grey self-start mb-3">Address Line 1:</div>
           <input
-            class="addressInput"
+            class="userDetailsInput"
             v-model="userObject.addressLine1"
             type="text"
             placeholder="*Address Line 1"
           />
         </div>
         <div class="flex flex-col mt-8">
-          <div class="label-grey self-start">Address Line 2:</div>
+          <div class="label-grey self-start mb-3">Address Line 2:</div>
           <input
-            class="addressInput"
+            class="userDetailsInput"
             v-model="userObject.addressLine2"
             type="text"
             placeholder="Address Line 2"
           />
         </div>
-        <div class="flex justify-between sm:justify-around">
+        <div class="flex justify-between">
           <div class="flex flex-col mt-8">
-            <div class="label-grey self-start">City:</div>
+            <div class="label-grey self-start mb-3">City:</div>
             <input
-              class="addressInput"
+              class="userDetailsInput"
               v-model="userObject.city"
               type="text"
               placeholder="*City"
             />
           </div>
           <div class="flex flex-col mt-8">
-            <div class="label-grey self-start">Post Code:</div>
+            <div class="label-grey self-start mb-3">Post Code:</div>
             <input
-              class="addressInput"
+              class="userDetailsInput"
               v-model="userObject.postcode"
               type="text"
               placeholder="*Post Code"
             />
           </div>
         </div>
-        <div class="flex flex-col mt-8">
-          <div class="label-grey self-start">Country:</div>
-          <input
-            class="addressInput"
-            v-model="userObject.country"
-            type="text"
-            placeholder="*Country"
-          />
-        </div>
-        <div class="flex flex-col mt-8">
-          <div class="label-grey self-start">Phone Number:</div>
-          <input
-            class="addressInput"
-            v-model="userObject.phoneNumber"
-            type="text"
-            placeholder="*Phone Number"
-          />
+        <div class="flex justify-between">
+          <div class="flex flex-col mt-8">
+            <div class="label-grey self-start mb-3">Country:</div>
+            <input
+              class="userDetailsInput"
+              v-model="userObject.country"
+              type="text"
+              placeholder="*Country"
+            />
+          </div>
+          <div class="flex flex-col mt-8">
+            <div class="label-grey self-start mb-3">Phone Number:</div>
+            <input
+              class="userDetailsInput"
+              v-model="userObject.phoneNumber"
+              type="text"
+              placeholder="*Phone Number"
+            />
+          </div>
         </div>
       </form>
 
       <div class="buttonArea">
         <!-- :class="{ disable: !missingValues }" -->
         <button
-          class="btn-green btn-lrg mt-10"
+          class="btn-green btn-lrg my-10"
           @click="saveDetails()"
           :class="{ disable: isDisabled }"
         >
