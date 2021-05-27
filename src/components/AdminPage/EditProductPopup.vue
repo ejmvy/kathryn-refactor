@@ -158,7 +158,10 @@
         />
       </div>
 
-      <div v-if="isNewProduct" class="ImageArea">
+      <div
+        v-if="isNewProduct"
+        class="ImageArea flex text-white bg-green-dark flex-col items-center p-3"
+      >
         <div class="h-1/2 w-full border-gray-light border-dashed rounded-sm">
           <img class="relative w-full h-full" />
         </div>
