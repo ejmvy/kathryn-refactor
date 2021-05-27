@@ -187,21 +187,22 @@ export default {
             },
           },
         })
-        .then(function (result) {
-          if (result.error) {
-            // this.loading(false);
-            // Show error to your customer
-            this.showError(result.error.message);
-            console.log("error 3", result.error);
-          } else {
-            // this.loading(false);
-            // The payment succeeded!
-            console.log("successsss", confirmOrder);
-            console.log(result);
-            //
-          }
-        });
-      this.sendOrderToDB(confirmOrder);
+        .then(
+          function (result) {
+            if (result.error) {
+              this.loading(false);
+              // Show error to your customer
+              this.showError(result.error.message);
+              console.log("error 3", result.error);
+            } else {
+              this.loading(false);
+              // The payment succeeded!
+              console.log("successsss", confirmOrder);
+              console.log(result);
+              this.sendOrderToDB(confirmOrder);
+            }
+          }.bind(this)
+        );
     },
     sendOrderToDB(confirmOrder) {
       fetch("http://localhost:3000/api/orders", {
