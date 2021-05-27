@@ -26,11 +26,28 @@
             placeholder="Email"
             v-model="newUser.email"
           />
-          <input
-            class="loginInput webInput"
-            placeholder="Password"
-            v-model="newUser.password"
-          />
+          <div class="w-full">
+            <input
+              id="passwordInput"
+              class="loginInput webInput"
+              placeholder="Password"
+              v-model="newUser.password"
+              type="password"
+            />
+            <transition name="fade-button">
+              <span class="viewPassword cursor-pointer">
+                <PasswordShowSvg
+                  v-if="!viewUserPassword"
+                  @svgClicked="viewPassword()"
+                ></PasswordShowSvg>
+                <PasswordHideSvg
+                  v-else
+                  @svgClicked="viewPassword()"
+                ></PasswordHideSvg>
+              </span>
+            </transition>
+          </div>
+
           <button
             class="btn-green btn-lrg mt-10"
             @click="registerUser"
@@ -58,11 +75,32 @@
             placeholder="Email"
             v-model="loginUser.email"
           />
-          <input
+          <div class="w-full">
+            <input
+              id="passwordInput2"
+              class="loginInput webInput"
+              placeholder="Password"
+              v-model="loginUser.password"
+              type="password"
+            />
+            <transition name="fade-button">
+              <span class="viewPassword cursor-pointer">
+                <PasswordShowSvg
+                  v-if="!viewUserPassword"
+                  @svgClicked="viewPassword2()"
+                ></PasswordShowSvg>
+                <PasswordHideSvg
+                  v-else
+                  @svgClicked="viewPassword2()"
+                ></PasswordHideSvg>
+              </span>
+            </transition>
+          </div>
+          <!-- <input
             class="loginInput webInput"
             placeholder="Password"
             v-model="loginUser.password"
-          />
+          /> -->
           <button
             @click="loginUserFn"
             class="btn-green btn-lrg mt-10"
@@ -255,15 +293,27 @@ export default {
     signInButton() {
       console.log("Sign in!");
       const container = this.$refs.containerRef;
+      this.viewUserPassword = false;
+      this.newUser.password = "";
       container.classList.remove("right-panel-active");
     },
     signUpButton() {
       console.log("Sign Up!");
       const container = this.$refs.containerRef;
+      this.viewUserPassword = false;
+      this.loginUser.password = "";
       container.classList.add("right-panel-active");
     },
     viewPassword() {
-      const pass = document.getElementById("passwordInput");
+      let pass = document.getElementById("passwordInput");
+
+      this.viewUserPassword = !this.viewUserPassword;
+
+      return (pass.type = this.viewUserPassword ? "text" : "password");
+    },
+
+    viewPassword2() {
+      let pass = document.getElementById("passwordInput2");
 
       this.viewUserPassword = !this.viewUserPassword;
 
@@ -413,6 +463,10 @@ export default {
 <style scoped>
 * {
   box-sizing: border-box;
+}
+
+input {
+  max-height: 50px !important;
 }
 
 span {
