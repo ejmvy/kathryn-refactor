@@ -13,7 +13,8 @@ export default defineComponent({
         datasets: [
           {
             label: "Total per month",
-            height: "400px",
+            height: "300px",
+            width: "280px",
             backgroundColor: [
               "#627F8A",
               "#D0E8E2",
