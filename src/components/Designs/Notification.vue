@@ -15,11 +15,11 @@
       />
     </svg>
 
-    <div class="tracking-widest flex flex-col">
-      <h5 v-if="notificationObj.title" class="text-xs uppercase">
+    <div class="tracking-widest">
+      <h5 v-if="notificationObj.title" class="text-xs uppercase pb-2">
         {{ notificationObj.title }}
       </h5>
-      <p class="text-xs pt-2" v-if="notificationObj.message">
+      <p class="text-xs" v-if="notificationObj.message">
         {{ notificationObj.message }}
       </p>
     </div>
