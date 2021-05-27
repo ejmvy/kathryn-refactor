@@ -318,7 +318,7 @@ export default {
           let userName = data.name.split(" ")[0];
           this.emitter.emit("showNotification", {
             state: true,
-            title: `Welcome Back ${userName} !`,
+            message: `Welcome Back ${userName} !`,
           });
 
           if (cartProcess > 0) {
@@ -364,7 +364,7 @@ export default {
             let userName = newUser.name.split(" ")[0];
             this.emitter.emit("showNotification", {
               state: true,
-              title: `Welcome ${userName} !`,
+              message: `Welcome ${userName} !`,
             });
 
             if (cartProcess > 0) {
@@ -384,7 +384,7 @@ export default {
       } else {
         this.emitter.emit("showNotification", {
           state: false,
-          title: `Ooops! Some Information is missing`,
+          message: `Ooops! Some Information is missing`,
         });
       }
     },

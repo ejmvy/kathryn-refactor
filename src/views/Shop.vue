@@ -2,7 +2,9 @@
   <div>
     <Header :addShadow="true"></Header>
     <section class="section pb-8 mb-24">
-      <h1 class="text-2xl sm:text-4xl mt-5 mb-10 md:mb-0">Our Collection</h1>
+      <h1 class="text-2xl sm:text-4xl mt-5 md:mt-10 mb-10 md:mb-0">
+        Our Collection
+      </h1>
       <div class="w-11/12 sm:mt-6 flex justify-between text-gray-dark">
         <div class="flex">
           <p>Collections</p>

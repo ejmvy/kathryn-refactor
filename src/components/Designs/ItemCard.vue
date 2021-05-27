@@ -110,7 +110,7 @@ export default {
 
       this.emitter.emit("showNotification", {
         state: true,
-        title: "Item Added to Cart",
+        message: "Item Added to Cart",
       });
 
       this.getCartItems();

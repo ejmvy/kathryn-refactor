@@ -174,7 +174,7 @@ export default {
             let userName = data.name.split(" ")[0];
             this.emitter.emit("showNotification", {
               state: true,
-              title: `Welcome ${userName} !`,
+              message: `Welcome ${userName} !`,
             });
           } else {
             this.emitter.emit("showNotification", {

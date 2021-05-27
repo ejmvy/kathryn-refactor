@@ -95,8 +95,7 @@ export default {
       if (this.form.name && this.form.email && this.form.message) {
         this.emitter.emit("showNotification", {
           state: true,
-          title: "Message Sent",
-          message: "Thanks for reaching out",
+          message: "Message Sent",
         });
       } else {
         this.emitter.emit("showNotification", {
