@@ -13,21 +13,29 @@
     </router-link>
 
     <div class="flex">
-      <svg
-        @click="openCart()"
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-8 w-8 cartIcon cursor-pointer"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="#627F8A"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-        />
-      </svg>
+      <div class="flex">
+        <svg
+          @click="openCart()"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-8 w-8 cartIcon cursor-pointer"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="#627F8A"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+          />
+        </svg>
+        <div
+          v-if="getCartLength"
+          class="w-5 h-5 text-xs flex items-center justify-center bg-green-light rounded-full text-white font-bold relative -top-2"
+        >
+          {{ getCartLength }}
+        </div>
+      </div>
 
       <div
         class="hamburger"
