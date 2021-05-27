@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100%" class="w-full">
-    <div class="flex flex-col h-full w-full items-center">
+    <div class="flex flex-col h-full w-full lg:w-5/6 lg:m-auto items-center">
       <div class="w-11/12 flex justify-between">
         <div class="w-5 h-5"></div>
         <h5 class="uppercase text-sm text-gray-500 font-bold">
@@ -25,7 +25,8 @@
             <th class="py-4">Mark as Delivered</th>
             <th class="py-4"></th>
           </tr>
-          <transition-group tag="tbody" name="list" mode="out-in">
+          <tbody>
+            <!-- <transition-group tag="tbody" name="list" mode="out-in"> -->
             <tr
               class="border-b border-gray-300 text-sm"
               v-for="item in getRecentOrders"
@@ -52,7 +53,8 @@
                 />
               </td>
             </tr>
-          </transition-group>
+          </tbody>
+          <!-- </transition-group> -->
         </table>
       </div>
     </div>

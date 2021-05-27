@@ -1,6 +1,6 @@
 <template>
   <div
-    class="cartArea popupIndex fixed w-10/12 h-10/12 bg-white shadow-xl flex"
+    class="cartArea popupIndex fixed w-10/12 lg:m-auto h-10/12 bg-white shadow-xl flex"
   >
     <div class="purchases">
       <table class="productArea w-full mt-6 mb-10">
