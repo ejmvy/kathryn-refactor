@@ -174,6 +174,10 @@ button:hover {
     @apply w-full border-b border-gray-400 text-sm px-2 p-1 mt-3 ;
 }
 
+.userDetailsInput {
+    @apply  bg-gray-50 rounded-sm py-3 pl-5 text-sm;
+}
+
 .label-grey {
     @apply text-xxs text-gray-400 tracking-widest uppercase;
 }
