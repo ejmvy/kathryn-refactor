@@ -32,7 +32,15 @@ export default defineComponent({
           },
         ],
       },
-      { responsive: true, maintainAspectRatio: false }
+      {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      }
     );
   },
 });
