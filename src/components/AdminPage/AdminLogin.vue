@@ -87,7 +87,7 @@
 
         <button
           v-on:click="checkUserAuth"
-          class="btn-green btn-lrg mt-10 elementSlideUp4"
+          class="btn-green btn-lrg mt-10 elementSlideUp3"
         >
           Log In
         </button>
