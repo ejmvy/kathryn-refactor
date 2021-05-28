@@ -120,6 +120,7 @@
 
 <script>
 import EditProductPopup from "./EditProductPopup.vue";
+import axios from "axios";
 
 export default {
   data() {
@@ -135,12 +136,10 @@ export default {
   },
   methods: {
     viewCategory(category) {
-      fetch(`http://localhost:3000/api/products/category/${category._id}`)
-        .then((res) => {
-          return res.json();
-        })
+      axios
+        .get(`${process.env.VUE_APP_BASE_URL}products/category/${category._id}`)
         .then((data) => {
-          this.productList = data;
+          this.productList = data.data;
         });
       this.categorySelected = category._id;
     },
@@ -165,15 +164,13 @@ export default {
       this.emitter.emit("hideOverlay");
     },
     refreshProducts() {
-      fetch(
-        `http://localhost:3000/api/products/category/${this.categorySelected}`
-      )
-        .then((res) => {
-          return res.json();
-        })
+      axios
+        .get(
+          `${process.env.VUE_APP_BASE_URL}products/category/${this.categorySelected}`
+        )
         .then((data) => {
           console.log("category items: ", data);
-          this.productList = data;
+          this.productList = data.data;
         });
     },
     saveProductEdits(productInfo) {
@@ -192,18 +189,13 @@ export default {
       this.productToEdit = {};
     },
     saveEditedProduct(productObj) {
-      fetch(`http://localhost:3000/api/products/${productObj._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(productObj),
-      })
-        .then((res) => {
-          return res.json();
-        })
+      axios
+        .put(
+          `${process.env.VUE_APP_BASE_URL}products/${productObj._id}`,
+          productObj
+        )
         .then((data) => {
-          console.log(data);
+          console.log(data.data);
           this.refreshProducts();
           this.emitter.emit("showNotification", {
             state: true,
@@ -222,18 +214,10 @@ export default {
         });
     },
     addNewProduct(productObj) {
-      fetch(`http://localhost:3000/api/products/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(productObj),
-      })
-        .then((res) => {
-          return res.json();
-        })
+      axios
+        .post(`${process.env.VUE_APP_BASE_URL}products/`, productObj)
         .then((data) => {
-          console.log(data);
+          console.log(data.data);
           this.refreshProducts();
           this.emitter.emit("showNotification", {
             state: true,
@@ -252,13 +236,9 @@ export default {
     },
   },
   created() {
-    fetch("http://localhost:3000/api/categories/")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        this.categoryList = data;
-      });
+    axios.get(`${process.env.VUE_APP_BASE_URL}categories/`).then((data) => {
+      this.categoryList = data.data;
+    });
   },
   components: {
     EditProductPopup,

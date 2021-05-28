@@ -62,6 +62,7 @@ import OrderHistoryPanel from "../AdminPage/OrderHistoryPanel.vue";
 import StatsPanel from "../AdminPage/StatsPanel.vue";
 import EditPanel from "../AdminPage/EditPanel.vue";
 import ConfirmPopup from "../Designs/ConfirmPopup.vue";
+import axios from "axios";
 
 export default {
   data() {
@@ -112,13 +113,9 @@ export default {
     },
   },
   created() {
-    fetch("http://localhost:3000/api/categories/")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        this.categoryList = data;
-      });
+    axios.get(`${process.env.VUE_APP_BASE_URL}categories/`).then((data) => {
+      this.categoryList = data.data;
+    });
 
     console.log(`user logged: `, this.$store.state.user);
 

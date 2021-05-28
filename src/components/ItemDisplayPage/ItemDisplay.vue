@@ -91,6 +91,7 @@ import Footer from "../LandingPage/Footer.vue";
 import ProductDescription from "./ProductDesription.vue";
 import FrequentQuestions from "./FrequentQuestions.vue";
 import ImageSlider from "../Designs/ImageSlider.vue";
+import axios from "axios";
 
 export default {
   data() {
@@ -131,11 +132,11 @@ export default {
   },
 
   created() {
-    fetch(`http://localhost:3000/api/products/${this.$route.params.id}`)
+    axios
+      .get(`${process.env.VUE_APP_BASE_URL}products/${this.$route.params.id}`)
+
       .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
+        const data = res.data;
         data.colourArr = data.colour.split(",");
         data.colourArr = data.colourArr.map((col) => col.trim());
         console.log(data);

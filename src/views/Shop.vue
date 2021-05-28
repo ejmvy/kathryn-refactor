@@ -41,6 +41,7 @@
 import Header from "../components/LandingPage/Header.vue";
 import Footer from "../components/LandingPage/Footer.vue";
 import ItemCard from "../components/Designs/ItemCard.vue";
+import axios from "axios";
 
 export default {
   data() {
@@ -55,28 +56,20 @@ export default {
   },
   created() {
     const categoryParam = this.$route.params.category;
-    console.log("category: " + categoryParam);
     if (categoryParam)
       this.categoryName =
         categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
 
-    fetch("http://localhost:3000/api/products/")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        this.serverData = data;
-        if (categoryParam) {
-          this.categorySelected =
-            this.categoryName.slice(0, 1).toUpperCase() +
-            this.categoryName.slice(1);
-        }
-        this.productData = data;
-      });
-    // const products = this.$store.getters["prods/products"];
-    // console.log("PRODS FROM STORE:");
-    // console.log(products);
+    axios.get(`${process.env.VUE_APP_BASE_URL}products/`).then((data) => {
+      console.log(data.data);
+      this.serverData = data.data;
+      if (categoryParam) {
+        this.categorySelected =
+          this.categoryName.slice(0, 1).toUpperCase() +
+          this.categoryName.slice(1);
+      }
+      this.productData = data.data;
+    });
   },
 
   computed: {
@@ -98,9 +91,6 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  font-family: "Playfair Display SC", serif;
-}
 .routerLink {
   transition: all 0.2s ease;
 }

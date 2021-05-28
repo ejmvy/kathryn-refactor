@@ -97,6 +97,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -119,32 +120,14 @@ export default {
       // first do call to AUTH api to check user is correct. Receive token
       // then check with token if user is Admin.
 
-      fetch("http://localhost:3000/api/auth", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      axios
+        .post(`${process.env.VUE_APP_BASE_URL}auth`, {
           email: this.userEmail,
           password: this.userPassword,
-        }),
-      })
-        .then((res) => {
-          const resp = res.text();
-          return resp;
         })
         .then((key) => {
-          console.log("key" + key);
-          this.checkAdminDetails(key);
-          //   if (key !== "Invalid email or password") {
-
-          //   } else {
-          //     this.emitter.emit("showNotification", {
-          //       state: false,
-          //       title: "Ooops!",
-          //       message: "Somethings gone wrong.",
-          //     });
-          //   }
+          console.log("key" + key.data);
+          this.checkAdminDetails(key.data);
         })
         .catch((error) => {
           this.emitter.emit("showNotification", {
@@ -155,18 +138,15 @@ export default {
         });
     },
     checkAdminDetails(key) {
-      fetch("http://localhost:3000/api/users/me", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "x-auth-token": key,
-        },
-      })
-        .then((res) => {
-          return res.json();
+      axios
+        .get(`${process.env.VUE_APP_BASE_URL}users/me`, {
+          headers: {
+            "x-auth-token": key,
+          },
         })
-        .then((data) => {
-          console.log("admin: ", data);
+        .then((res) => {
+          console.log("admin: ", res.data);
+          let data = res.data;
           if (data.isAdmin) {
             this.$store.dispatch("setKey", key);
             this.$store.dispatch("login", data);

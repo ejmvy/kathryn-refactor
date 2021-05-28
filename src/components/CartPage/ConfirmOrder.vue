@@ -147,7 +147,7 @@ export default {
 
         axios
           .post(
-            "http://localhost:3000/api/payments/create-payment-intent",
+            `${process.env.VUE_APP_BASE_URL}payments/create-payment-intent`,
             confirmOrder
           )
           .then((response) => {
@@ -205,18 +205,11 @@ export default {
         );
     },
     sendOrderToDB(confirmOrder) {
-      fetch("http://localhost:3000/api/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(confirmOrder),
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((newOrder) => {
+      axios
+        .post(`${process.env.VUE_APP_BASE_URL}orders`, confirmOrder)
+        .then((data) => {
           console.log("payment taken");
+          let newOrder = data.data;
           console.log(newOrder);
 
           this.$store.dispatch("cart/clearCart");
@@ -241,19 +234,15 @@ export default {
     },
     updateUserDetails() {
       const key = this.$store.getters["getUserKey"];
-      fetch("http://localhost:3000/api/users/me", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "x-auth-token": key,
-        },
-      })
-        .then((res) => {
-          return res.json();
+      axios
+        .get(`${process.env.VUE_APP_BASE_URL}users/me`, {
+          headers: {
+            "x-auth-token": key,
+          },
         })
         .then((data) => {
           data.userKey = key;
-          this.$store.dispatch("login", data);
+          this.$store.dispatch("login", data.data);
         })
         .catch((e) => {
           console.log(`err ${e}`);

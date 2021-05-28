@@ -99,8 +99,6 @@ export default {
   },
   created() {
     const cartItems = this.$store.getters["cart/products"];
-    console.log("CART ITEMS");
-    console.log(cartItems[0]);
 
     this.cartData = cartItems;
   },

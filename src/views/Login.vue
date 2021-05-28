@@ -20,6 +20,7 @@
 <script>
 import WebLogin from "../components/Designs/WebLogin.vue";
 import MobileLogin from "../components/Designs/MobileLogin.vue";
+import axios from "axios";
 export default {
   data() {},
   methods: {
@@ -28,17 +29,14 @@ export default {
       this.getUserAuthKey(loginUser, "login");
     },
     getUserDetails(key) {
-      fetch("http://localhost:3000/api/users/me", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "x-auth-token": key,
-        },
-      })
-        .then((res) => {
-          return res.json();
+      axios
+        .get(`${process.env.VUE_APP_BASE_URL}users/me`, {
+          headers: {
+            "x-auth-token": key,
+          },
         })
-        .then((data) => {
+        .then((res) => {
+          const data = res.data;
           this.$store.dispatch("login", data);
 
           const cartProcess = this.$store.getters["cart/paymentStep"];
@@ -70,17 +68,10 @@ export default {
     registerUser(newUser) {
       console.log("REGI:  ", newUser);
 
-      fetch("http://localhost:3000/api/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((registeredUser) => {
+      axios
+        .post(`${process.env.VUE_APP_BASE_URL}users`, newUser)
+        .then((data) => {
+          const registeredUser = data.data;
           this.$store.dispatch("login", registeredUser);
 
           delete newUser["name"];
@@ -110,7 +101,7 @@ export default {
         });
     },
     getUserAuthKey(userDetails, type) {
-      fetch("http://localhost:3000/api/auth", {
+      fetch(`${process.env.VUE_APP_BASE_URL}auth`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

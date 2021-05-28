@@ -162,7 +162,7 @@ export default {
 
     async loadData() {
       await axios
-        .get("http://localhost:3000/api/orders/history")
+        .get(`${process.env.VUE_APP_BASE_URL}orders/history`)
         .then((data) => {
           this.entries = data.data;
           this.filteredEntries = this.entries.slice(0, this.currentEntries);

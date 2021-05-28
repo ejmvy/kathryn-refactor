@@ -25,7 +25,7 @@ export default {
   actions: {
     async callOrdersAPI({ commit }) {
       await axios
-        .get("http://localhost:3000/api/orders/recent")
+        .get(`${process.env.VUE_APP_BASE_URL}orders/recent`)
         .then((result) => {
           commit("setOrders", result.data);
         });

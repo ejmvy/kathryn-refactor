@@ -1,5 +1,5 @@
+import axios from "axios";
 import { createStore } from "vuex";
-
 import cartModule from "./modules/cart.js";
 import productModule from "./modules/products.js";
 import recentOrders from "./modules/recentOrders.js";
@@ -53,30 +53,25 @@ export default createStore({
     updateUserDetails: ({ dispatch, getters }) => {
       const key = getters["getUserKey"];
       console.log("key: " + key);
-      fetch("http://localhost:3000/api/users/me", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "x-auth-token": key,
-        },
-      })
-        .then((res) => {
-          return res.json();
+      axios
+        .get(`${process.env.VUE_APP_BASE_URL}users/me`, {
+          headers: {
+            "x-auth-token": key,
+          },
         })
         .then((data) => {
-          dispatch("login", data);
+          dispatch("login", data.data);
         })
         .catch((e) => {
           console.log(`err ${e}`);
         });
     },
     getUserOrders: (context, userId) => {
-      fetch(`http://localhost:3000/api/orders/userhistory/${userId}`)
-        .then((res) => {
-          return res.json();
-        })
+      axios
+        .get(`${process.env.VUE_APP_BASE_URL}orders/userhistory/${userId}`)
+
         .then((data) => {
-          context.commit("setUserOrders", data);
+          context.commit("setUserOrders", data.data);
         })
         .catch((e) => {
           console.log(`err ${e}`);

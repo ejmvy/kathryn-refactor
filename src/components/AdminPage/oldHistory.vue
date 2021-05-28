@@ -139,6 +139,7 @@
 
 <script>
 import ViewOrderDetails from "./ViewOrderDetails.vue";
+import axios from "axios";
 
 export default {
   data: () => ({
@@ -187,13 +188,11 @@ export default {
       return orders.slice(from, to);
     },
     loadData() {
-      fetch("http://localhost:3000/api/orders/history")
-        .then((res) => {
-          return res.json();
-        })
+      axios
+        .get(`${process.env.VUE_APP_BASE_URL}orders/history`)
         .then((data) => {
-          this.orders = data;
-          this.ordersLength = data.length;
+          this.orders = data.data;
+          this.ordersLength = this.orders.length;
         });
     },
   },

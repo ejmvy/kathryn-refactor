@@ -16,9 +16,11 @@ export default {
   },
   actions: {
     async callProductsApi({ commit }) {
-      await axios.get("http://localhost:3000/api/products/").then((result) => {
-        commit("setProducts", result.data);
-      });
+      await axios
+        .get(`${process.env.VUE_APP_BASE_URL}products/`)
+        .then((result) => {
+          commit("setProducts", result.data);
+        });
     },
   },
   getters: {

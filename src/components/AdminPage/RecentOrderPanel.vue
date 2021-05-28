@@ -80,16 +80,15 @@
 </template>
 
 <script>
-// import Overlay from "vuejs-overlay";
 import ViewOrderDetails from "./ViewOrderDetails.vue";
 import ConfirmPopup from "../Designs/ConfirmPopup.vue";
+import axios from "axios";
 export default {
   data() {
     return {
       showDetails: false,
       viewOrder: {},
       showOrderPanel: false,
-      // recentOrders: [],
       showPopup: false,
       popupMessage: {
         title: "",
@@ -137,21 +136,13 @@ export default {
       console.log(updateOrders);
 
       updateOrders.forEach((orderDelivered) => {
-        fetch(`http://localhost:3000/api/orders/${orderDelivered._id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+        axios
+          .put(`${process.env.VUE_APP_BASE_URL}orders/${orderDelivered._id}`, {
             isDelivered: true,
-          }),
-        })
-          .then((res) => {
-            return res.json();
           })
           .then((data) => {
             console.log("SEnt");
-            console.log(data);
+            console.log(data.data);
             this.$store.dispatch("recentOrders/callOrdersAPI");
             this.emitter.emit("reloadData");
             this.closePopup();

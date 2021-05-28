@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   props: ["user"],
   data() {
@@ -82,19 +83,14 @@ export default {
       const user = this.$store.getters["getUserDetails"];
       console.log("USER: ", user);
 
-      fetch(`http://localhost:3000/api/users/${user._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(this.userObject),
-      })
-        .then((res) => {
-          return res.json();
-        })
+      axios
+        .put(
+          `${process.env.VUE_APP_BASE_URL}users/${user._id}`,
+          this.userObject
+        )
         .then((updatedUser) => {
           console.log("updated user: ");
-          console.log(updatedUser);
+          console.log(updatedUser.data);
           this.$store.dispatch("updateUserDetails");
           this.closeMenu();
         })

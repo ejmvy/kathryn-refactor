@@ -136,7 +136,7 @@ export default {
   methods: {
     async getDashboardData(dashboardName) {
       await axios
-        .get(`http://localhost:3000/api/stats/${dashboardName}`)
+        .get(`${process.env.VUE_APP_BASE_URL}stats/${dashboardName}`)
         .then((data) => {
           this.dashboardData.data = data.data;
           this.dashboardData.name = dashboardName;
@@ -154,7 +154,7 @@ export default {
     },
     async showBarChart(chartName) {
       await axios
-        .get(`http://localhost:3000/api/stats/${chartName}`)
+        .get(`${process.env.VUE_APP_BASE_URL}stats/${chartName}`)
         .then((data) => {
           this.chartData.name = chartName;
           this.chartData.data = Object.values(data.data);
@@ -179,7 +179,7 @@ export default {
     const month = timestamp.getMonth();
 
     axios
-      .get(`http://localhost:3000/api/stats/orders/${year}/${month}`)
+      .get(`${process.env.VUE_APP_BASE_URL}stats/orders/${year}/${month}`)
       .then((result) => {
         let data = result.data;
         console.log("difrerrence: " + data.averageSalesDifference);
@@ -208,7 +208,7 @@ export default {
       });
 
     axios
-      .get(`http://localhost:3000/api/stats/newUsers/${year}/${month}`)
+      .get(`${process.env.VUE_APP_BASE_URL}stats/newUsers/${year}/${month}`)
       .then((result) => {
         let data = result.data;
         this.newUsers.cardFigure = data.current;
