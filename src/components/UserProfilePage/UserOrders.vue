@@ -13,7 +13,7 @@
     </div>
     <div class="bg-gray-200 w-full p-1"></div>
 
-    <div class="md:flex md:flex-col md:w-2/3 md:m-auto">
+    <div class="p-3 md:flex md:flex-col md:w-3/4 md:m-auto">
       <div class="mt-10" v-if="!getUserOrders.length">
         <p class="text-xs text-gray-500">There are no orders to show</p>
         <button class="btn-green btn-sm mt-10">Start Shopping now!</button>
@@ -29,20 +29,37 @@
           </div>
           <div class="w-full h-0.5 bg-gray-200 my-2"></div>
           <div
-            class="w-full mt-3 h-24 sm:h-32 flex justify-center overflow-auto"
+            class="w-full mt-3 h-24 flex overflow-auto"
+            :class="
+              order.products.length < 3 ? 'justify-center' : 'justify-between'
+            "
           >
             <div
-              class="h-24 w-24 sm:h-32 sm:w-32 mx-2"
-              v-for="product in order.products"
+              class="imageArea h-24 w-24 mx-2 relative"
+              v-for="(product, index) in order.products.slice(0, 3)"
               :key="product"
             >
-              <img class="h-24 w-24 mx-2" :src="getImageUrl(product._id)" />
+              <img class="h-24 w-24" :src="getImageUrl(product._id)" />
+              <div
+                @click="viewOrder(order)"
+                :class="{ overlayImg: order.products.length > 3 && index == 2 }"
+              >
+                <div
+                  v-if="order.products.length > 3 && index == 2"
+                  class="flex items-center cursor-pointer"
+                >
+                  <div class="text-xl font-bold">+</div>
+                  <div class="font-bold text-4xl">
+                    {{ order.products.length - 3 }}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="flex flex-col items-start pl-8">
+          <div class="flex flex-col ml-8 w-60">
             <div class="flex mt-5 items-center">
               <div class="labelxs mr-5">Total:</div>
-              <p class="text-sm">€ {{ order.paymentTotal }}</p>
+              <p class="text-sm self-end">€ {{ order.paymentTotal }}</p>
             </div>
             <div class="flex mt-1 items-center">
               <div class="labelxs mr-5">Order No:</div>
@@ -52,6 +69,12 @@
               <div class="labelxs mr-5">Order Date:</div>
               <p class="text-sm">
                 {{ convertDate(order.orderDate) }}
+              </p>
+            </div>
+            <div v-if="order.deliveredDate" class="flex mt-1 items-center">
+              <div class="labelxs mr-5">Shipped Date:</div>
+              <p class="text-sm">
+                {{ convertDate(order.deliveredDate) }}
               </p>
             </div>
           </div>
@@ -124,3 +147,20 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.imageArea .overlayImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  display: block;
+  z-index: 2;
+  background: rgba(36, 116, 109, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
