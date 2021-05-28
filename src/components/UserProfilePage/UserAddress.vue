@@ -1,7 +1,7 @@
 <template>
   <div class="slowShow">
     <div
-      class="bg-white px-3 py-4 flex w-full justify-between md:justify-center items-center"
+      class="bg-white px-3 py-4 flex w-full justify-between md:justify-center items-center md:shadow-lg"
     >
       <img
         @click="closeMenu()"
