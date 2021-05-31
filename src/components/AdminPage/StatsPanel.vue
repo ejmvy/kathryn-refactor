@@ -49,6 +49,7 @@
           data-aos="fade-up"
           data-aos-delay="300"
           class="mx-2 mt-8"
+          @click="showBarChart('returningUsers')"
           :cardObject="returningUsers"
         ></StatCard>
       </div>
@@ -182,7 +183,6 @@ export default {
       .get(`${process.env.VUE_APP_BASE_URL}stats/orders/${year}/${month}`)
       .then((result) => {
         let data = result.data;
-        console.log("difrerrence: " + data.averageSalesDifference);
         this.totalSales.cardFigure = data.current;
         this.totalSales.change = `${data.orderDifference.toFixed(0)}%`;
         this.totalSales.direction = data.current > data.prev ? "up" : "down";
@@ -194,8 +194,12 @@ export default {
 
         this.mostPopular.cardFigure = data.topSales[0].name;
 
-        this.returningUsers.cardFigure = data.topSales[1].amount;
-        this.returningUsers.change = "12%";
+        this.returningUsers.cardFigure = data.currentReturningUsers;
+        this.returningUsers.change = `${data.returningUserDifference.toFixed(
+          2
+        )}%`;
+        this.returningUsers.direction =
+          data.currentReturningUsers > data.prevReturningUsers ? "up" : "down";
 
         this.averageOrderValue.cardFigure = `€ ${data.currentAverage.toFixed(
           2
@@ -215,6 +219,12 @@ export default {
         this.newUsers.change = `${data.difference.toFixed(0)}%`;
         this.newUsers.direction = data.current > data.prev ? "up" : "down";
       });
+
+    // axios
+    //   .get(`${process.env.VUE_APP_BASE_URL}stats/returningUsers`)
+    //   .then((result) => {
+    //     let data = result.data;
+    //   });
   },
 
   components: {
