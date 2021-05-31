@@ -1,21 +1,7 @@
 <template>
   <div class="w-full lg:w-3/4">
     <div class="w-full flex justify-between">
-      <svg
-        @click="closeChart()"
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6 cursor-pointer"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M15 19l-7-7 7-7"
-        />
-      </svg>
+      <Svg @click="closeChart()" :svg="backSvg"></Svg>
       <h1>{{ getChartName }}</h1>
       <div>
         <select
@@ -47,11 +33,13 @@
 <script>
 import BarChart from "../Charts/BarChart.vue";
 import LineChart from "../Charts/LineChart.vue";
+import Svg from "../Designs/SvgBase.vue";
 
 export default {
   props: ["chartData"],
   data() {
     return {
+      backSvg: "M15 19l-7-7 7-7",
       chartTitles: {
         totalSales: "Total Sales",
         newUsers: "New Users",
@@ -94,6 +82,7 @@ export default {
   },
 
   components: {
+    Svg,
     BarChart,
     LineChart,
   },

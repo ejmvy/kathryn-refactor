@@ -12,20 +12,11 @@
             @click="viewCategory(category)"
           >
             <div>{{ category.name }}</div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="#365a69"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
+            <Svg
+              @click="closeChart()"
+              :svgColour="svgColour"
+              :svg="arrowSvg"
+            ></Svg>
           </div>
         </div>
       </div>
@@ -61,36 +52,17 @@
                 <div
                   class="productIcons flex items-center justify-end w-2/5 py-3"
                 >
-                  <svg
+                  <Svg
                     @click="deleteProduct(product)"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="#365a69"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                    />
-                  </svg>
-                  <svg
+                    :svgColour="svgColour"
+                    :svg="deleteSvg"
+                  ></Svg>
+                  <Svg
+                    class="ml-8"
                     @click="editProduct(product)"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="w-4 h-4 ml-8"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="#365a69"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                    />
-                  </svg>
+                    :svgColour="svgColour"
+                    :svg="editSvg"
+                  ></Svg>
                 </div>
               </div>
             </div>
@@ -120,11 +92,18 @@
 
 <script>
 import EditProductPopup from "./EditProductPopup.vue";
+import Svg from "../Designs/SvgBase.vue";
 import axios from "axios";
 
 export default {
   data() {
     return {
+      svgColour: "#365a69",
+      arrowSvg: "M9 5l7 7-7 7",
+      deleteSvg:
+        "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16",
+      editSvg:
+        "M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z",
       hideProductBtn: false,
       categoryList: [],
       productList: [],
@@ -241,6 +220,7 @@ export default {
     });
   },
   components: {
+    Svg,
     EditProductPopup,
   },
 };

@@ -42,68 +42,22 @@
         </div>
         <div class="flex justify-around">
           <div class="flex mr-3">
-            <svg
+            <Svg
               @click="toBeginning()"
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 cursor-pointer mr-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="#627F8A"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-              />
-            </svg>
-            <svg
-              @click="toPrev()"
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 cursor-pointer"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="#627F8A"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
+              class="mr-2"
+              :svgColour="svgColour"
+              :svg="beginSvg"
+            ></Svg>
+            <Svg @click="toPrev()" :svgColour="svgColour" :svg="prevSvg"></Svg>
           </div>
           <div class="flex ml-3">
-            <svg
-              @click="toNext()"
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 cursor-pointer"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="#627F8A"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-            <svg
+            <Svg @click="toNext()" :svgColour="svgColour" :svg="nextSvg"></Svg>
+            <Svg
               @click="toEnd()"
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 cursor-pointer ml-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="#627F8A"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 5l7 7-7 7M5 5l7 7-7 7"
-              />
-            </svg>
+              class="ml-2"
+              :svgColour="svgColour"
+              :svg="endSvg"
+            ></Svg>
           </div>
         </div>
       </div>
@@ -122,10 +76,16 @@
 <script>
 import ViewOrderDetails from "./ViewOrderDetails.vue";
 import TableData from "./TableData.vue";
+import Svg from "../Designs/SvgBase.vue";
 import axios from "axios";
 
 export default {
   data: () => ({
+    svgColour: "#627F8A",
+    beginSvg: "M11 19l-7-7 7-7m8 14l-7-7 7-7",
+    prevSvg: "M15 19l-7-7 7-7",
+    nextSvg: "M9 5l7 7-7 7",
+    endSvg: "M13 5l7 7-7 7M5 5l7 7-7 7",
     columns: [
       { id: "order", text: "Order" },
       { id: "recipient", text: "Recipient" },
@@ -229,6 +189,7 @@ export default {
     });
   },
   components: {
+    Svg,
     TableData,
     ViewOrderDetails,
   },

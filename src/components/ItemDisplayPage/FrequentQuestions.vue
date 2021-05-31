@@ -9,22 +9,13 @@
       >
         <div class="flex items-center w-full justify-between mt-8">
           <div class="questionTitle">{{ question.title }}</div>
-          <svg
+          <Svg
             @click="question.answerShow = !question.answerShow"
             :class="{ rotateArrow: question.answerShow }"
-            xmlns="http://www.w3.org/2000/svg"
-            class="arrow w-6 h-6 cursor-pointer"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="#627F8A"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
+            class="arrow"
+            :svgColour="'#627F8A'"
+            :svg="arrowSvg"
+          ></Svg>
         </div>
         <div :class="{ answerArea: question.answerShow }">
           <p class="answerText text-xs mt-5 text-left opacity-0">
@@ -38,10 +29,12 @@
 
 <script>
 import TitleDesign from "../Designs/TitleDesign.vue";
+import Svg from "../Designs/SvgBase.vue";
 export default {
   props: ["itemInfo"],
   data() {
     return {
+      arrowSvg: "M19 9l-7 7-7-7",
       titleText: "Frequently Asked Questions",
 
       questions: [
@@ -67,6 +60,7 @@ export default {
     };
   },
   components: {
+    Svg,
     TitleDesign,
   },
 };

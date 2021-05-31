@@ -1,21 +1,7 @@
 <template>
   <div class="w-full">
     <div class="w-11/12 m-auto flex justify-between">
-      <svg
-        @click="closeChart()"
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6 cursor-pointer"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M15 19l-7-7 7-7"
-        />
-      </svg>
+      <Svg @click="closeChart()" :svgColour="svgColour" :svg="backSvg"></Svg>
       <h1>{{ getDashboardName }}</h1>
       <div></div>
     </div>
@@ -37,10 +23,12 @@
 
 <script>
 import PieChart from "../Charts/PieChart.vue";
+import Svg from "../Designs/SvgBase.vue";
 export default {
   props: ["dashboardData"],
   data() {
     return {
+      backSvg: "M15 19l-7-7 7-7",
       dashboardNames: {
         categoryStats: "Category Breakdown Dashboard",
       },
@@ -80,6 +68,7 @@ export default {
   },
 
   components: {
+    Svg,
     PieChart,
   },
 };

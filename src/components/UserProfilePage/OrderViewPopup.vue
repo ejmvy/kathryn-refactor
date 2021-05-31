@@ -6,21 +6,7 @@
       class="bg-white w-11/12 h-4/5 md:w-4/5 lg:w-2/3 xl:w-1/2 md:h-2/3 flex flex-col rounded-sm"
     >
       <div class="w-full flex items-center border-b-4 border-gray-100 p-4">
-        <svg
-          @click="closePopup"
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 cursor-pointer"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="#C4C3C5"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M15 19l-7-7 7-7"
-          />
-        </svg>
+        <Svg @click="closePopup" :svgColour="'#C4C3C5'" :svg="closeSvg"></Svg>
         <p class="ml-16 labelxs text-gray-dark">
           {{ orderInfo.orderStatus ? orderInfo.orderStatus : "In Progress.." }}
         </p>
@@ -102,10 +88,14 @@
 </template>
 
 <script>
-// import shared from "../../shared";
+import Svg from "../Designs/SvgBase.vue";
 export default {
   props: ["orderInfo"],
-
+  data() {
+    return {
+      closeSvg: "M15 19l-7-7 7-7",
+    };
+  },
   methods: {
     closePopup() {
       this.$emit("closePopop");
@@ -122,6 +112,9 @@ export default {
       const options = { year: "numeric", month: "long", day: "numeric" };
       return new Date(orderDate).toLocaleDateString(undefined, options);
     },
+  },
+  components: {
+    Svg,
   },
 };
 </script>
