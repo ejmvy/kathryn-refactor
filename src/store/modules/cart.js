@@ -22,19 +22,17 @@ export default {
       );
 
       if (productInCartIdx >= 0) {
-        state.items[productInCartIdx].qty++;
+        state.items[productInCartIdx].qty =
+          state.items[productInCartIdx].qty + payload.qty;
       } else {
         state.items.push(productData);
       }
 
-      state.qty++;
-      state.total += productData.price;
+      state.qty += payload.qty;
+      state.total += productData.price * payload.qty;
     },
     removeProductFromCart(state, payload) {
       const prodId = payload._id;
-
-      console.log("item: ");
-      console.log(payload);
 
       const productInCartIdx = state.items.findIndex(
         (cartItem) =>
@@ -47,7 +45,6 @@ export default {
           cartItem.colourSelected === payload.colourSelected
       );
 
-      console.log("index1: " + productInCartIdx);
       state.items.splice(productInCartIdx, 1);
       state.qty -= productInCart.qty;
       state.total -= productInCart.price * productInCart.qty;
@@ -121,9 +118,6 @@ export default {
     setPaymentStep(context, payload) {
       context.commit("setPaymentStep", payload);
     },
-    // setRecentOrder(context, payload) {
-    //   context.commit("setRecentOrder")
-    // },
     clearCart(context) {
       context.commit("clearCart");
     },
