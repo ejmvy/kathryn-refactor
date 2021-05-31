@@ -58,6 +58,7 @@ export default {
         monthlyIncome: "Monthly Income",
         mostPopular: "Most Popular Products This Month",
         averageOrder: "Average Order Value",
+        returningUsers: "Returning Users",
       },
       months: [
         "January",
