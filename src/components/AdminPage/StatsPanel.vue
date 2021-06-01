@@ -124,7 +124,6 @@ export default {
     },
     returningUsers: {
       cardTitle: "Returning Users",
-      direction: "up",
       icon:
         "M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z",
     },
@@ -178,10 +177,13 @@ export default {
     const timestamp = new Date();
     const year = timestamp.getFullYear();
     const month = timestamp.getMonth();
+    console.log(`year: ${year} : month ${month}`);
 
     axios
       .get(`${process.env.VUE_APP_BASE_URL}stats/orders/${year}/${month}`)
       .then((result) => {
+        console.log("data stats: ");
+        console.log(result.data);
         let data = result.data;
         this.totalSales.cardFigure = data.current;
         this.totalSales.change = `${data.orderDifference.toFixed(0)}%`;
@@ -192,7 +194,9 @@ export default {
         this.monthlyIncome.direction =
           data.currentSales > data.prevSales ? "up" : "down";
 
-        this.mostPopular.cardFigure = data.topSales[0].name;
+        this.mostPopular.cardFigure = data.topSales[0]
+          ? data.topSales[0].name
+          : "";
 
         this.returningUsers.cardFigure = data.currentReturningUsers;
         this.returningUsers.change = `${data.returningUserDifference.toFixed(
@@ -201,12 +205,12 @@ export default {
         this.returningUsers.direction =
           data.currentReturningUsers > data.prevReturningUsers ? "up" : "down";
 
-        this.averageOrderValue.cardFigure = `€ ${data.currentAverage.toFixed(
-          2
-        )}`;
-        this.averageOrderValue.change = `${data.averageSalesDifference.toFixed(
-          0
-        )}%`;
+        this.averageOrderValue.cardFigure = data.currentAverage
+          ? `€ ${data.currentAverage.toFixed(2)}`
+          : "0";
+        this.averageOrderValue.change = data.averageSalesDifference
+          ? `${data.averageSalesDifference.toFixed(0)}%`
+          : "0";
         this.averageOrderValue.direction =
           data.currentAverage > data.prevAverage ? "up" : "down";
       });
@@ -214,17 +218,13 @@ export default {
     axios
       .get(`${process.env.VUE_APP_BASE_URL}stats/newUsers/${year}/${month}`)
       .then((result) => {
+        console.log("users stats: ");
+        console.log(result.data);
         let data = result.data;
         this.newUsers.cardFigure = data.current;
         this.newUsers.change = `${data.difference.toFixed(0)}%`;
         this.newUsers.direction = data.current > data.prev ? "up" : "down";
       });
-
-    // axios
-    //   .get(`${process.env.VUE_APP_BASE_URL}stats/returningUsers`)
-    //   .then((result) => {
-    //     let data = result.data;
-    //   });
   },
 
   components: {
@@ -234,8 +234,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* https://www.npmjs.com/package/vue3-chart-v2 */
-/* https://vue3-chart-v2.netlify.app/guide/ */
-</style>
