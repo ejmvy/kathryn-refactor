@@ -48,7 +48,6 @@
           </div>
         </div>
         <div class="hidden md:ml-5 md:flex md:flex-col md:w-2/3">
-          <UserOrders></UserOrders>
           <transition name="component-fade" mode="out-in">
             <keep-alive>
               <component :is="view"></component>
