@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <div class="w-11/12 m-auto flex justify-between">
-      <Svg @click="closeChart()" :svgColour="svgColour" :svg="backSvg"></Svg>
+      <Svg @click="closeChart()" :svg="backSvg"></Svg>
       <h1>{{ getDashboardName }}</h1>
       <div></div>
     </div>
@@ -14,6 +14,12 @@
           :key="category"
         >
           <h1>{{ category }}</h1>
+          <p
+            v-if="!categories[category].data.length"
+            class="mt-10 text-gray-400 text-sm"
+          >
+            No Data
+          </p>
           <PieChart :pieData="categories[category]" />
         </div>
       </div>
