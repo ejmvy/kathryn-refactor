@@ -34,14 +34,13 @@
           />
           <transition name="fade-button">
             <span class="viewPassword cursor-pointer">
-              <PasswordShowSvg
+              <Svg
+                @click="viewPassword()"
                 v-if="!viewUserPassword"
-                @svgClicked="viewPassword()"
-              ></PasswordShowSvg>
-              <PasswordHideSvg
-                v-else
-                @svgClicked="viewPassword()"
-              ></PasswordHideSvg>
+                :svgColour="'#aaaaaa'"
+                :svg="showPasswordSvg"
+              ></Svg>
+              <PasswordHideSvg v-else @click="viewPassword()"></PasswordHideSvg>
             </span>
           </transition>
         </div>
@@ -58,7 +57,7 @@
     <div class="form-container sign-in-container">
       <router-link to="/">
         <Svg
-          class="absolute right-0 m-3"
+          class="absolute left-0 m-3"
           :svgColour="'#aaaaaa'"
           :svg="homeSvg"
         ></Svg>
@@ -84,13 +83,15 @@
           />
           <transition name="fade-button">
             <span class="viewPassword cursor-pointer">
-              <PasswordShowSvg
+              <Svg
+                @click="viewPassword2()"
                 v-if="!viewUserPassword"
-                @svgClicked="viewPassword2()"
-              ></PasswordShowSvg>
+                :svgColour="'#aaaaaa'"
+                :svg="showPasswordSvg"
+              ></Svg>
               <PasswordHideSvg
                 v-else
-                @svgClicked="viewPassword2()"
+                @click="viewPassword2()"
               ></PasswordHideSvg>
             </span>
           </transition>
@@ -138,7 +139,6 @@
 </template>
 
 <script>
-import PasswordShowSvg from "./PasswordShowSvg.vue";
 import PasswordHideSvg from "./PasswordHideSvg.vue";
 import Svg from "../Designs/SvgBase.vue";
 export default {
@@ -146,6 +146,8 @@ export default {
     return {
       homeSvg:
         "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
+      showPasswordSvg:
+        "M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21",
       toLogin: true,
       toRegister: false,
       newUser: {
@@ -216,7 +218,6 @@ export default {
 
   components: {
     Svg,
-    PasswordShowSvg,
     PasswordHideSvg,
   },
 };
