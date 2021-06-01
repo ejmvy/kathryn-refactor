@@ -6,7 +6,6 @@
       <Svg :svgColour="svgColour" :svg="homeSvg"></Svg>
     </router-link>
     <p class="text-white font-bold">Welcome Kathryn!</p>
-    <!-- <Svg :svgColour="svgColour" :svg="logoutSvg"></Svg> -->
     <svg
       @click="logoutUser()"
       xmlns="http://www.w3.org/2000/svg"
