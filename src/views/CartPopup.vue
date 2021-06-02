@@ -34,7 +34,14 @@
         v-for="(item, idx) in cartData"
         :key="item"
       >
-        <img class="w-20 h-20" :src="item.imageUrlArray[0]" />
+        <img
+          class="w-20 h-20"
+          :src="
+            item.imageUrlArray[0]
+              ? item.imageUrlArray[0]
+              : 'https://i.ibb.co/NCDk0sY/corrupt-Image.png'
+          "
+        />
         <div class="flex flex-col items-start">
           <label class="text-white font-bold">{{ item.name }}</label>
           <p class="text-gray-300 text-xs">{{ item.price }}</p>
