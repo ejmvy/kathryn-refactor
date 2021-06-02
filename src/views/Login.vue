@@ -28,43 +28,7 @@ export default {
       console.log("loggged: ", loginUser);
       this.getUserAuthKey(loginUser, "login");
     },
-    getUserDetails(key) {
-      axios
-        .get(`${process.env.VUE_APP_BASE_URL}users/me`, {
-          headers: {
-            "x-auth-token": key,
-          },
-        })
-        .then((res) => {
-          const data = res.data;
-          this.$store.dispatch("login", data);
 
-          const cartProcess = this.$store.getters["cart/paymentStep"];
-
-          let userName = data.name.split(" ")[0];
-          this.emitter.emit("showNotification", {
-            state: true,
-            message: `Welcome Back ${userName} !`,
-          });
-
-          if (cartProcess > 0) {
-            if (data.userAddress) {
-              this.$store.dispatch("cart/setPaymentStep", 2);
-            }
-            return this.$router.push("/checkout");
-          } else {
-            this.$router.push("/userprofile");
-          }
-        })
-        .catch((err) => {
-          console.log(`Err: ${err}`);
-          this.emitter.emit("showNotification", {
-            state: false,
-            title: "Ooops!",
-            message: "Somethings gone wrong.",
-          });
-        });
-    },
     registerUser(newUser) {
       console.log("REGI:  ", newUser);
 
@@ -123,6 +87,44 @@ export default {
         })
         .catch((err) => {
           console.log("Error:", err);
+        });
+    },
+    getUserDetails(key) {
+      axios
+        .get(`${process.env.VUE_APP_BASE_URL}users/me`, {
+          headers: {
+            "x-auth-token": key,
+          },
+        })
+        .then((res) => {
+          const data = res.data;
+          data.userKey = key;
+          this.$store.dispatch("login", data);
+
+          const cartProcess = this.$store.getters["cart/paymentStep"];
+
+          let userName = data.name.split(" ")[0];
+          this.emitter.emit("showNotification", {
+            state: true,
+            message: `Welcome Back ${userName} !`,
+          });
+
+          if (cartProcess > 0) {
+            if (data.userAddress) {
+              this.$store.dispatch("cart/setPaymentStep", 2);
+            }
+            return this.$router.push("/checkout");
+          } else {
+            this.$router.push("/userprofile");
+          }
+        })
+        .catch((err) => {
+          console.log(`Err: ${err}`);
+          this.emitter.emit("showNotification", {
+            state: false,
+            title: "Ooops!",
+            message: "Somethings gone wrong.",
+          });
         });
     },
   },
