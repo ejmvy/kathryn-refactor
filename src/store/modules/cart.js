@@ -6,7 +6,6 @@ export default {
       total: 0,
       qty: 0,
       paymentStep: 0,
-      recentOrder: {},
     };
   },
 
@@ -30,6 +29,10 @@ export default {
 
       state.qty += payload.qty;
       state.total += productData.price * payload.qty;
+
+      console.log("new cart: ", state.items);
+
+      sessionStorage.setItem("cartDetails", JSON.stringify(state.items));
     },
     removeProductFromCart(state, payload) {
       const prodId = payload._id;
@@ -48,6 +51,8 @@ export default {
       state.items.splice(productInCartIdx, 1);
       state.qty -= productInCart.qty;
       state.total -= productInCart.price * productInCart.qty;
+
+      sessionStorage.setItem("cartDetails", JSON.stringify(state.items));
     },
 
     increaseQty(state, payload) {
@@ -61,6 +66,8 @@ export default {
       state.items[productInCartIdx].qty++;
       state.qty++;
       state.total += state.items[productInCartIdx].price;
+
+      sessionStorage.setItem("cartDetails", JSON.stringify(state.items));
     },
     decreaseQty(state, payload) {
       const prodId = payload._id;
@@ -73,6 +80,8 @@ export default {
       state.items[productInCartIdx].qty--;
       state.qty--;
       state.total -= state.items[productInCartIdx].price;
+
+      sessionStorage.setItem("cartDetails", JSON.stringify(state.items));
     },
 
     increasePaymentStep(state) {
@@ -86,15 +95,22 @@ export default {
       state.total = 0;
       state.qty = 0;
       state.paymentStep = 0;
+
+      sessionStorage.removeItem("cartDetails");
+    },
+    updateCartFromStorage(state, cartDetails) {
+      state = cartDetails;
     },
   },
 
   actions: {
     addToCart(context, payload) {
-      const prodId = payload.id;
+      const prodId = payload.id ? payload.id : payload._id;
+      console.log("id: " + prodId);
       const products = context.rootGetters["prods/products"];
       try {
         const product = products.find((prod) => prod._id == prodId);
+        console.log("prodcut foudn: ", product);
         const newProduct = { ...product };
         newProduct.colourSelected = payload.colourSelected;
         newProduct.qty = payload.qty ? payload.qty : 1;
@@ -123,6 +139,9 @@ export default {
     },
     clearCartTotal(context) {
       context.commit("clearCart");
+    },
+    updateCartFromStorage(context, userCart) {
+      context.commit("updateCartFromStorage", userCart);
     },
   },
   getters: {
