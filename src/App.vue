@@ -26,6 +26,27 @@ export default {
       showOverlay: false,
     };
   },
+  created() {
+    // update user logged in details
+    const isLogged = localStorage.getItem("isLoggedIn");
+    if (isLogged) {
+      const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+      console.log("user details", userDetails);
+      this.$store.dispatch("login", userDetails);
+      this.$store.dispatch("setKey", userDetails.userKey);
+    }
+
+    // update user cart details
+    const userCart = sessionStorage.getItem("cartDetails");
+    if (userCart) {
+      const cartDetails = JSON.parse(userCart);
+      console.log("prev cart details:", cartDetails);
+      cartDetails.forEach((item) => {
+        console.log("item id: " + item._id);
+        this.$store.dispatch("cart/addToCart", item);
+      });
+    }
+  },
   mounted() {
     this.emitter.on("showNotification", (noteMessage) => {
       this.noteObjet = noteMessage;
