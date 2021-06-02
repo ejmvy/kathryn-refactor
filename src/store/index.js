@@ -27,6 +27,8 @@ export default createStore({
       console.log(payload);
       state.user = payload;
       state.isLoggedIn = true;
+      localStorage.setItem("isLoggedIn", true);
+      localStorage.setItem("userDetails", JSON.stringify(state.user));
     },
     logout(state) {
       state.isLoggedIn = false;
