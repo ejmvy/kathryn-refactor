@@ -34,6 +34,9 @@ export default createStore({
       state.isLoggedIn = false;
       state.user = {};
       state.userKey = "";
+
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("userDetails");
     },
     saveAddress(state, payload) {
       console.log("address to save:");
@@ -85,6 +88,7 @@ export default createStore({
   },
 
   getters: {
+    isAdmin: (state) => state.user.isAdmin,
     isAuthenticated: (state) => state.isLoggedIn,
     getUserDetails: (state) => state.user,
     getAddress: (state) => state.user.userAddress,
