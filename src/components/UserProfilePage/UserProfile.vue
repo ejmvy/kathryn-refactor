@@ -111,7 +111,6 @@ export default {
   },
   mounted() {
     this.userDetails = this.$store.getters["getUserDetails"];
-    this.$store.dispatch("prods/callProductsApi");
 
     const isLogged = this.$store.getters["isAuthenticated"];
     if (!isLogged) {
