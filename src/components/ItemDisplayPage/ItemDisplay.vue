@@ -69,6 +69,7 @@
 
           <div class="w-full flex justify-center">
             <button
+              :class="{ disable: !colourSelected || !quantityChosen }"
               @click="addItemToCart(item)"
               class="btn-green btn-lrg mt-10"
             >
