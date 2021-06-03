@@ -163,18 +163,46 @@
         class="ImageArea flex text-white bg-green-dark flex-col items-center p-3"
       >
         <div class="h-1/2 w-full border-gray-light border-dashed rounded-sm">
-          <img class="relative w-full h-full" />
+          <img
+            class="relative w-full h-full"
+            :src="
+              editedProduct.imageUrlArray[0]
+                ? editedProduct.imageUrlArray[0]
+                : ''
+            "
+          />
         </div>
 
         <div class="flex mt-5">
-          <div class="smImageArea" @click.prevent="onPickFile2">
-            <img class="smImage" />
+          <div class="smImageArea">
+            <img
+              class="smImage"
+              :src="
+                editedProduct.imageUrlArray[1]
+                  ? editedProduct.imageUrlArray[1]
+                  : ''
+              "
+            />
           </div>
           <div class="smImageArea">
-            <img class="smImage" />
+            <img
+              class="smImage"
+              :src="
+                editedProduct.imageUrlArray[2]
+                  ? editedProduct.imageUrlArray[2]
+                  : ''
+              "
+            />
           </div>
           <div class="smImageArea">
-            <img class="smImage" />
+            <img
+              class="smImage"
+              :src="
+                editedProduct.imageUrlArray[3]
+                  ? editedProduct.imageUrlArray[3]
+                  : ''
+              "
+            />
           </div>
         </div>
         <button
@@ -201,7 +229,6 @@ export default {
   props: ["productObject"],
   data() {
     return {
-      // imageUrl: "",
       imageRaw: null,
       isNewProduct: false,
       editTitle: "Edit ",
@@ -214,7 +241,6 @@ export default {
         dimensions: "",
         colours: "",
         stock: "",
-        // imageUrl: "",
         imageRaw: null,
         smallImage1Url: "",
         imageUrlArray: [],
@@ -224,7 +250,6 @@ export default {
   },
   methods: {
     saveEdit(edit) {
-      console.log(event.target.value);
       return (this.editedProduct[edit] = event.target.value);
     },
     saveEdits() {
@@ -264,10 +289,27 @@ export default {
 
       this.$emit("saveProduct", newEdits);
     },
+    clearEditObject() {
+      this.editedProduct = {
+        name: "",
+        price: "",
+        description: "",
+        washing: "",
+        dimensions: "",
+        colours: "",
+        stock: "",
+        imageRaw: null,
+        smallImage1Url: "",
+        imageUrlArray: [],
+        imageRawFiles: [],
+      };
+    },
     closePopup() {
+      this.clearEditObject();
       this.$emit("closePopup");
     },
-    onPickFile() {
+    onPickFile(e) {
+      e.preventDefault();
       this.$refs.fileInput.click();
     },
     // onPickFile2() {
@@ -275,14 +317,12 @@ export default {
     //   this.$refs.fileInput2.click();
     // },
     onFilePicked(e) {
+      e.preventDefault();
       this.editedProduct.imageUrlArray = [];
       const files = e.target.files;
-      console.log("FILES");
-      console.log(files.length);
 
       for (var file in Object.entries(files)) {
         let filename = files[file].name;
-        console.log(filename);
         if (filename.lastIndexOf(".") <= 0) {
           return alert("Please add a valid file");
         }

@@ -53,7 +53,7 @@
                   class="productIcons flex items-center justify-end w-2/5 py-3"
                 >
                   <Svg
-                    @click="deleteProduct(product)"
+                    @click="showDeletePopup(product)"
                     :svgColour="svgColour"
                     :svg="deleteSvg"
                   ></Svg>
@@ -84,14 +84,24 @@
         v-if="showEditProductPopup"
         :productObject="productToEdit"
         @saveProduct="saveProductEdits"
-        @closePopup="closeEditPopup"
+        @closePopup="closePopup"
       ></EditProductPopup>
+    </transition>
+
+    <transition name="slide-up">
+      <ConfirmPopup
+        v-if="showConfirmPopup"
+        :popupData="popupMessage"
+        @closePopup="closePopup"
+        @confirmAction="deleteProduct"
+      ></ConfirmPopup>
     </transition>
   </div>
 </template>
 
 <script>
 import EditProductPopup from "./EditProductPopup.vue";
+import ConfirmPopup from "../Designs/ConfirmPopup.vue";
 import Svg from "../Designs/SvgBase.vue";
 import axios from "axios";
 
@@ -111,9 +121,23 @@ export default {
       showNewProductPopup: false,
       categorySelected: "",
       productToEdit: {},
+
+      showConfirmPopup: false,
+      popupMessage: {
+        title: "",
+        message: "",
+        icon: "",
+      },
+      deleteProductId: "",
     };
   },
   methods: {
+    closePopup() {
+      this.deleteProductId = "";
+      this.showConfirmPopup = false;
+      this.showEditProductPopup = false;
+      this.emitter.emit("hideOverlay");
+    },
     viewCategory(category) {
       axios
         .get(`${process.env.VUE_APP_BASE_URL}products/category/${category._id}`)
@@ -122,8 +146,28 @@ export default {
         });
       this.categorySelected = category._id;
     },
-    deleteProduct(product) {
-      console.log("DELETE PRODUCT", product);
+    showDeletePopup(product) {
+      this.deleteProductId = product._id;
+      this.popupMessage.title = `Delete ${product.name} ?`;
+      this.popupMessage.message =
+        "Please confirm if you wish to remove this item";
+      this.popupMessage.icon =
+        "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16";
+      this.emitter.emit("showOverlay");
+      this.showConfirmPopup = true;
+    },
+    deleteProduct() {
+      console.log("DELETE PRODUCT", this.deleteProductId);
+      axios
+        .delete(
+          `${process.env.VUE_APP_BASE_URL}products/${this.deleteProductId}`
+        )
+        .then((data) => {
+          let deletedItem = data.data;
+          console.log("deleted: ", deletedItem);
+          this.refreshProducts();
+          this.closePopup();
+        });
     },
     editProduct(product) {
       this.productToEdit = product;
@@ -221,6 +265,7 @@ export default {
   },
   components: {
     Svg,
+    ConfirmPopup,
     EditProductPopup,
   },
 };
