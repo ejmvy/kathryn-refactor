@@ -25,7 +25,6 @@ export default {
   data() {},
   methods: {
     loginUserFn(loginUser) {
-      console.log("loggged: ", loginUser);
       this.getUserAuthKey(loginUser, "login");
     },
 

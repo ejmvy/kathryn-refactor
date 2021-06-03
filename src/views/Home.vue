@@ -20,12 +20,6 @@ import AboutArtist from "../components/LandingPage/AboutArtist.vue";
 import Footer from "../components/LandingPage/Footer.vue";
 
 export default {
-  created() {
-    const prods = this.$store.dispatch("prods/callProductsApi");
-
-    console.log("PRODCUTS FROM STORE");
-    console.log(prods);
-  },
   components: {
     Header,
     MainLanding,

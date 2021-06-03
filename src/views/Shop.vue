@@ -61,7 +61,6 @@ export default {
         categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
 
     axios.get(`${process.env.VUE_APP_BASE_URL}products/`).then((data) => {
-      console.log(data.data);
       this.serverData = data.data;
       if (categoryParam) {
         this.categorySelected =

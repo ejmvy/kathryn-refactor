@@ -24,7 +24,7 @@
     </div>
 
     <div
-      class="h-2/3 overflow-y-auto overflow-y-scroll mt-10 md:mt-20 px-5 sm:px-16 md:px-32 lg:px-5"
+      class="h-2/3 overflow-y-auto mt-10 md:mt-20 px-5 sm:px-16 md:px-32 lg:px-5"
     >
       <h5 v-if="!getCartLength" class="text-white">
         There are no items in your cart
