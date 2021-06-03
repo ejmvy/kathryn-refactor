@@ -4,7 +4,7 @@
     class="bg-white w-80 flex justify-center flex-col items-center shadow-xl my-10 mx-4"
   >
     <router-link :to="{ name: 'ItemDisplay', params: { id: displayItem._id } }">
-      <div class="w-80 h-48">
+      <div @click="viewItemScroll()" class="w-80 h-48">
         <div
           class="hoverBtn absolute w-80 h-48 opacity-0 flex justify-center items-center"
         >
@@ -18,11 +18,11 @@
     </router-link>
     <div class="p-3 pb-1 text-left w-full">
       <div class="pb-3">
-        <h2 class="mb-3 text-xl">{{ displayItem.name }}</h2>
+        <h2 class="mb-3 text-lg">{{ displayItem.name }}</h2>
         <h3 class="pt-1 text-gray-dark text-sm">
           {{ displayItem.description }}
         </h3>
-        <p class="pt-1 text-xs text-gray-500">{{ displayItem.price }}</p>
+        <p class="pt-1 text-xs text-gray-500">€ {{ displayItem.price }}</p>
       </div>
       <div class="flex pb-5 pt-3">
         <div
@@ -31,7 +31,7 @@
           class="flex space-x-4 px-4"
         >
           <button
-            @click="colourChosen = color"
+            @click="chooseColour(color)"
             class="h-6 w-6 border-gray-200 border rounded-full cursor-pointer colorBtn"
             :style="{
               backgroundColor: colourMatch[color]
@@ -46,13 +46,10 @@
       >
         <p class="text-xs uppercase font-bold text-green-dark">Quick Add</p>
         <div
+          @click="addItemToCart(displayItem)"
           class="bg-transparant cursor-pointer p-2 hover:bg-gray-100 focus:ring-2 rounded-full"
         >
-          <Svg
-            @click="addItemToCart(displayItem)"
-            :svgColour="svgColour"
-            :svg="addSvg"
-          ></Svg>
+          <Svg :svgColour="svgColour" :svg="addSvg"></Svg>
         </div>
       </div>
     </div>
@@ -88,14 +85,30 @@ export default {
     };
   },
   methods: {
+    chooseColour(colour) {
+      this.colourChosen = colour;
+      console.log("chosen: " + this.colourChosen);
+    },
     findColorCode(colour) {
       return this.colourMatch[colour];
     },
     getColourArray(colorString) {
-      const newArr = colorString.split(",").map((val) => val.trim());
-      return newArr;
+      return colorString.split(",").map((val) => val.trim());
     },
     addItemToCart(item) {
+      const colourArray = this.getColourArray(this.displayItem.colour);
+
+      if (
+        !this.colourChosen.length ||
+        !colourArray.includes(this.colourChosen)
+      ) {
+        this.colourChosen = "";
+        console.log("empt? " + this.colourChosen);
+        return;
+      }
+
+      console.log("colour: " + this.colourChosen);
+
       this.$store.dispatch("cart/addToCart", {
         id: item._id,
         colourSelected: this.colourChosen,
@@ -107,10 +120,16 @@ export default {
       });
 
       this.getCartItems();
+      this.colourChosen = "";
     },
 
     getCartItems() {
       return this.$store.getters["cart/products"];
+    },
+    viewItemScroll() {
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 600);
     },
   },
 
