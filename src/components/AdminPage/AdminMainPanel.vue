@@ -109,7 +109,7 @@ export default {
   },
   computed: {
     userLoggedIn() {
-      return this.$store.getters["isAuthenticated"];
+      return this.$store.getters["isAdmin"];
     },
   },
   created() {
@@ -119,7 +119,7 @@ export default {
 
     console.log(`user logged: `, this.$store.state.user);
 
-    this.$store.dispatch("prods/callProductsApi");
+    // this.$store.dispatch("prods/callProductsApi");
   },
   components: {
     AdminLogin,
