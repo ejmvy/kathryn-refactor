@@ -31,14 +31,18 @@
         </div>
       </div>
 
-      <TableData :columns="columns" :entries="filteredEntries" />
+      <TableData
+        :columns="columns"
+        :entries="filteredEntries"
+        @showOrderDetails="showOrderDetails"
+      />
 
       <div
         class="mt-16 w-full px-10 flex items-center justify-between my-12 py-3"
       >
         <div class="text-xs">
           Page {{ currentPage + 1 }} of {{ allPages }} for
-          {{ entries.length }} entries
+          {{ allEntries }} entries
         </div>
         <div class="flex justify-around">
           <div class="flex mr-3">
@@ -94,6 +98,7 @@ export default {
       { id: "delivered", text: "Delivered" },
       { id: "items", text: "Items" },
       { id: "total", text: "Total" },
+      { id: "view", text: "" },
     ],
     entries: [],
     showEntries: [5, 10, 15, 25, 50, 100],
@@ -103,6 +108,7 @@ export default {
     allPages: 1,
     searchInput: "",
     searchEntries: [],
+    allEntries: 0,
 
     showSearch: false,
     viewOrder: {},
@@ -128,20 +134,37 @@ export default {
           this.filteredEntries = this.entries.slice(0, this.currentEntries);
           this.ordersLength = data.length;
           this.allPages = this.entries.length / this.currentEntries;
+          this.allEntries = this.entries.length;
           if (this.allPages % 1 != 0)
             this.allPages = Math.round(this.allPages + 1);
         });
     },
     paginateEntries() {
       if (this.searchInput.length >= 3) {
-        this.searchEntries = this.entries.filter(this.searchInput);
-        // const start = this.currentPage * this.currentEntries;
-        // const end = this.currentPage * this.currentEntries + this.currentEntries;
-        // this.filteredEntries = this.entries.slice(start, end);
+        this.searchedEntries = this.entries.filter((item) =>
+          item.customer.name
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase())
+        );
+        console.log("current entries: ", this.searchedEntries);
+        const start = this.currentPage * this.currentEntries;
+        const end =
+          this.currentPage * this.currentEntries + this.currentEntries;
+        this.allEntries = this.searchedEntries.length;
+        this.filteredEntries = this.searchedEntries.slice(start, end);
+        this.allPages = this.searchedEntries.length / this.currentEntries;
+        if (this.allPages % 1 != 0)
+          this.allPages = Math.round(this.allPages + 1);
+      } else {
+        const start = this.currentPage * this.currentEntries;
+        const end =
+          this.currentPage * this.currentEntries + this.currentEntries;
+        this.allEntries = this.entries.length;
+        this.filteredEntries = this.entries.slice(start, end);
+        this.allPages = this.entries.length / this.currentEntries;
+        if (this.allPages % 1 != 0)
+          this.allPages = Math.round(this.allPages + 1);
       }
-      const start = this.currentPage * this.currentEntries;
-      const end = this.currentPage * this.currentEntries + this.currentEntries;
-      this.filteredEntries = this.entries.slice(start, end);
     },
     toBeginning() {
       this.currentPage = 0;
@@ -160,21 +183,12 @@ export default {
       this.paginateEntries();
     },
     searchEvent() {
-      this.currentPage = 1;
+      this.currentPage = 0;
       this.paginateEntries();
     },
   },
 
   computed: {
-    showInfo() {
-      // const getCurrentEntries = (this.searchEntries.length <= 0) ? this.entries: this.searchEntries;
-      const showObj = {
-        current: this.currentPage,
-        of: this.currentEntries,
-        outOf: this.entries.length,
-      };
-      return showObj;
-    },
     showPagination() {
       return 4;
       // return this.allPages.slice(this.currentPage, 3);
