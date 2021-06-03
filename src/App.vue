@@ -26,12 +26,15 @@ export default {
       showOverlay: false,
     };
   },
-  created() {
+  async created() {
+    await this.$store.dispatch("prods/callProductsApi");
+
     // update user logged in details
     const isLogged = localStorage.getItem("isLoggedIn");
+    console.log("logged: " + isLogged);
     if (isLogged) {
       const userDetails = JSON.parse(localStorage.getItem("userDetails"));
-      console.log("user details", userDetails);
+      console.log("user: ", userDetails);
       this.$store.dispatch("login", userDetails);
       this.$store.dispatch("setKey", userDetails.userKey);
     }
@@ -40,9 +43,7 @@ export default {
     const userCart = sessionStorage.getItem("cartDetails");
     if (userCart) {
       const cartDetails = JSON.parse(userCart);
-      console.log("prev cart details:", cartDetails);
       cartDetails.forEach((item) => {
-        console.log("item id: " + item._id);
         this.$store.dispatch("cart/addToCart", item);
       });
     }

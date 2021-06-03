@@ -106,11 +106,9 @@ export default {
   actions: {
     addToCart(context, payload) {
       const prodId = payload.id ? payload.id : payload._id;
-      console.log("id: " + prodId);
       const products = context.rootGetters["prods/products"];
       try {
         const product = products.find((prod) => prod._id == prodId);
-        console.log("prodcut foudn: ", product);
         const newProduct = { ...product };
         newProduct.colourSelected = payload.colourSelected;
         newProduct.qty = payload.qty ? payload.qty : 1;

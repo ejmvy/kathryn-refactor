@@ -20,6 +20,8 @@ export default {
         .get(`${process.env.VUE_APP_BASE_URL}products/`)
         .then((result) => {
           commit("setProducts", result.data);
+          console.log("PRODCUTS FROM STORE");
+          console.log(result.data);
         });
     },
   },
