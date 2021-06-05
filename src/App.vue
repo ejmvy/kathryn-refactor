@@ -243,7 +243,7 @@ input:focus {
 
 @keyframes slide_up_content {
   0% {
-    transform: translateY(100%);
+    transform: translateY(30%);
   }
   100% {
     opacity: 1;
