@@ -5,7 +5,7 @@
     class="flex flex-col justify-center items-center lg:relative lg:-right-20 my-5 md:flex-row w-11/12 md:w-3/4 lg:w-2/3 xl:w-1/2"
   >
     <div
-      class="flex flex-col order-last md:order-first items-center text-center relative -top-10 md:top-0 w-3/4 md:-right-5 p-8 md:flex-1 md:w-40 z-10 bg-white shadow-xl"
+      class="flex flex-col order-last md:order-first items-center text-center relative -top-10 md:top-0 w-11/12 md:-right-5 p-8 md:flex-1 md:w-40 z-10 bg-white shadow-xl"
     >
       <div>
         <h1 class="text-left text-lg pb-2 mb-5 border-b border-gray-200">

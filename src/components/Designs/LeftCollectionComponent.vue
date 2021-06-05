@@ -11,7 +11,7 @@
       />
     </div>
     <div
-      class="flex flex-col items-center text-center relative -top-10 md:top-0 w-3/4 md:-left-5 p-7 md:flex-1 bg-white shadow-xl rounded-sm"
+      class="flex flex-col items-center text-center relative -top-10 md:top-0 w-11/12 md:-left-5 p-7 md:flex-1 bg-white shadow-xl rounded-sm"
     >
       <div>
         <h1 class="text-left text-lg pb-2 mb-5 border-b border-gray-200">
