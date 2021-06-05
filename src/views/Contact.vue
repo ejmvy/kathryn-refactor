@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header :addShadow="true"></Header>
-    <section class="pt-10 w-full flex flex-col items-center">
+    <section class="mb-10 pt-10 w-full flex flex-col items-center">
       <TitleDesign :title="titleText"></TitleDesign>
       <div class="flex justify-between mt-14 w-11/12">
         <div class="flex flex-1 flex-col text-green-dark px-10">
