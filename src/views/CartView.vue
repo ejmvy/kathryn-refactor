@@ -24,12 +24,9 @@
         <div
           class="mainContent h-4/5 md:h-full md:w-3/4 bg-gray-100 overflow-auto"
         >
-          <div class="hidden md:flex w-3/4 md:items-center p-5">
+          <div class="hidden md:flex w-full md:items-center p-4 mb-4 bg-white">
             <router-link to="/shop">
-              <img
-                class="w-5 h-5 transform rotate-180 cursor-pointer"
-                src="https://i.ibb.co/Qm0BCkd/right.png"
-              />
+              <Svg :svgColour="'#627F8A'" :svg="backSvg"></Svg>
             </router-link>
             <h5 class="uppercase font-bold tracking-wider pl-5">My Bag</h5>
           </div>
@@ -132,7 +129,7 @@
     <transition :name="mobileWidth ? 'slideUp' : 'slide-up'" class="transition">
       <div
         v-if="customisePanel"
-        class="customisePanel absolute bottom-0 md:relative md:top-1/3 md:w-1/2 md:m-auto w-full flex flex-col items-center bg-white"
+        class="customisePanel absolute bottom-0 md:relative md:top-1/3 md:w-1/3 md:m-auto w-full flex flex-col items-center bg-white"
       >
         <div class="py-3 md:pt-8">
           <div class="font-bold">{{ customiseItem.name }}</div>
@@ -169,7 +166,7 @@
         <div class="flex justify-end w-full text-sm font-bold py-1 px-3">
           <button
             @click="closeCustomisePanel()"
-            class="text-gray-400 bg-transparent border-transparent p-1 focus:bg-gray-400 focus:text-white hover:bg-gray-500 hover:text-white"
+            class="text-gray-400 bg-transparent border-transparent p-1 hover:bg-green-light hover:text-white"
           >
             Close
           </button>
@@ -186,6 +183,7 @@ export default {
     return {
       plusSvg: "M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z",
       minusSvg: "M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z",
+      backSvg: "M15 19l-7-7 7-7",
       cartItems: [],
       total: 0,
       isRemoved: false,
