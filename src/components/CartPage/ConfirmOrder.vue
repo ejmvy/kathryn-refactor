@@ -216,7 +216,7 @@ export default {
           this.$store.dispatch("cart/setPaymentStep", 3);
           this.$emit("orderComplete", newOrder);
 
-          this.updateUserDetails();
+          // this.updateUserDetails();
 
           window.scroll({
             top: 0,
@@ -232,22 +232,23 @@ export default {
       console.log("change address");
       this.$store.dispatch("cart/setPaymentStep", 1);
     },
-    updateUserDetails() {
-      const key = this.$store.getters["getUserKey"];
-      axios
-        .get(`${process.env.VUE_APP_BASE_URL}users/me`, {
-          headers: {
-            "x-auth-token": key,
-          },
-        })
-        .then((data) => {
-          data.userKey = key;
-          this.$store.dispatch("login", data.data);
-        })
-        .catch((e) => {
-          console.log(`err ${e}`);
-        });
-    },
+    // updateUserDetails() {
+    //   const key = this.$store.getters["getUserKey"];
+    //   console.log("user key: " + key);
+    //   axios
+    //     .get(`${process.env.VUE_APP_BASE_URL}users/me`, {
+    //       headers: {
+    //         "x-auth-token": key,
+    //       },
+    //     })
+    //     .then((data) => {
+    //       data.userKey = key;
+    //       this.$store.dispatch("login", data.data);
+    //     })
+    //     .catch((e) => {
+    //       console.log(`err ${e}`);
+    //     });
+    // },
     // Show the customer the error from Stripe if their card fails to charge
     showError(errorMsgText) {
       this.loading(false);
