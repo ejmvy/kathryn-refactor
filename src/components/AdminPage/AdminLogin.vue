@@ -25,7 +25,12 @@
         </div>
         <div class="flex flex-col elementSlideUp2">
           <div class="label-grey self-start mb-2">Email</div>
-          <input class="adminLoginInput" v-model="userEmail" />
+          <input
+            id="emailInput"
+            class="adminLoginInput"
+            v-model="userEmail"
+            ref="email"
+          />
         </div>
         <div class="flex flex-col mt-8 elementSlideUp3">
           <div class="label-grey self-start mb-2">Password</div>
@@ -165,6 +170,12 @@ export default {
     detailsEntered() {
       return this.userEmail && this.userPassword;
     },
+  },
+  created() {
+    // this.$refs.email.focus();
+    const reff = this.$refs.email;
+
+    console.log("reff: ", reff);
   },
   components: {
     Svg,
